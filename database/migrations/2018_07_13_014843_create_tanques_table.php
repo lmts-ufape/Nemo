@@ -15,7 +15,10 @@ class CreateTanquesTable extends Migration
     {
         Schema::create('tanques', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('nome');
             $table->float('volume')->unsigned();
+            $table->float('area')->unsigned();
+            $table->float('altura')->unsigned();
             $table->string('manutencao_necessaria')->default("Não");
             $table->integer('piscicultura_id');
 
