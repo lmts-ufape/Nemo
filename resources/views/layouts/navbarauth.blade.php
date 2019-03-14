@@ -14,7 +14,6 @@
                 {{\Auth::user()->name}}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Ação 1</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="/logout">Sair</a>
                 </div>
