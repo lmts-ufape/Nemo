@@ -14,22 +14,15 @@
 	<div>
 		<table class="table">
 			<tr>
-				<th>Código</th>
-				<th>Volume</th>
-				<th>Manutenção</th>
-				<th>Ações</th>
+				<th>Tanque </th>
 			</tr>
 			@foreach ($tanques as $tanque)
 			<tr>
-				<td>{{ $tanque->id }}</td>
-				<td>{{ $tanque->volume}}</td>
-				<td>{{$tanque->manutencao_necessaria}}</td>
+			<td><a href="/tanque/{{$tanque->id}}/detalhes">{{ $tanque->nome }}</a></td>
 				<td>
         			<a class="btn btn-primary" href="/info/tanque/{{$tanque->id}}">Info</a>
-        			<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/cadastrar/qualidadeAgua">Parâmetros da Água</a>
+        			<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/cadastrar/qualidadeAgua">Qualidade da água</a>
         			<a class="btn btn-primary" href="/listar/especies/{{$tanque->id}}">Povoar</a>
-					<a class="btn btn-warning" href="/editar/tanque/{{$tanque->id}}">Editar</a>
-        			<a class="btn btn-danger" href="/remover/tanque/{{$tanque->id}}">Remover</a>
 				</td>
 			</tr>
 			@endforeach		
