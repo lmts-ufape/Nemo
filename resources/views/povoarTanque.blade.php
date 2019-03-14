@@ -4,7 +4,7 @@
 @extends('layouts.principal')
 @section('title','Povoar Tanque')
 @section('path')
-<a href="/listar/pisciculturas">Pisciculturas</a> > <a href="/info/piscicultura/{{$piscicultura->id}}"> {{$piscicultura->nome}} </a> > <a href="/listar/tanques/{{$tanque->id}}">Tanques</a> > <a href="/listar/especies/{{$especiePeixe->id}}">Povoar Tanque</a> > Povoamento		
+<a href="/listar/pisciculturas">Pisciculturas</a> > <a href="/info/piscicultura/{{$piscicultura->id}}"> {{$piscicultura->nome}} </a> > <a href="/listar/tanques/{{$piscicultura->id}}">Tanques</a> > <a href="/listar/especies/{{$especiePeixe->id}}">Povoar Tanque</a> > Povoamento		
 @stop
 @section('conteudo')
 
