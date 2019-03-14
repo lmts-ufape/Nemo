@@ -1,16 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/home"><img width="100px" src="https://i.imgur.com/zXDg6Bm.png" /></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    @auth
-        @include('layouts.navbarauth')
-    @endauth
-
-    @guest
-        @include('layouts.navbarguest')
-    @endguest
-
-
+<nav class="navbar navbar-default" style="background-color: #1B2E4F; border-color: #d3e0e9" role="navigation">
+    <div>
+        @if(Auth::check())
+        <a style="color:#fff" class="nav-link" href="/home">Início</a> @endif
+    </div>
+    <div>
+        @if(Auth::check())
+        <a style="color:#fff" href="/logout">Sair</a> @else
+        <a style="color:#fff" href="/login">Entrar &nbsp;</a>
+        <a style="color:#fff" href="/register">Cadastrar</a> @endif
+    </div>
 </nav>
