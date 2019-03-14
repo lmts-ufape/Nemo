@@ -8,8 +8,15 @@
     {{ csrf_field() }}
     <input type="hidden" name="id" min="0" value="{{ $tanque->id}}" />
     <div class="form-group">
-      <label>Volume</lable>
-      <input class="form-control" type="number" step="any" name="volume" value="{{$tanque->volume}}" required/><br/>
+        <label>Nome</lable>
+        <input class="form-control" step="any" type="text" name="nome"value="{{$tanque->nome}}"required="required"/><br/>
+        <label>Volume</lable>
+        <input class="form-control" type="number" step="any" name="volume" value="{{$tanque->volume}}" required/><br/>
+        <label>Área</lable>
+        <input class="form-control" type="number" step="any" name="area" value="{{$tanque->area}}" required/><br/>
+        <label>Altura</lable>
+        <input class="form-control" type="number" step="any" name="altura" value="{{$tanque->altura}}" required/><br/>
+  
     </div>
     <div class="form-group">
       <label>Necessita de Manutenção</label>
