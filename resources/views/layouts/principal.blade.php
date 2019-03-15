@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
-    @include('definitions.head')
-    @include('layouts.navbar')
+@include('definitions.head')
 
-    <div id="site">
-        <!--@include('layouts.header')-->
-        @include('layouts.body')
+<body>
+    <div type="container" id="site">
+        @include('layouts.header')
+        <div class="container">
+            @include('layouts.body')
+        </div>
+        @include('layouts.footer')
     </div>
-    @include('layouts.footer')
+</body>
+@include('layouts.scripts')
+
 </html>
