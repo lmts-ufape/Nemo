@@ -3,7 +3,7 @@
 @section('path')
     Cadastrar
 @stop
-@section('conteudo')
+@section('content')
 <div class="container" width="50%">
     <div class="card">
         <div class="card-header">

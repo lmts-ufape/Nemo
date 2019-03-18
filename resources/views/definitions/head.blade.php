@@ -13,6 +13,7 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/select2-bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/principal-style.css') }}" type="text/css" rel="stylesheet">
     
         <script type="text/javascript">
             /* Máscaras ER */
@@ -74,7 +75,6 @@
             .navbar-default .navbar-nav > .dropdown > a:focus, .navbar-default .navbar-nav > .dropdown > a:hover {
                 color: #fff;
                 background-color: #1B2E4F;
-                max-width: 10px
             }
             .navbar-default .navbar-nav > .open > a:focus, .navbar-default .navbar-nav > .open > a:hover {
                 color: #000;

@@ -4,7 +4,7 @@
 @section('path')
 <a href="/listar/pisciculturas">Pisciculturas</a> > <a href="/info/piscicultura/{{$piscicultura->id}}"> {{$piscicultura->nome}} </a> > Remover Piscicultura	
 @stop
-@section('conteudo')
+@section('content')
 	<form action="/apagarPiscicultura" method="post" >
 		{{ csrf_field() }}
 		<input type="hidden" name="id" value=" {{ $piscicultura->id}}"/>

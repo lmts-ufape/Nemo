@@ -3,7 +3,7 @@
 @section('path')
 <a href="/listar/pisciculturas">Pisciculturas</a> > <a href="/info/piscicultura/{{$piscicultura->id}}"> {{$piscicultura->nome}} </a> > <a href="/listar/tanques/{{$piscicultura->id}}">Tanques</a> > Parâmetros da água	
 @stop
-@section('conteudo')
+@section('content')
   <form action="/adicionarQualidadeAgua" method="post">
     {{ csrf_field() }}
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />

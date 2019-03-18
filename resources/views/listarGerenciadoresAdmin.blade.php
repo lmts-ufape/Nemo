@@ -4,7 +4,7 @@
 	<a href="/listar/pisciculturas">Pisciculturas</a> > <a href="/info/piscicultura/{{$piscicultura->id}}"> {{$piscicultura->nome}} </a> > Gerenciadores
 	
 @stop
-@section('conteudo')
+@section('content')
 	<ul>
 	
 		<table class="table">

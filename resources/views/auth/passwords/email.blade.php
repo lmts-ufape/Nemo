@@ -3,7 +3,7 @@
 @section('path')
     Esqueci minha senha
 @stop
-@section('conteudo')
+@section('content')
 <div class="container">
     @if (session('status'))
     <div class="alert alert-success" role="alert">

@@ -3,7 +3,7 @@
 @section('path')
 	Piscicultura {{$piscicultura->nome}} > Tanque {{$tanque->id}} > Povoar > Informação da espécie: {{$EspeciePeixe->nome}}
 @stop
-@section('conteudo')
+@section('content')
     
 	<div>
 		<table class="table">

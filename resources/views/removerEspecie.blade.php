@@ -4,7 +4,7 @@
 @section('path')
 	Piscultura {{$piscicultura->nome}} > Tanque {{$tanque_id}} > Povoar > Informações da especie: {{$especiePeixe->nome}} > Remover
 @stop
-@section('conteudo')
+@section('content')
 	<form action="/apagarEspecie" method="post"> 
 		{{ csrf_field() }}
 		<input type="hidden" name="especie_id" value="{{ $especie_id}}" />
