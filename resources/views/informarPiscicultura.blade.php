@@ -3,7 +3,7 @@
 @section('path')
     <a href="/listar/pisciculturas">Pisciculturas</a> > {{$piscicultura->nome}} > Dados
 @stop
-@section('conteudo')
+@section('content')
     <div class="container">
         <div class="row">
             <div class="col-sm">

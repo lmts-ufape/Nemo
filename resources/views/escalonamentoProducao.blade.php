@@ -3,7 +3,7 @@
 @section('path')
 	<a href="/listar/pisciculturas">Pisciculturas</a> > <a href="/info/piscicultura/{{$piscicultura->id}}"> {{$piscicultura->nome}} </a> > Escalonamento de Produção    
 @stop
-@section('conteudo')
+@section('content')
 @if (isset($errors) && count($errors) > 0)
 <div class="alert alert-danger" role="alert">
 	@foreach($errors->getMessages() as &$error)

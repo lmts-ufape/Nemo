@@ -4,7 +4,7 @@
 @section('path')
 	Piscultura {{$piscicultura->nome}} > Tanque {{$tanque_id}} > Povoar > Informações da especie: {{$especiePeixe->nome}} > Editar
 @stop
-@section('conteudo')
+@section('content')
 	
 	<form action="/salvarEspecie" method="post"> 
 		{{ csrf_field() }}

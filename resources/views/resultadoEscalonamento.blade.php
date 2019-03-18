@@ -3,7 +3,7 @@
 @section('path')
 <a href="/listar/pisciculturas">Pisciculturas</a> > <a href="/info/piscicultura/{{$piscicultura->id}}"> {{$piscicultura->nome}} </a> > <a href="/escalonamento/{{$piscicultura->id}}">Calcular Escalonamento</a> > Resultado do Escalonamento da Produção    
 @stop
-@section('conteudo')
+@section('content')
     <div>
         <table class="table">
             <tr>
