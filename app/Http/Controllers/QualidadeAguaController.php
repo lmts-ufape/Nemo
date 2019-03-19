@@ -21,11 +21,11 @@ class QualidadeAguaController extends Controller
 
   public function adicionar(Request $request){
     if(!$this->verificaTanqueExistente($request->id_tanque)) {
-      date_default_timezone_set('America/Sao_Paulo');
-      $data = date('d-m-Y');
-      $data .= ' '.date('H:i:s');
+      //date_default_timezone_set('America/Sao_Paulo');
+      //$data = date('d-m-Y');
+      //$data .= ' '.date('H:i:s');
       $tanque = \nemo\Tanque::find($request->id_tanque);
-      //dd($request->nivelOxigenio();
+      $data = $request->dataMedicao;
       $qualidade = new \nemo\QualidadeAgua();
       $qualidade->ph = $request->ph;
       $qualidade->nivelOxigenio = $request->nivelOxigenio;
