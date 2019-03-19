@@ -5,11 +5,7 @@
 <a href="/listar/pisciculturas">Pisciculturas</a> > <a href="/info/piscicultura/{{$piscicultura->id}}"> {{$piscicultura->nome}} </a> > <a href="/listar/tanques/{{$piscicultura->id}}">Tanques</a> > Povoar Tanque	
 @stop
 @section('content')
-	<div>
-		<form action="/adicionar/especie/{{$piscicultura_id}}" method="get" >
-			<input class="btn btn-primary" type="submit" value="Nova Especie" />
-		</form>
-	</div>	
+		
 
 	<div>
 		<table class="table">
