@@ -33,7 +33,8 @@
                     <input class="form-control" type="text" name="alcalinidade" value="{{old('alcalinidade')}}" autofocus required/><br/>
                     <label>Dureza</label>
                     <input class="form-control" type="text" name="dureza" value="{{old('dureza')}}" autofocus required/><br/>
-
+                    <label>Data da Medição</label>
+                    <input class="form-control" type="text" name="dataMedicao" value="{{old('dataMedicao')}}" placeholder="DD/MM/AA HH:MM" autofocus required/><br/>
                   </div>
                   <input class="btn btn-success" type="submit" value="Cadastrar" />
                 </form>
