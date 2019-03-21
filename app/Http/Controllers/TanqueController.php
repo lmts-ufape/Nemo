@@ -59,7 +59,8 @@ class TanqueController extends Controller
     $tanque->area = $request->area;
     $tanque->manutencao_necessaria = $request->manutencao_necessaria;
     $tanque->update();
-    return redirect()->route("listarTanques", ['id' => $tanque->piscicultura_id]);
+    return redirect()->route("detalhesTanque", ['id' => $tanque->piscicultura_id]);
+    
   }
 
   public function remover(Request $request){

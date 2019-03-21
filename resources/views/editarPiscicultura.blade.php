@@ -2,7 +2,7 @@
 @extends('layouts.principal')
 @section('title','Editar Piscucultura')
 @section('path')
-<a href="/listar/pisciculturas">Pisciculturas</a> > <a href="/info/piscicultura/{{$piscicultura->id}}"> {{$piscicultura->nome}} </a> > Editar Piscicultura	
+<a href="/listar/pisciculturas">Pisciculturas</a>  > Editar {{$piscicultura->nome}}	
 @stop
 @section('content')
 <div class="container">
