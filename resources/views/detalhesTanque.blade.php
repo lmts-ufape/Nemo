@@ -12,7 +12,7 @@
                     <div class="card-header">
                         Detalhes
                         <a href = "/remover/tanque/{{$tanque->id}}">
-                            <img src="{{asset('images/lixo_sem_fundo.png')}}" style = "margin-left: 30px; margin-right: -10px " height="25" width="25" align = "right">
+                            <img onclick="return confirm('Confirmar remoção de {{ $tanque->nome}}?')" src="{{asset('images/lixo_sem_fundo.png')}}" style = "margin-left: 30px; margin-right: -10px " height="25" width="25" align = "right">
                         </a>
                         <a href = "/editar/tanque/{{$tanque->id}}">
                             <img src="{{asset('images/edit.png')}}" style = "margin-left: 15px; margin-right: -10px " height="25" width="25" align = "right">

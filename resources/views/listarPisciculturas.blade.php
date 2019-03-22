@@ -25,7 +25,7 @@
 							@foreach ($pisciculturas as $piscicultura)
 							<tr>
 								<td><a href="/info/piscicultura/{{$piscicultura->id}}">{{ $piscicultura->nome }}</a>
-									<a href = "/remover/piscicultura/{{$piscicultura->id}}">
+									<a onclick="return confirm('Confirmar remoção de {{ $piscicultura->nome}}?')" href = "/remover/piscicultura/{{$piscicultura->id}}">
 										<img src="{{asset('images/delete.png')}}" style = "margin-left: 30px; margin-right: -10px " height="25" width="25" align = "right">
 									</a>
 									<a href = "/editar/pisciculturas/{{$piscicultura->id}}">

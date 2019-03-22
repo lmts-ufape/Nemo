@@ -102,13 +102,10 @@ class PisciculturaController extends Controller
 
     public function remover($id){
 		    $piscicultura = \nemo\Piscicultura::find($id);
-		    return view("removerPiscicultura", ['piscicultura' => $piscicultura]);
+		    $piscicultura->delete();
+		return redirect("listar/pisciculturas");
     }
 
-    public function apagar(Request $request){
-		$piscicultura = \nemo\Piscicultura::find($request->id);
-		$piscicultura->delete();
-		return redirect("listar/pisciculturas");
-	}
+    
 
 }
