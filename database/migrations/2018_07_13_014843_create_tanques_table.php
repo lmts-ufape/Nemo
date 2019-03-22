@@ -19,6 +19,7 @@ class CreateTanquesTable extends Migration
             $table->float('volume')->unsigned();
             $table->float('area')->unsigned();
             $table->float('altura')->unsigned();
+            $table->string('formato');
             $table->string('manutencao_necessaria')->default("Não");
             $table->integer('piscicultura_id');
 

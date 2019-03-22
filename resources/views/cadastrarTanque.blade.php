@@ -23,6 +23,8 @@
                       <input class="form-control" type="number" min="0" step="any" name="area" placeholder="Em metros quadrados" autofocus required/><br/>
                       <label>Altura</label>
                       <input class="form-control" type="number" min="0" step="any" name="altura" placeholder="Em metros" autofocus required/><br/>
+                      <label>Formato</label>
+                      <input class="form-control" type="text" name="formato"required="required" placeholder="Formato" autofocus required /><br/>
                       <input class="btn btn-success" type="submit" value="Cadastrar" />
                     </div>
                   </form>
