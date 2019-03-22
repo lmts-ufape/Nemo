@@ -25,7 +25,7 @@
 							<tr>
 							<td><a href="/tanque/{{$tanque->id}}/detalhes">{{ $tanque->nome }}</a></td>
 								<td>
-									<a class="btn btn-primary" href="/info/tanque/{{$tanque->id}}">Info</a>
+									<a class="btn btn-primary" href="/relatorios/tanque/{{$tanque->id}}">Relatorios</a>
 									<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/cadastrar/qualidadeAgua">Qualidade da água</a>
 									<a class="btn btn-primary" href="/listar/especies/{{$tanque->id}}">Povoar</a>
 								</td>

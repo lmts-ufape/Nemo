@@ -24,7 +24,6 @@
                               <th>Nitrato</th>
                               <th>Alcalinidade</th>
                               <th>Dureza</th>
-                              
                           </tr>
                         </thead>
                         <tbody>
