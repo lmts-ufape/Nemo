@@ -40,6 +40,7 @@ Route::post('/salvarTanque', "TanqueController@salvar");
 Route::get('/remover/tanque/{id}', "TanqueController@remover");
 Route::post('/apagarTanque', "TanqueController@apagar");
 Route::get('/tanque/{id}/detalhes', "TanqueController@exibirDetalhes")->name('detalhesTanque');
+Route::get('/relatorios/tanque/{id}', "TanqueController@gerarRelatorios");
 
 //Rotas de Espécie
 Route::get('/listar/especies/{id}', "EspecieController@listar")->name('listarEspecies');

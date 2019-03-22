@@ -84,4 +84,11 @@ class TanqueController extends Controller
       'piscicultura' => $piscicultura,
     ]);
   }
+
+  public function gerarRelatorios($id) {
+    $tanque = \nemo\Tanque::find($id);
+    $piscicultura = $tanque->piscicultura;
+
+    return view('relatoriosTanque', ['tanque' => $tanque, 'piscicultura' => $piscicultura]);
+  }
 }
