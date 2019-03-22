@@ -66,12 +66,13 @@ class TanqueController extends Controller
   public function remover(Request $request){
     $tanque = \nemo\Tanque::find($request->id);
     $piscicultura = \nemo\Piscicultura::find($tanque->piscicultura_id);
-  	return view("/removerTanque", ['tanque' => $tanque, 'piscicultura' => $piscicultura]);
+    $tanque->delete();
+  	return redirect()->route("listarTanques", ['id' => $tanque->piscicultura_id]);
 	}
 
 	public function apagar(Request $request){
   	$tanque = \nemo\Tanque::find($request->tanque_id);
-    $tanque->delete();
+    
     return redirect()->route("listarTanques", ['id' => $tanque->piscicultura_id]);
   }
   
