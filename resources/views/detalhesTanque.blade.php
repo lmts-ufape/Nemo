@@ -27,12 +27,14 @@
                                     <th>Volume</th>
                                     <th>Área</th>
                                     <th>Altura</th>
+                                    <th>Formato</th>
                                 </tr>
                                 <tr>
                                 <td>{{ $tanque->nome }}</td>
                                 <td>{{ $tanque->volume }}</td>
                                 <td>{{ $tanque->area }}</td>
                                 <td>{{ $tanque->altura }}</td>
+                                <td>{{ $tanque->formato }}</td>
                                 </tr>	
                             </table>
                         </div>

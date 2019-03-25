@@ -23,14 +23,10 @@
                           <input class="form-control" type="number" step="any" name="area" value="{{$tanque->area}}" required/><br/>
                           <label>Altura</label>
                           <input class="form-control" type="number" step="any" name="altura" value="{{$tanque->altura}}" required/><br/>
-
+                          <label>Formato</label>
+                          <input class="form-control" step="any" type="text" name="formato"value="{{$tanque->formato}}"required="required"/><br/>
                       </div>
-                      <div class="card-body">
-                        <label>Necessita de Manutenção</label>
-                        <div class="radio">
-                          <label><input type="radio" name="manutencao_necessaria" value="Não" checked>Não</label>
-                          <label><input type="radio" name="manutencao_necessaria" value="Sim">Sim</label>
-                        </div>
+                      <div class="card-body">            
                         <input class="btn btn-primary" type="submit" value="Salvar" />
                       </div>
                       
