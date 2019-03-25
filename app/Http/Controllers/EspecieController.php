@@ -51,11 +51,11 @@ class EspecieController extends Controller
                 ]);
 
     			
-    		return redirect()->route("listarEspecies", ['id' => $tanque->id]);
+    		return redirect()->route("especie.listar", ['id' => $tanque->id]);
     		}
     		
     	}
-    	return redirect()->route("listarEspecies", ['id' => $tanque->id]);
+    	return redirect()->route("especie.listar", ['id' => $tanque->id]);
    	
     }
     
@@ -116,7 +116,7 @@ class EspecieController extends Controller
 	 	$tanque = \nemo\Tanque::find($request->tanque_id);
   		$especiePeixe = \nemo\EspeciePeixe::find($request->especie_id);
     	$especiePeixe->delete();
-    	return redirect()->route("listarEspecies", ['id' => $request->tanque_id]);
+    	return redirect()->route("especie.listar", ['id' => $request->tanque_id]);
 	}
 	
 	public function verificaNomeExistente($nome) {

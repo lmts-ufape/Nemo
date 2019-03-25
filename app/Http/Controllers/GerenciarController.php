@@ -65,7 +65,7 @@ class GerenciarController extends Controller
             'is_administrador' => 0,
         ]);
 
-        return redirect()->route("listar.gerenciadores", ['id' => $piscicultura->id]);
+        return redirect()->route("gerenciador.listar", ['id' => $piscicultura->id]);
 
     }
 
@@ -74,10 +74,10 @@ class GerenciarController extends Controller
         $gerenciar->delete();
 
         if((int) $gerenciar->user_id == \Auth::user()->id){
-            return redirect("/listar/pisciculturas");
+            return redirect("gerenciador.listar");
         }
 
-        return redirect()->route("listar.gerenciadores", ['id' => $piscicultura_id]);
+        return redirect()->route("gerenciador.listar", ['id' => $piscicultura_id]);
     }
 
 }

@@ -39,7 +39,7 @@ class TanqueController extends Controller
       'formato' => $request->formato,
       'manutencao_necessaria' => 'Não'
       ]);
-      return redirect()->route("listarTanques", ['piscicultura' => $request->id_piscicultura]);
+      return redirect()->route("tanque.listar", ['piscicultura' => $request->id_piscicultura]);
       
   }
 
@@ -60,7 +60,7 @@ class TanqueController extends Controller
     $tanque->area = $request->area;
     $tanque->formato = $request->formato;
     $tanque->update();
-    return redirect()->route("detalhesTanque", ['id' => $request->id]);
+    return redirect()->route("tanque.detalhar", ['id' => $request->id]);
     
   }
 
@@ -68,7 +68,7 @@ class TanqueController extends Controller
     $tanque = \nemo\Tanque::find($request->id);
     $piscicultura = \nemo\Piscicultura::find($tanque->piscicultura_id);
     $tanque->delete();
-  	return redirect()->route("listarTanques", ['id' => $tanque->piscicultura_id]);
+  	return redirect()->route("tanque.listar", ['id' => $tanque->piscicultura_id]);
 	}
 
   

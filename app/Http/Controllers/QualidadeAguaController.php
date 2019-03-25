@@ -39,9 +39,9 @@ class QualidadeAguaController extends Controller
       $qualidade->tanque_id = $tanque->id;
       $qualidade->save();
       
-       return redirect()->route("listarTanques", ['id' => $tanque->piscicultura_id]);
+       return redirect()->route("tanque.listar", ['id' => $tanque->piscicultura_id]);
     }
-    return redirect()->route("listarTanques", ['id' => $tanque->piscicultura_id]);
+    return redirect()->route("tanque.listar", ['id' => $tanque->piscicultura_id]);
   }
   
   public function verificaTanqueExistente($id){
@@ -64,7 +64,7 @@ class QualidadeAguaController extends Controller
 	 	$qualidadeAgua = \nemo\QualidadeAgua::find($request->id);
   		$qualidadeAgua ->ph = $request->ph;
   		$qualidadeAgua->update();
-  		return redirect("/listar/qualidadesAgua");
+  		return redirect()->route('qualidade.agua.listar');
   }
   
   public function remover(Request $request){
@@ -75,7 +75,7 @@ class QualidadeAguaController extends Controller
 	 public function apagar(Request $request){
   		$qualidadeAgua = \nemo\QualidadeAgua::find($request->id);
     	$qualidadeAgua->delete();
-    	return redirect("/listar/qualidadesAgua");
+    	return redirect()->route('qualidade.agua.listar');
 	}
 
 }
