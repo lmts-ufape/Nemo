@@ -12,29 +12,36 @@
                   Cadastrar qualidade da água
               </div>
               <div class="card-body">
+                @if (isset($errors) && count($errors) > 0)
+                <div class="alert alert-danger" role="alert">
+                  @foreach($errors->getMessages() as &$error) {{$error[0]}} @endforeach
+                </div>
+                @endif
                 <form action="/adicionarQualidadeAgua" method="post">
                   {{ csrf_field() }}
                   <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                   <input type="hidden" name="id_tanque" value="{{ $tanque->id}}" />
                   <div class="form-group">
                     <label>PH</label>
-                    <input class="form-control" type="number" name="ph" min="0" max="14" required autofocus/><br/>
+                    <input class="form-control" type="number" name="ph" min="0" max="14" value="{{old('ph')}}" autofocus/><br/>
                     <label>Nível de Oxigênio</label>
-                    <input class="form-control" type="number" name="nivelOxigenio" value="{{old('nivelOxigenio')}}" autofocus required/><br/>
+                    <input class="form-control" type="number" name="nivelOxigenio" value="{{old('nivelOxigenio')}}" autofocus /><br/>
                     <label>Temperatura</label>
-                    <input class="form-control" type="text" name="temperatura" value="{{old('temperatura')}}" autofocus required/><br/>
+                    <input class="form-control" type="text" name="temperatura" value="{{old('temperatura')}}" autofocus /><br/>
                     <label>Nível de Amônia</label>
-                    <input class="form-control" type="text" name="nivelAmonia" value="{{old('nivelAmonia')}}" autofocus required/><br/>
+                    <input class="form-control" type="text" name="nivelAmonia" value="{{old('nivelAmonia')}}" autofocus /><br/>
                     <label>Nitrito</label>
-                    <input class="form-control" type="text" name="nitrito" value="{{old('nitrito')}}" autofocus required/><br/>
+                    <input class="form-control" type="text" name="nitrito" value="{{old('nitrito')}}" autofocus /><br/>
                     <label>Nitrato</label>
-                    <input class="form-control" type="text" name="nitrato" value="{{old('nitrato')}}" autofocus required/><br/>
+                    <input class="form-control" type="text" name="nitrato" value="{{old('nitrato')}}" autofocus /><br/>
                     <label>Alcalinidade</label>
-                    <input class="form-control" type="text" name="alcalinidade" value="{{old('alcalinidade')}}" autofocus required/><br/>
+                    <input class="form-control" type="text" name="alcalinidade" value="{{old('alcalinidade')}}" autofocus /><br/>
                     <label>Dureza</label>
-                    <input class="form-control" type="text" name="dureza" value="{{old('dureza')}}" autofocus required/><br/>
+                    <input class="form-control" type="text" name="dureza" value="{{old('dureza')}}" autofocus /><br/>
                     <label>Data da Medição</label>
-                    <input class="form-control" type="text" name="dataMedicao" value="{{old('dataMedicao')}}" placeholder="DD/MM/AA HH:MM" autofocus required/><br/>
+                    <input class="form-control" type="text" name="dataMedicao" value="{{old('dataMedicao')}}" placeholder="DD/MM/AA" autofocus /><br/>
+                    <label>Hora da Medição</label>
+                    <input class="form-control" type="text" name="horaMedicao" value="{{old('horaMedicao')}}" placeholder="HH:MM" autofocus /><br/>
                   </div>
                   <input class="btn btn-success" type="submit" value="Cadastrar" />
                 </form>
