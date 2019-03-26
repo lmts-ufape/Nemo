@@ -34,7 +34,7 @@ class PovoamentoController extends Controller
 				'quantidade' => $request->quantidade,
 				       
         	]);
-        	return redirect()->route("listarTanques", ['id' => $tanque->piscicultura_id]);
+        	return redirect()->route("tanque.listar", ['id' => $tanque->piscicultura_id]);
     	
 		}else{
 			return back()->withErrors(array('message' => 'Quantidade inserida maior do que a capacidade do tanque. Se deseja realizar o povoamento mesmo assim insira novamente.'));

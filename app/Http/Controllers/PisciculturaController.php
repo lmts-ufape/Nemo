@@ -63,7 +63,7 @@ class PisciculturaController extends Controller
 				'piscicultura_id' => $piscicultura->id,
 			]);
 
-			return redirect("/listar/pisciculturas");
+			return redirect()->route('piscicultura.listar');
 
 		}catch(\nemo\Validator\ValidationException $e){
 
@@ -82,7 +82,7 @@ class PisciculturaController extends Controller
 		$piscicultura = \nemo\Piscicultura::find($request->id);
 
 		if($piscicultura->nome == $request['nome']){
-			return redirect("/listar/pisciculturas");
+			return redirect()->route('piscicultura.listar');;
 		}
 
 		$piscicultura->nome = $request['nome'];
@@ -92,7 +92,7 @@ class PisciculturaController extends Controller
 			PisciculturaValidator::validate($dados);
 			$piscicultura->update();
 			
-			return redirect("/listar/pisciculturas");			
+			return redirect()->route('piscicultura.listar');;			
 
 		}catch(\nemo\Validator\ValidationException $e){
 			return back()->withErrors($e->getValidator())->withInput();
@@ -103,7 +103,7 @@ class PisciculturaController extends Controller
     public function remover($id){
 		    $piscicultura = \nemo\Piscicultura::find($id);
 		    $piscicultura->delete();
-		return redirect("listar/pisciculturas");
+		return redirect()->route('piscicultura.listar');
     }
 
     
