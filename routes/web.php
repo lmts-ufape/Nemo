@@ -15,6 +15,11 @@
     return view('welcome');
 });*/
 
+//Rotas de Autenticação
+Auth::routes();
+Route::get('/logout', 'Auth\LoginController@logout');
+
+Route::middleware('autorizacao')->group(function() {
     //Rotas de Piscicultura
     Route::get('/listar/pisciculturas', "PisciculturaController@listar")->name('piscicultura.listar');
     Route::get('/info/piscicultura/{id}',"PisciculturaController@informar")->name('piscicultura.informar');
@@ -53,14 +58,11 @@
     Route::get('/tanque/{id}/especie/{especiePeixe_id}/info', "EspecieController@informar")->name('especie.informar');;
 
 
-    //Rotas de Autenticação
-    Auth::routes();
-    Route::get('/logout', 'Auth\LoginController@logout');
-
+    
     //Rotas de Sistema
     Route::get('/', 'PisciculturaController@listar')->name('home');
     Route::get('/home', 'PisciculturaController@listar')->name('home');
-
+    
     //Rotas de Qualidade Água
     Route::get('/tanque/{id}/cadastrar/qualidadeAgua', "QualidadeAguaController@cadastrar")->name('qualidade.agua.cadastrar');
     Route::post('/adicionarQualidadeAgua', "QualidadeAguaController@adicionar")->name('qualidade.agua.adicionar');
@@ -69,16 +71,17 @@
     Route::post('/salvarQualidadeAgua', "QualidadeAguaController@salvar")->name('qualidade.agua.salvar');
     Route::post('/apagarQualidadeAgua', "QualidadeAguaController@apagar")->name('qualidade.agua.apagar');
     Route::get('/remover/qualidadeAgua/{id}', "QualidadeAguaController@remover")->name('qualidade.agua.remover');
-
+    
     //Rotas de Povoamento
     Route::get('/povoar/tanque/{tanque_id}/especie/{especie_id}',  "PovoamentoController@povoarTanque")->name('povoamento.povoar');
     Route::post('/inserirPeixe', "PovoamentoController@inserirPeixe")->name('povoamento.inserir.peixe')->name('povoamento.inserir.peixe');
     Route::get('/info/tanque/{id}', "PovoamentoController@listar")->name('povoamento.listar');
-
+    
     //Rotas de Pesca
     Route::get('/tanque/{tanque_id}/pesca/especie/{especiePeixe_id}/povoamento/{povoamento_id}', "PescaController@pesca")->name('pesca.pesca');
     Route::post('/pescarEspecie', "PescaController@pescar")->name('pescar.pescar');
-
+    
     //Rotas de Escalonamento
     Route::get('/escalonamento/{id}', "EscalonamentoController@chamaEscalonamento")->name('escalonamento.chamar');
     Route::post('/calcularEscalonamento', "EscalonamentoController@calcularEscalonamento")->name('escalonamento.calcular');
+});
