@@ -45,7 +45,7 @@ class QualidadeAguaController extends Controller
         $qualidade->tanque_id = $tanque->id;
         $qualidade->save();
         
-         return redirect()->route("listarTanques", ['id' => $tanque->piscicultura_id]);
+         return redirect()->route("tanque.listar", ['id' => $tanque->piscicultura_id]);
       //}
     }catch(\nemo\Validator\ValidationException $e){
 

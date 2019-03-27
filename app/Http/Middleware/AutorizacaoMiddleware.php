@@ -38,7 +38,11 @@ class AutorizacaoMiddleware
                 'editar/tanque/{id}',
                 'remover/tanque/{id}',
                 'tanque/{id}/detalhes',
-                'relatorios/tanque/{id}'
+                'relatorios/tanque/{id}',
+                'tanque/{id}/detalhes',
+                //Rotas de Qualidade Agua
+                'tanque/{id}/cadastrar/qualidadeAgua',
+                'tanque/{id}/listar/qualidadesAgua'
             ];
 
             if(in_array($request->route()->uri,$rotas_gerentePiscicultura)){
@@ -51,6 +55,13 @@ class AutorizacaoMiddleware
             elseif(in_array($request->route()->uri,$rotas_donoPiscicultura)){
                 $gerenciar = \nemo\Gerenciar::where('piscicultura_id','=',$request->id)->where('user_id','=',\Auth::user()->id)->first();
                 if($gerenciar==NULL||$gerenciar->is_administrador != "1"){
+                    return redirect('/home')->with('denied','Você não tem permissão');
+                }
+            }elseif(in_array($request->route()->uri,$rotas_gerenteTanque)){
+                $tanque = \nemo\Tanque::find($request->id);
+                $piscicultura = $tanque->piscicultura;
+                $gerenciar = \nemo\Gerenciar::where('piscicultura_id','=',$piscicultura->id)->where('user_id','=',\Auth::user()->id)->first();
+                if($gerenciar == NULL){
                     return redirect('/home')->with('denied','Você não tem permissão');
                 }
             }
