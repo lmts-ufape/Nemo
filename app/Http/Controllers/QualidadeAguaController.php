@@ -3,6 +3,8 @@
 namespace nemo\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Validator;
+use nemo\Validator\QualidadeAguaValidator;
 
 class QualidadeAguaController extends Controller
 {
@@ -20,28 +22,37 @@ class QualidadeAguaController extends Controller
   }
 
   public function adicionar(Request $request){
-    if(!$this->verificaTanqueExistente($request->id_tanque)) {
-      //date_default_timezone_set('America/Sao_Paulo');
-      //$data = date('d-m-Y');
-      //$data .= ' '.date('H:i:s');
-      $tanque = \nemo\Tanque::find($request->id_tanque);
-      $data = $request->dataMedicao;
-      $qualidade = new \nemo\QualidadeAgua();
-      $qualidade->ph = $request->ph;
-      $qualidade->nivelOxigenio = $request->nivelOxigenio;
-      $qualidade->temperatura = $request->temperatura;
-      $qualidade->nivelAmonia = $request->nivelAmonia;
-      $qualidade->nitrito = $request->nitrato;
-      $qualidade->nitrato = $request->nitrato;
-      $qualidade->alcalinidade = $request->alcalinidade;
-      $qualidade->dureza = $request->dureza;
-      $qualidade->data = $data;
-      $qualidade->tanque_id = $tanque->id;
-      $qualidade->save();
-      
-       return redirect()->route("tanque.listar", ['id' => $tanque->piscicultura_id]);
-    }
-    return redirect()->route("tanque.listar", ['id' => $tanque->piscicultura_id]);
+    try{
+      //if(!$this->verificaTanqueExistente($request->id_tanque)) {
+        QualidadeAguaValidator::validate($request->all());
+        //date_default_timezone_set('America/Sao_Paulo');
+        //$data = date('d-m-Y');
+        //$data .= ' '.date('H:i:s');
+        $tanque = \nemo\Tanque::find($request->id_tanque);
+        $dataM = $request->dataMedicao;
+        $horaM = $request->horaMedicao;
+        $data = $dataM." ".$horaM;
+        $qualidade = new \nemo\QualidadeAgua();
+        $qualidade->ph = $request->ph;
+        $qualidade->nivelOxigenio = $request->nivelOxigenio;
+        $qualidade->temperatura = $request->temperatura;
+        $qualidade->nivelAmonia = $request->nivelAmonia;
+        $qualidade->nitrito = $request->nitrato;
+        $qualidade->nitrato = $request->nitrato;
+        $qualidade->alcalinidade = $request->alcalinidade;
+        $qualidade->dureza = $request->dureza;
+        $qualidade->data = $data;
+        $qualidade->tanque_id = $tanque->id;
+        $qualidade->save();
+        
+         return redirect()->route("listarTanques", ['id' => $tanque->piscicultura_id]);
+      //}
+    }catch(\nemo\Validator\ValidationException $e){
+
+			return back()->withErrors($e->getValidator())->withInput();
+			
+		}
+    //return redirect()->route("listarTanques", ['id' => $tanque->piscicultura_id]);
   }
   
   public function verificaTanqueExistente($id){
