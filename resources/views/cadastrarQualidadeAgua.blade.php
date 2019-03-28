@@ -39,9 +39,9 @@
                     <label>Dureza</label>
                     <input class="form-control" type="text" name="dureza" value="{{old('dureza')}}" autofocus /><br/>
                     <label>Data da Medição</label>
-                    <input class="form-control" type="text" name="dataMedicao" value="{{old('dataMedicao')}}" placeholder="DD/MM/AA" autofocus /><br/>
+                    <input class="form-control" type="date" name="dataMedicao" value="{{old('dataMedicao')}}" placeholder="DD/MM/AA" autofocus /><br/>
                     <label>Hora da Medição</label>
-                    <input class="form-control" type="text" name="horaMedicao" value="{{old('horaMedicao')}}" placeholder="HH:MM" autofocus /><br/>
+                    <input class="form-control" type="time" name="horaMedicao" value="{{old('horaMedicao')}}" placeholder="HH:MM" autofocus /><br/>
                   </div>
                   <input class="btn btn-success" type="submit" value="Cadastrar" />
                 </form>
