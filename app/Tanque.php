@@ -10,7 +10,7 @@ use nemo\Piscicultura;
 class Tanque extends Model
 {
 	public $timestamps = false;
-	protected $fillable = ['nome','volume','area','altura','formato'];
+	protected $fillable = ['nome','volume','area','altura'];
     
     public function piscicultura(){
     	return $this->belongsTo(Piscicultura::class);

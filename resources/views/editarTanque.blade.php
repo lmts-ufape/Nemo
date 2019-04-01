@@ -20,11 +20,10 @@
                           <label>Volume</label>
                           <input class="form-control" type="number" step="any" name="volume" value="{{$tanque->volume}}" required/><br/>
                           <label>Área</label>
-                          <input class="form-control" type="number" step="any" name="area" value="{{$tanque->area}}" required/><br/>
+                          <input class="form-control" type="number" step="any" name="area" value="{{$tanque->area}}" /><br/>
                           <label>Altura</label>
-                          <input class="form-control" type="number" step="any" name="altura" value="{{$tanque->altura}}" required/><br/>
-                          <label>Formato</label>
-                          <input class="form-control" step="any" type="text" name="formato"value="{{$tanque->formato}}"required="required"/><br/>
+                          <input class="form-control" type="number" step="any" name="altura" value="{{$tanque->altura}}" /><br/>
+                          
                       </div>
                       <div class="card-body">            
                         <input class="btn btn-primary" type="submit" value="Salvar" />
