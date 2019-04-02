@@ -11,18 +11,23 @@
                 <div class="card-header">
                     Editar Tanque
                 </div>
+                @if($errors->getMessages() != NULL)
+                  <div class="alert alert-danger" role="alert">
+                        @foreach($errors->getMessages() as &$error) {{$error[0]}} <br/> @endforeach
+                  </div>
+                @endif
                     <form action="/salvarTanque" method="post">
                       {{ csrf_field() }}
                       <input type="hidden" name="id" min="0" value="{{ $tanque->id}}" />
                       <div class="card-body">
                           <label>Nome</label>
-                          <input class="form-control" step="any" type="text" name="nome"value="{{$tanque->nome}}"required="required"/><br/>
+                          <input class="form-control" step="any" type="text" name="nome"value="{{$tanque->nome}}"/><br/>
                           <label>Volume</label>
-                          <input class="form-control" type="number" step="any" name="volume" value="{{$tanque->volume}}" required/><br/>
+                          <input class="form-control" type="text" step="any" name="volume" value="{{$tanque->volume}}" /><br/>
                           <label>Área</label>
-                          <input class="form-control" type="number" step="any" name="area" value="{{$tanque->area}}" /><br/>
+                          <input class="form-control" type="text" step="any" name="area" value="{{$tanque->area}}" /><br/>
                           <label>Altura</label>
-                          <input class="form-control" type="number" step="any" name="altura" value="{{$tanque->altura}}" /><br/>
+                          <input class="form-control" type="text" step="any" name="altura" value="{{$tanque->altura}}" /><br/>
                           
                       </div>
                       <div class="card-body">            
