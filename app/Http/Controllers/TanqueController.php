@@ -31,7 +31,7 @@ class TanqueController extends Controller
   public function adicionar(Request $request){
 
     $piscicultura = \nemo\Piscicultura::find($request->id_piscicultura);
-    $piscicultura->tanques()->create([
+    $tanque = $piscicultura->tanques()->create([
       'nome' => $request->nome,
       'volume' => $request->volume,
       'area' => $request->area,
@@ -39,6 +39,8 @@ class TanqueController extends Controller
       //'formato' => $request->formato,
       'manutencao_necessaria' => 'Não'
       ]);
+      $tanque->qualidade_aguas()->create([]);
+
       return redirect()->route("tanque.listar", ['piscicultura' => $request->id_piscicultura]);
       
   }
