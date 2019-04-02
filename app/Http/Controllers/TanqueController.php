@@ -36,7 +36,7 @@ class TanqueController extends Controller
       'volume' => $request->volume,
       'area' => $request->area,
       'altura' => $request->altura,
-      'formato' => $request->formato,
+      //'formato' => $request->formato,
       'manutencao_necessaria' => 'Não'
       ]);
       return redirect()->route("tanque.listar", ['piscicultura' => $request->id_piscicultura]);
@@ -58,7 +58,7 @@ class TanqueController extends Controller
     $tanque->nome = $request->nome;
     $tanque->altura = $request->altura;
     $tanque->area = $request->area;
-    $tanque->formato = $request->formato;
+    //$tanque->formato = $request->formato;
     $tanque->update();
     return redirect()->route("tanque.detalhar", ['id' => $request->id]);
     
