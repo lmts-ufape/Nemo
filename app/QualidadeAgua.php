@@ -26,6 +26,6 @@ class QualidadeAgua extends Model
 	];
 
     public function tanque(){
-    	return $this->belongsTo(Tanque::class);
+    	return $this->belongsTo(Tanque::class, 'tanque_id');
     }
 }

@@ -71,6 +71,22 @@ Route::middleware('autorizacao')->group(function() {
     Route::post('/salvarQualidadeAgua', "QualidadeAguaController@salvar")->name('qualidade.agua.salvar');
     Route::post('/apagarQualidadeAgua', "QualidadeAguaController@apagar")->name('qualidade.agua.apagar');
     Route::get('/remover/qualidadeAgua/{id}', "QualidadeAguaController@remover")->name('qualidade.agua.remover');
+    Route::get('/tanque/{id}/cadastrar/ph', "PhController@cadastrar")->name('ph.cadastrar');
+    Route::post('/adicionarPh', "PhController@adicionar")->name('ph.adicionar');
+    Route::get('/tanque/{id}/cadastrar/amonia', "AmoniaController@cadastrar")->name('amonia.cadastrar');
+    Route::post('/adicionarAmonia', "AmoniaController@adicionar")->name('amonia.adicionar');
+    Route::get('/tanque/{id}/cadastrar/nitrito', "NitritoController@cadastrar")->name('nitrito.cadastrar');
+    Route::post('/adicionarNitrito', "NitritoController@adicionar")->name('nitrito.adicionar');
+    Route::get('/tanque/{id}/cadastrar/nitrato', "NitratoController@cadastrar")->name('nitrato.cadastrar');
+    Route::post('/adicionarNitrato', "NitratoController@adicionar")->name('nitrato.adicionar');
+    Route::get('/tanque/{id}/cadastrar/oxigenio', "OxigenioController@cadastrar")->name('oxigenio.cadastrar');
+    Route::post('/adicionarOxigenio', "OxigenioController@adicionar")->name('oxigenio.adicionar');
+    Route::get('/tanque/{id}/cadastrar/dureza', "DurezaController@cadastrar")->name('dureza.cadastrar');
+    Route::post('/adicionarDureza', "DurezaController@adicionar")->name('dureza.adicionar');
+    Route::get('/tanque/{id}/cadastrar/alcalinidade', "AlcalinidadeController@cadastrar")->name('alcalinidade.cadastrar');
+    Route::post('/adicionarAlcalinidade', "AlcalinidadeController@adicionar")->name('alcalinidade.adicionar');
+    Route::get('/tanque/{id}/cadastrar/temperatura', "TemperaturaController@cadastrar")->name('temperatura.cadastrar');
+    Route::post('/adicionarTemperatura', "TemperaturaController@adicionar")->name('temperatura.adicionar');
     
     //Rotas de Povoamento
     Route::get('/povoar/tanque/{tanque_id}/especie/{especie_id}',  "PovoamentoController@povoarTanque")->name('povoamento.povoar');
