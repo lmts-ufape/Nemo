@@ -27,5 +27,9 @@ class QualidadeAgua extends Model
 
     public function tanque(){
     	return $this->belongsTo(Tanque::class, 'tanque_id');
-    }
+	}
+	
+	public function phs(){
+		return $this->hasMany(Ph::class);
+	}
 }
