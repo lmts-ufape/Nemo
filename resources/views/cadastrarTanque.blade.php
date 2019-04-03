@@ -11,18 +11,23 @@
                 <div class="card-header">
                     Cadastrar Tanque
                 </div>
+                      @if($errors->getMessages() != NULL)
+                  <div class="alert alert-danger" role="alert">
+                      @foreach($errors->getMessages() as &$error) {{$error[0]}} <br/> @endforeach
+                  </div>
+                      @endif
                   <form action="/adicionarTanque" method="post">
                     {{ csrf_field() }}
                     <input type="hidden" name="id_piscicultura" value="{{$piscicultura->id}}">
                     <div class="card-body">
                       <label>Nome</label>
-                      <input class="form-control" type="text" name="nome"required="required" placeholder="Nome" autofocus required /><br/>
+                    <input class="form-control" type="text" name="nome" placeholder="Nome" value="{{old('nome')}}" autofocus  /><br/>
                       <label>Volume</label>
-                      <input class="form-control" type="number" min="0" step="any" name="volume" placeholder="Em litros" autofocus required/><br/>
+                      <input class="form-control" type="text" min="0" step="any" name="volume" placeholder="Em litros" value="{{old('volume')}}" autofocus /><br/>
                       <label>Área</label>
-                      <input class="form-control" type="number" min="0" step="any" name="area" placeholder="Em metros quadrados" autofocus/><br/>
+                      <input class="form-control" type="text" min="0" step="any" name="area" placeholder="Em metros quadrados" autofocus /><br/>
                       <label>Altura</label>
-                      <input class="form-control" type="number" min="0" step="any" name="altura" placeholder="Em metros" autofocus /><br/>
+                      <input class="form-control" type="text" min="0" step="any" name="altura" placeholder="Em metros" autofocus /><br/>
                       <input class="btn btn-success" type="submit" value="Cadastrar" />
                     </div>
                   </form>
@@ -31,6 +36,3 @@
     </div>
 </div>
 @stop
-
-
-

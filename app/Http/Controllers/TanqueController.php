@@ -6,6 +6,7 @@ namespace nemo\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Validator;
+use nemo\Validator\TanqueValidator;
 
 class TanqueController extends Controller
 {
@@ -30,18 +31,25 @@ class TanqueController extends Controller
 
   public function adicionar(Request $request){
 
-    $piscicultura = \nemo\Piscicultura::find($request->id_piscicultura);
-    $tanque = $piscicultura->tanques()->create([
-      'nome' => $request->nome,
-      'volume' => $request->volume,
-      'area' => $request->area,
-      'altura' => $request->altura,
-      //'formato' => $request->formato,
-      'manutencao_necessaria' => 'Não'
-      ]);
-      $tanque->qualidade_aguas()->create([]);
+    try{
 
-      return redirect()->route("tanque.listar", ['piscicultura' => $request->id_piscicultura]);
+      TanqueValidator::validate($request->all());
+
+      $piscicultura = \nemo\Piscicultura::find($request->id_piscicultura);
+      $piscicultura->tanques()->create([
+        'nome' => $request->nome,
+        'volume' => $request->volume,
+        'area' => $request->area,
+        'altura' => $request->altura,
+        //'formato' => $request->formato,
+        'manutencao_necessaria' => 'Não'
+        ]);
+        return redirect()->route("tanque.listar", ['piscicultura' => $request->id_piscicultura]);
+    }catch(\nemo\Validator\ValidationException $e){
+
+			return back()->withErrors($e->getValidator())->withInput();
+			
+		}
       
   }
 
@@ -55,14 +63,23 @@ class TanqueController extends Controller
   }
 
   public function salvar(Request $request){
-	 	$tanque = \nemo\Tanque::find($request->id);
-    $tanque->volume = $request->volume;
-    $tanque->nome = $request->nome;
-    $tanque->altura = $request->altura;
-    $tanque->area = $request->area;
-    //$tanque->formato = $request->formato;
-    $tanque->update();
-    return redirect()->route("tanque.detalhar", ['id' => $request->id]);
+     $tanque = \nemo\Tanque::find($request->id);
+     
+    try{
+      TanqueValidator::validate($request->all());
+      $tanque->volume = $request->volume;
+      $tanque->nome = $request->nome;
+      $tanque->altura = $request->altura;
+      $tanque->area = $request->area;
+      //$tanque->formato = $request->formato;
+      $tanque->update();
+      return redirect()->route("tanque.detalhar", ['id' => $request->id]);
+
+    }catch(\nemo\Validator\ValidationException $e){
+
+			return back()->withErrors($e->getValidator())->withInput();
+			
+		}
     
   }
 
