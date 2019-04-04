@@ -12,8 +12,9 @@
                 <div class="card-header">Relatório da Qualidade da água</div>
                 <div class="card-body">
 				    <div id="tabela" class="table-responsive">
-                        <font size="2px">
-                        <table id="tabela" class="table table-hover" >
+                        
+                        {{--
+                          <table id="tabela" class="table table-hover" >
                             <thead>
                                 <tr>
                                     <th>PH</th>
@@ -53,12 +54,15 @@
                             <font size="2px">
                             <table id="tabela" class="table table-hover" >
                             </table>
-                      </font>
+                          --}}
+                          {!! $chart->html() !!}
+                      
                       </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+{!! Charts::scripts() !!}
+{!! $chart->script() !!}
 @stop

@@ -31,7 +31,7 @@ class Tanque extends Model
     }
 
     public function qualidade_aguas(){
-    	return $this->hasMany(QualidadeAgua::class);
+    	return $this->hasOne(QualidadeAgua::class);
     }
     
     public function povoamentos(){

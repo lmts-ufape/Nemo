@@ -7,6 +7,8 @@ namespace nemo\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use nemo\Validator\TanqueValidator;
+use Charts;
+use nemo\QualidadeAgua;
 
 class TanqueController extends Controller
 {
@@ -103,7 +105,22 @@ class TanqueController extends Controller
   public function gerarRelatorios($id) {
     $tanque = \nemo\Tanque::find($id);
     $piscicultura = $tanque->piscicultura;
+    $phs = $tanque->qualidade_aguas->phs;
+        $chart = Charts::database($phs, 'bar', 'highcharts')
+			      ->title("PHs")
+			      ->elementLabel("PHs")
+			      ->dimensions(1000, 500)
+			      ->responsive(true)
+			      ->groupByMonth(date('Y'), true);
+  
+		$line_chart = Charts::create('line', 'highcharts')
+			    ->title('Line Chart Demo')
+			    ->elementLabel('Chart Labels')
+			    ->labels(['Ph 1', 'Ph 2', 'Ph 3', 'Ph 4', 'Ph 5', 'Ph 6'])
+			    ->values([15,25,50, 5,10,20])
+			    ->dimensions(1000,500)
+          ->responsive(true);
 
-    return view('relatoriosTanque', ['tanque' => $tanque, 'piscicultura' => $piscicultura]);
+    return view('relatoriosTanque', compact('chart'), ['tanque' => $tanque, 'piscicultura' => $piscicultura]);
   }
 }
