@@ -9,6 +9,7 @@ use Validator;
 use nemo\Validator\TanqueValidator;
 use Charts;
 use nemo\QualidadeAgua;
+use phpDocumentor\Reflection\Types\Object_;
 
 class TanqueController extends Controller
 {
@@ -38,7 +39,7 @@ class TanqueController extends Controller
       TanqueValidator::validate($request->all());
 
       $piscicultura = \nemo\Piscicultura::find($request->id_piscicultura);
-      $piscicultura->tanques()->create([
+      $tanque = $piscicultura->tanques()->create([
         'nome' => $request->nome,
         'volume' => $request->volume,
         'area' => $request->area,
@@ -46,6 +47,7 @@ class TanqueController extends Controller
         //'formato' => $request->formato,
         'manutencao_necessaria' => 'Não'
         ]);
+        $tanque->qualidade_aguas()->create([]);
         return redirect()->route("tanque.listar", ['piscicultura' => $request->id_piscicultura]);
     }catch(\nemo\Validator\ValidationException $e){
 
@@ -106,21 +108,59 @@ class TanqueController extends Controller
     $tanque = \nemo\Tanque::find($id);
     $piscicultura = $tanque->piscicultura;
     $phs = $tanque->qualidade_aguas->phs;
-        $chart = Charts::database($phs, 'bar', 'highcharts')
-			      ->title("PHs")
-			      ->elementLabel("PHs")
-			      ->dimensions(1000, 500)
-			      ->responsive(true)
-			      ->groupByMonth(date('Y'), true);
-  
-		$line_chart = Charts::create('line', 'highcharts')
-			    ->title('Line Chart Demo')
-			    ->elementLabel('Chart Labels')
-			    ->labels(['Ph 1', 'Ph 2', 'Ph 3', 'Ph 4', 'Ph 5', 'Ph 6'])
-			    ->values([15,25,50, 5,10,20])
+    $datasPh = $this->gerarDatas($phs);
+    $phsData = $this->gerarQualidades($datasPh,$phs);
+    $temperaturas = $tanque->qualidade_aguas->temperaturas;
+    $datasTemp = $this->gerarDatas($temperaturas);
+    $tempsData = $this->gerarQualidades($datasTemp,$temperaturas);
+    
+
+		$line_chartPh = Charts::create('line', 'highcharts')
+			    ->title('PH')
+			    ->elementLabel('Ph')
+			    ->labels($datasPh)
+          ->values($phsData)       
 			    ->dimensions(1000,500)
           ->responsive(true);
+    
+          
+    $line_chartTemp = Charts::create('line', 'highcharts')
+			    ->title('Temperatura')
+			    ->elementLabel('C')
+			    ->labels($datasTemp)
+          ->values($tempsData)       
+			    ->dimensions(1000,500)
+          ->responsive(true); 
 
-    return view('relatoriosTanque', compact('chart'), ['tanque' => $tanque, 'piscicultura' => $piscicultura]);
+    return view('relatoriosTanque', compact('line_chartPh', 'line_chartTemp'), ['tanque' => $tanque, 'piscicultura' => $piscicultura]);
   }
+
+  public function gerarDatas($qualidades){
+    $datas = array();
+    
+    foreach ($qualidades as &$qualidade) {
+      $dataHora = $qualidade->data . " " . $qualidade->hora;
+      $str = str_replace("-", "/", $dataHora);
+      array_push($datas,$str);   
+      
+    }
+    sort($datas);
+    return $datas;    
+  }
+
+  public function gerarQualidades($datas,$qualidades){
+    $phsData = array();
+    foreach($datas as &$data){
+      foreach($qualidades as &$qualidade){
+        $dataHora = $qualidade->data . " " . $qualidade->hora;
+        $str = str_replace("-", "/", $dataHora);
+        if($data == $str){
+          array_push($phsData,$qualidade->valor); 
+        }
+      }
+    }
+    return $phsData;
+  }
+
 }
+
