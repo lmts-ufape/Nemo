@@ -32,4 +32,7 @@ class QualidadeAgua extends Model
 	public function phs(){
 		return $this->hasMany(Ph::class);
 	}
+	public function temperaturas(){
+		return $this->hasMany(Temperatura::class);
+	}
 }

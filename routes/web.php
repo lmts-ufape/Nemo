@@ -45,7 +45,7 @@ Route::middleware('autorizacao')->group(function() {
     Route::get('/remover/tanque/{id}', "TanqueController@remover")->name('tanque.remover');
     Route::post('/apagarTanque', "TanqueController@apagar")->name('tanque.apagar');
     Route::get('/tanque/{id}/detalhes', "TanqueController@exibirDetalhes")->name('tanque.detalhar');
-    Route::get('/relatorios/tanque/{id}', "TanqueController@gerarRelatorios")->name('tanque.gerar.relatorio');
+    Route::get('/relatorios/tanque/{id}', "TanqueController@gerarRelatorios")->name('tanque.gerar.relatorios');
 
     //Rotas de Espécie
     Route::get('/listar/especies/{id}', "EspecieController@listar")->name('listarEspecies');
