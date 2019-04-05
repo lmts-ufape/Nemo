@@ -21,6 +21,36 @@
               {!! $line_chartTemp->html() !!}
                       
             </div>
+            <div id="tabela" class="table-responsive">
+                        
+              {!! $line_chartAmonia->html() !!}
+                      
+            </div>
+            <div id="tabela" class="table-responsive">
+                        
+              {!! $line_chartNitrito->html() !!}
+                      
+            </div>
+            <div id="tabela" class="table-responsive">
+                        
+              {!! $line_chartNitrato->html() !!}
+                      
+            </div>
+            <div id="tabela" class="table-responsive">
+                        
+              {!! $line_chartDureza->html() !!}
+                      
+            </div>
+            <div id="tabela" class="table-responsive">
+                        
+              {!! $line_chartAlcalinidade->html() !!}
+                      
+            </div>
+            <div id="tabela" class="table-responsive">
+                        
+              {!! $line_chartOxigenio->html() !!}
+                      
+            </div>
           </div>
         </div>
       </div>
@@ -29,4 +59,10 @@
 {!! Charts::scripts() !!}
 {!! $line_chartPh->script() !!}
 {!! $line_chartTemp->script() !!}
+{!! $line_chartAlcalinidade->script() !!}
+{!! $line_chartOxigenio->script() !!}
+{!! $line_chartDureza->script() !!}
+{!! $line_chartNitrito->script() !!}
+{!! $line_chartNitrato->script() !!}
+{!! $line_chartAmonia->script() !!}
 @stop
