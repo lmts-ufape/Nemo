@@ -35,4 +35,22 @@ class QualidadeAgua extends Model
 	public function temperaturas(){
 		return $this->hasMany(Temperatura::class);
 	}
+	public function amonias(){
+		return $this->hasMany(Amonia::class);
+	}
+	public function nitritos(){
+		return $this->hasMany(Nitrito::class);
+	}
+	public function nitratos(){
+		return $this->hasMany(Nitrato::class);
+	}
+	public function durezas(){
+		return $this->hasMany(Dureza::class);
+	}
+	public function alcalinidades(){
+		return $this->hasMany(Alcalinidade::class);
+	}
+	public function oxigenios(){
+		return $this->hasMany(NivelDeOxigenio::class);
+	}
 }

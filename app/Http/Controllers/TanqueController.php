@@ -113,6 +113,24 @@ class TanqueController extends Controller
     $temperaturas = $tanque->qualidade_aguas->temperaturas;
     $datasTemp = $this->gerarDatas($temperaturas);
     $tempsData = $this->gerarQualidades($datasTemp,$temperaturas);
+    $amonias = $tanque->qualidade_aguas->amonias;
+    $datasAmonia = $this->gerarDatas($amonias);
+    $amoniasData = $this->gerarQualidades($datasTemp,$amonias);
+    $nitritos = $tanque->qualidade_aguas->nitritos;
+    $datasNitrito = $this->gerarDatas($nitritos);
+    $nitritosData = $this->gerarQualidades($datasTemp,$nitritos);
+    $nitratos = $tanque->qualidade_aguas->nitratos;
+    $datasNitrato = $this->gerarDatas($nitratos);
+    $nitratosData = $this->gerarQualidades($datasTemp,$nitratos);
+    $durezas = $tanque->qualidade_aguas->durezas;
+    $datasDureza = $this->gerarDatas($durezas);
+    $durezasData = $this->gerarQualidades($datasTemp,$durezas);
+    $alcalinidades = $tanque->qualidade_aguas->alcalinidades;
+    $datasAlcalinidade = $this->gerarDatas($alcalinidades);
+    $alcalinidadesData = $this->gerarQualidades($datasTemp,$alcalinidades);
+    $oxigenios = $tanque->qualidade_aguas->oxigenios;
+    $datasOxigenio = $this->gerarDatas($oxigenios);
+    $oxigeniosData = $this->gerarQualidades($datasTemp,$oxigenios);
     
 
 		$line_chartPh = Charts::create('line', 'highcharts')
@@ -126,13 +144,65 @@ class TanqueController extends Controller
           
     $line_chartTemp = Charts::create('line', 'highcharts')
 			    ->title('Temperatura')
-			    ->elementLabel('C')
+			    ->elementLabel('°C')
 			    ->labels($datasTemp)
           ->values($tempsData)       
 			    ->dimensions(1000,500)
           ->responsive(true); 
 
-    return view('relatoriosTanque', compact('line_chartPh', 'line_chartTemp'), ['tanque' => $tanque, 'piscicultura' => $piscicultura]);
+    $line_chartAmonia = Charts::create('line', 'highcharts')
+			    ->title('Amônia')
+			    ->elementLabel('mg/L')
+			    ->labels($datasAmonia)
+          ->values($amoniasData)       
+			    ->dimensions(1000,500)
+          ->responsive(true);
+
+    $line_chartNitrato = Charts::create('line', 'highcharts')
+			    ->title('Nitrato')
+			    ->elementLabel('mg/L')
+			    ->labels($datasNitrato)
+          ->values($nitratosData)       
+			    ->dimensions(1000,500)
+          ->responsive(true);
+
+    $line_chartNitrito = Charts::create('line', 'highcharts')
+			    ->title('Nitrito')
+			    ->elementLabel('mg/L')
+			    ->labels($datasNitrito)
+          ->values($nitritosData)       
+			    ->dimensions(1000,500)
+          ->responsive(true);
+    
+    $line_chartAlcalinidade = Charts::create('line', 'highcharts')
+			    ->title('Alcalinidade')
+			    ->elementLabel('mg CaCO3/L')
+			    ->labels($datasAlcalinidade)
+          ->values($alcalinidadesData)       
+			    ->dimensions(1000,500)
+          ->responsive(true);
+
+    $line_chartDureza = Charts::create('line', 'highcharts')
+			    ->title('Dureza')
+			    ->elementLabel('mg CaCO3/L')
+			    ->labels($datasDureza)
+          ->values($durezasData)       
+			    ->dimensions(1000,500)
+          ->responsive(true);
+
+    $line_chartOxigenio = Charts::create('line', 'highcharts')
+			    ->title('Oxigênio')
+			    ->elementLabel('mg/L')
+			    ->labels($datasOxigenio)
+          ->values($oxigeniosData)       
+			    ->dimensions(1000,500)
+          ->responsive(true);
+
+
+          
+    
+
+    return view('relatoriosTanque', compact('line_chartNitrato','line_chartNitrito','line_chartDureza','line_chartAlcalinidade','line_chartOxigenio','line_chartPh', 'line_chartTemp', 'line_chartAmonia'), ['tanque' => $tanque, 'piscicultura' => $piscicultura]);
   }
 
   public function gerarDatas($qualidades){
