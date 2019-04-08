@@ -131,6 +131,9 @@ class TanqueController extends Controller
     $oxigenios = $tanque->qualidade_aguas->oxigenios;
     $datasOxigenio = $this->gerarDatas($oxigenios);
     $oxigeniosData = $this->gerarQualidades($datasTemp,$oxigenios);
+    $biometrias = $tanque->biometrias;
+    $datasBiometria = $this->gerarDatas($biometrias);
+    $biometriasData = $this->gerarPesos($datasBiometria,$biometrias);
     
 
 		$line_chartPh = Charts::create('line', 'highcharts')
@@ -198,11 +201,17 @@ class TanqueController extends Controller
 			    ->dimensions(1000,500)
           ->responsive(true);
 
-
+    $line_chartBiometria = Charts::create('line', 'highcharts')
+			    ->title('Biometria')
+			    ->elementLabel('Kg')
+			    ->labels($datasBiometria)
+          ->values($biometriasData)       
+			    ->dimensions(1000,500)
+          ->responsive(true);
           
     
 
-    return view('relatoriosTanque', compact('line_chartNitrato','line_chartNitrito','line_chartDureza','line_chartAlcalinidade','line_chartOxigenio','line_chartPh', 'line_chartTemp', 'line_chartAmonia'), ['tanque' => $tanque, 'piscicultura' => $piscicultura]);
+    return view('relatoriosTanque', compact('line_chartBiometria','line_chartNitrato','line_chartNitrito','line_chartDureza','line_chartAlcalinidade','line_chartOxigenio','line_chartPh', 'line_chartTemp', 'line_chartAmonia'), ['tanque' => $tanque, 'piscicultura' => $piscicultura]);
   }
 
   public function gerarDatas($qualidades){
@@ -219,17 +228,30 @@ class TanqueController extends Controller
   }
 
   public function gerarQualidades($datas,$qualidades){
-    $phsData = array();
+    $qualidadesData = array();
     foreach($datas as &$data){
       foreach($qualidades as &$qualidade){
         $dataHora = $qualidade->data . " " . $qualidade->hora;
         $str = str_replace("-", "/", $dataHora);
         if($data == $str){
-          array_push($phsData,$qualidade->valor); 
+          array_push($qualidadesData,$qualidade->valor); 
         }
       }
     }
-    return $phsData;
+    return $qualidadesData;
+  }
+  public function gerarPesos($datas,$biometrias){
+    $pesosDatas = array();
+    foreach($datas as &$data){
+      foreach($biometrias as &$biometria){
+        $dataHora = $biometria->data . " " . $biometria->hora;
+        $str = str_replace("-", "/", $dataHora);
+        if($data == $str){
+          array_push($pesosDatas,$biometria->peso); 
+        }
+      }
+    }
+    return $pesosDatas;
   }
 
 }
