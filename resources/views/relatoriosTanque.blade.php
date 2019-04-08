@@ -51,6 +51,11 @@
               {!! $line_chartOxigenio->html() !!}
                       
             </div>
+            <div id="tabela" class="table-responsive">
+                        
+              {!! $line_chartBiometria->html() !!}
+                      
+            </div>
           </div>
         </div>
       </div>
@@ -65,4 +70,5 @@
 {!! $line_chartNitrito->script() !!}
 {!! $line_chartNitrato->script() !!}
 {!! $line_chartAmonia->script() !!}
+{!! $line_chartBiometria->script() !!}
 @stop

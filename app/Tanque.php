@@ -41,5 +41,8 @@ class Tanque extends Model
     public function pescas(){
         return $this->hasMany(Pesca::class);
     }
+    public function biometrias(){
+        return $this->hasMany(Biometria::class);
+    }
 }
 

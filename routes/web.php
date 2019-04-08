@@ -97,6 +97,11 @@ Route::middleware('autorizacao')->group(function() {
     Route::get('/tanque/{tanque_id}/pesca/especie/{especiePeixe_id}/povoamento/{povoamento_id}', "PescaController@pesca")->name('pesca.pesca');
     Route::post('/pescarEspecie', "PescaController@pescar")->name('pescar.pescar');
     
+    //Rotas de Biometria
+    Route::get('/tanque/{id}/cadastrar/biometria', "BiometriaController@cadastrar")->name('biometria.cadastrar');
+    Route::post('/adicionarBiometria', "BiometriaController@adicionar")->name('biometria.adicionar');
+    
+
     //Rotas de Escalonamento
     Route::get('/escalonamento/{id}', "EscalonamentoController@chamaEscalonamento")->name('escalonamento.chamar');
     Route::post('/calcularEscalonamento', "EscalonamentoController@calcularEscalonamento")->name('escalonamento.calcular');

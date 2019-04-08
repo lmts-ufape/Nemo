@@ -28,6 +28,7 @@
 									<a class="btn btn-primary" href="/relatorios/tanque/{{$tanque->id}}">Relatorios</a>
 									<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/cadastrar/qualidadeAgua">Qualidade da água</a>
 									<a class="btn btn-primary" href="/listar/especies/{{$tanque->id}}">Povoar</a>
+									<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/cadastrar/biometria">Biometria</a>
 								</td>
 							</tr>
 							@endforeach		
