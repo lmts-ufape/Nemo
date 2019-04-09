@@ -21,10 +21,12 @@ class BiometriaController extends Controller
       public function adicionar(Request $request){
             $tanque = \nemo\Tanque::find($request->tanque_id);
             $biometria = new \nemo\Biometria();
-            $biometria->peso = $request->peso;
+            $biometria->peso_total = $request->peso;
+            $biometria->peso_medio = $request->peso/$request->quantidade;
             $biometria->data = $request->data;
             $biometria->hora = $request->hora;
             $biometria->tanque_id = $tanque->id;
+            $biometria->quantidade = $request->quantidade;
             $biometria->save();
             
              return redirect()->route("tanque.listar", ['id' => $tanque->piscicultura_id]);

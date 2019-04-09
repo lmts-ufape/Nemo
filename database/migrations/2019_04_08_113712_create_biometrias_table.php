@@ -16,10 +16,12 @@ class CreateBiometriasTable extends Migration
         Schema::create('biometrias', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('peso');
+            $table->decimal('peso_total');
+            $table->decimal('peso_medio');
             $table->date('data');
             $table->time('hora');
             $table->integer('tanque_id');
+            $table->integer('quantidade');
             
             $table->foreign('tanque_id')->references('id')->on('tanques')->onDelete('cascade');
         });

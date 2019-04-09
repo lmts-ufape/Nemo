@@ -247,7 +247,7 @@ class TanqueController extends Controller
         $dataHora = $biometria->data . " " . $biometria->hora;
         $str = str_replace("-", "/", $dataHora);
         if($data == $str){
-          array_push($pesosDatas,$biometria->peso); 
+          array_push($pesosDatas,$biometria->peso_medio); 
         }
       }
     }

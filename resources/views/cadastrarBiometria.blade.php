@@ -21,6 +21,8 @@
                   <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                   <input type="hidden" name="tanque_id" value="{{$tanque->id}}" />
                   <div class="form-group">
+                    <label>Quantidade</label>
+                    <input class="form-control" type="number" name="quantidade" autofocus/><br/>
                     <label>Peso</label>
                     <input class="form-control" type="number" name="peso" placeholder="Kg" autofocus/><br/>
                     <label>Data</label>
