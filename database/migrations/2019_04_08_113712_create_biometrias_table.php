@@ -16,8 +16,8 @@ class CreateBiometriasTable extends Migration
         Schema::create('biometrias', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->decimal('peso_total');
-            $table->decimal('peso_medio');
+            $table->double('peso_total');
+            $table->double('peso_medio');
             $table->date('data');
             $table->time('hora');
             $table->integer('tanque_id');
