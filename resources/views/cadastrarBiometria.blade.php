@@ -1,7 +1,7 @@
 @extends('layouts.principal')
 @section('title','Cadastrar Biometria')
 @section('path')
-<a href="/listar/pisciculturas">Pisciculturas</a> > <a href="/info/piscicultura/{{$piscicultura->id}}"> {{$piscicultura->nome}} </a> > <a href="/listar/tanques/{{$piscicultura->id}}">Tanques</a> > Nitrato	
+<a href="/listar/pisciculturas">Pisciculturas</a> > <a href="/info/piscicultura/{{$piscicultura->id}}"> {{$piscicultura->nome}} </a> > <a href="/listar/tanques/{{$piscicultura->id}}">Tanques</a> > Biometria	
 @stop
 @section('content')
 <div class="container">
@@ -24,7 +24,7 @@
                     <label>Quantidade</label>
                     <input class="form-control" type="number" name="quantidade" autofocus/><br/>
                     <label>Peso</label>
-                    <input class="form-control" type="number" name="peso" placeholder="Kg" autofocus/><br/>
+                    <input class="form-control" type="number" step="0.0001" name="peso" placeholder="Kg" autofocus/><br/>
                     <label>Data</label>
                     <input class="form-control" type="date" name="data" placeholder="DD/MM/AA" autofocus /><br/>
                     <label>Hora</label>

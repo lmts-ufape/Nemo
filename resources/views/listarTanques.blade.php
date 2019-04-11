@@ -29,6 +29,7 @@
 									<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/cadastrar/qualidadeAgua">Qualidade da água</a>
 									<a class="btn btn-primary" href="/listar/especies/{{$tanque->id}}">Povoar</a>
 									<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/cadastrar/biometria">Biometria</a>
+									<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/racao">Ração</a>
 								</td>
 							</tr>
 							@endforeach		

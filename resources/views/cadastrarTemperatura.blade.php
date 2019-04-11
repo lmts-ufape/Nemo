@@ -19,7 +19,7 @@
                   <input type="hidden" name="id_qualidade_agua" value="{{$qualidade_agua->id}}" />
                   <div class="form-group">
                     <label>Valor</label>
-                    <input class="form-control" type="number" name="valor" min="0" max="14" value="{{old('ph')}}" autofocus/><br/>
+                    <input class="form-control" type="number" name="valor"  value="{{old('ph')}}" autofocus/><br/>
                     <label>Data da Medição</label>
                     <input class="form-control" type="date" name="data" value="{{old('data')}}" placeholder="DD/MM/AA" autofocus /><br/>
                     <label>Hora da Medição</label>
