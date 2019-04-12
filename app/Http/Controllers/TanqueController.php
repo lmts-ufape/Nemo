@@ -253,6 +253,19 @@ class TanqueController extends Controller
     }
     return $pesosDatas;
   }
+  public function temperaturaMedia($datasTemp,$tempsData){
+    $temps = array();
+    $i = 0;
+    foreach($datasTemp as $temp){
+      $dataFinal = (strtotime($datasTemp[count($datasTemp)-1]) - strtotime($temp)) /86400;
+      if($dataFinal <= 7){
+        array_push($temps,$tempsData[$i]);
+      }
+      $i++;
+    }
+    $temp = array_sum($temps) / count(array_filter($temps));
+    return $temp;
+  } 
 
   public function tabelaRacao($id){
     $tanque = \nemo\Tanque::find($id);
@@ -260,233 +273,199 @@ class TanqueController extends Controller
     $temperaturas = $tanque->qualidade_aguas->temperaturas;
     $datasTemp = $this->gerarDatas($temperaturas);
     $tempsData = $this->gerarQualidades($datasTemp,$temperaturas);
+    $temperatura = $this->temperaturaMedia($datasTemp,$tempsData);
     $biometrias = $tanque->biometrias;
     $datasBiometria = $this->gerarDatas($biometrias);
     $biometriasData = $this->gerarPesos($datasBiometria,$biometrias);
+    $povoamento = $tanque->povoamentos[0];
+    //dd($povoamento);
     $pb = 0;
     $quantidade_total = 0;
-    $quantidade_por_refeicao = 0;
     $refeicoes_por_dia = 0;
     $tamanho = 0;
+    $pv = $biometriasData[count($biometriasData)-1]*$povoamento->quantidade;
+    $i = 0;
+    for ($i = 0; $i < count($biometriasData); $i++) {
+      if($i < 4) {
+        $pv =  1000*($pv - (0.05 * $pv));      
+      }else{
+        $pv =  1000*($pv - (0.025 * $pv));
+      }
+    }
 
     if($biometriasData[count($biometriasData)-1] < 0.0005){
         $tamanho = "Pó fino < 0,5mm";
-        $pb = '40';
+        $pb = '40g';
       if(($tempsData[count($tempsData)-1])>30){
-        $quantidade_total = '15% a 20% do PV';
-        $quantidade_por_refeicao = 0;
+        $quantidade_total = 0.175*$pv;
         $refeicoes_por_dia = '6 a 8';
-      }elseif($tempsData[count($tempsData)-1] >= 27 && $tempsData[count($tempsData)-1] <= 30){
-        $quantidade_total = '15% a 20% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 27 && $temperatura <= 30){
+        $quantidade_total = 0.175*$pv;;
         $refeicoes_por_dia = '6 a 8';
-      }elseif($tempsData[count($tempsData)-1] >= 23 && $tempsData[count($tempsData)-1] <= 26){
-        $quantidade_total = '10% a 15% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 23 && $temperatura <= 26){
+        $quantidade_total = 0.125*$pv;;
         $refeicoes_por_dia = '5 a 6';
-      }elseif($tempsData[count($tempsData)-1] >= 19 && $tempsData[count($tempsData)-1] <= 22){
-        $quantidade_total = '7% a 10% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 19 && $temperatura <= 22){
+        $quantidade_total = 0.085*$pv;;
         $refeicoes_por_dia = '4 a 5';
-      }elseif($tempsData[count($tempsData)-1] < 19){
-        $quantidade_total = '4% a 6% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura < 19){
+        $quantidade_total = 0.05*$pv;;
         $refeicoes_por_dia = '3 a 4';
       }
     }elseif($biometriasData[count($biometriasData)-1] >= 0.0005 && $biometriasData[count($biometriasData)-1] < 0.003){
         $tamanho = "Pó fino < 0,5mm";
-        $pb = '40'; 
-      if(($tempsData[count($tempsData)-1])>30){
-        $quantidade_total = '10% a 12% do PV';
-        $quantidade_por_refeicao = 0;
+        $pb = '40g'; 
+      if(($temperatura)>30){
+        $quantidade_total = 0.11*$pv;;
         $refeicoes_por_dia = '5 a 6';
-      }elseif($tempsData[count($tempsData)-1] >= 27 && $tempsData[count($tempsData)-1] <= 30){
-        $quantidade_total = '10% a 12% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 27 && $temperatura <= 30){
+        $quantidade_total = 0.11*$pv;;
         $refeicoes_por_dia = '5 a 6';
-      }elseif($tempsData[count($tempsData)-1] >= 23 && $tempsData[count($tempsData)-1] <= 26){
-        $quantidade_total = '7% a 9% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 23 && $temperatura <= 26){
+        $quantidade_total = 0.08*$pv;;
         $refeicoes_por_dia = '4 a 5';
-      }elseif($tempsData[count($tempsData)-1] >= 19 && $tempsData[count($tempsData)-1] <= 22){
-        $quantidade_total = '5% a 6% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 19 && $temperatura <= 22){
+        $quantidade_total = 0.055*$pv;;
         $refeicoes_por_dia = '3 a 4';
-      }elseif($tempsData[count($tempsData)-1] < 19){
-        $quantidade_total = '3% a 4% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura < 19){
+        $quantidade_total = 0.035*$pv;;
         $refeicoes_por_dia = '2 a 3';
       }
     }elseif($biometriasData[count($biometriasData)-1] >= 0.003 && $biometriasData[count($biometriasData)-1] < 0.005){
       $tamanho = "Pó fino < 0,5mm";
-      $pb = '40 ou 36';      
-      if(($tempsData[count($tempsData)-1])>30){
-        $quantidade_total = '8% a 10% do PV';
-        $quantidade_por_refeicao = 0;
+      $pb = '40g ou 36g';      
+      if(($temperatura)>30){
+        $quantidade_total = 0.09*$pv;;
         $refeicoes_por_dia = '4 a 5';
-      }elseif($tempsData[count($tempsData)-1] >= 27 && $tempsData[count($tempsData)-1] <= 30){
-        $quantidade_total = '8% a 10% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 27 && $temperatura <= 30){
+        $quantidade_total = 0.09*$pv;
         $refeicoes_por_dia = '4 a 5';
-      }elseif($tempsData[count($tempsData)-1] >= 23 && $tempsData[count($tempsData)-1] <= 26){
-        $quantidade_total = '6% a 7% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 23 && $temperatura <= 26){
+        $quantidade_total = 0.065*$pv;
         $refeicoes_por_dia = '3 a 4';
-      }elseif($tempsData[count($tempsData)-1] >= 19 && $tempsData[count($tempsData)-1] <= 22){
-        $quantidade_total = '4% a 5% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 19 && $temperatura <= 22){
+        $quantidade_total = 0.045*$pv;
         $refeicoes_por_dia = '2 a 3';
-      }elseif($tempsData[count($tempsData)-1] < 19){
-        $quantidade_total = '2% a 3% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura < 19){
+        $quantidade_total = 0.025*$pv;
         $refeicoes_por_dia = '2';
       }
     }elseif($biometriasData[count($biometriasData)-1] >= 0.005 && $biometriasData[count($biometriasData)-1] < 0.010){
       $tamanho = "2mm";
       $pb = '36'; 
-      if(($tempsData[count($tempsData)-1])>30){
-        $quantidade_total = '6% a 8% do PV';
-        $quantidade_por_refeicao = 0;
+      if(($temperatura)>30){
+        $quantidade_total = 0.070*$pv;
         $refeicoes_por_dia = '3 a 4';
-      }elseif($tempsData[count($tempsData)-1] >= 27 && $tempsData[count($tempsData)-1] <= 30){
-        $quantidade_total = '6% a 8% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 27 && $temperatura <= 30){
+        $quantidade_total = 0.070*$pv;
         $refeicoes_por_dia = '3 a 4';
-      }elseif($tempsData[count($tempsData)-1] >= 23 && $tempsData[count($tempsData)-1] <= 26){
-        $quantidade_total = '4% a 6% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 23 && $temperatura <= 26){
+        $quantidade_total = 0.050*$pv;
         $refeicoes_por_dia = '2 a 4';
-      }elseif($tempsData[count($tempsData)-1] >= 19 && $tempsData[count($tempsData)-1] <= 22){
-        $quantidade_total = '3% a 4% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 19 && $temperatura <= 22){
+        $quantidade_total = 0.035*$pv;
         $refeicoes_por_dia = '2';
-      }elseif($tempsData[count($tempsData)-1] < 19){
-        $quantidade_total = '2% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura < 19){
+        $quantidade_total = 0.020*$pv;
         $refeicoes_por_dia = '1';
       }
     }elseif($biometriasData[count($biometriasData)-1] >= 0.010 && $biometriasData[count($biometriasData)-1] < 0.030){
         $tamanho = '2mm a 4mm';
-        $pb = '36';      
-      if(($tempsData[count($tempsData)-1])>30){
-        $quantidade_total = '5% a 6% do PV';
-        $quantidade_por_refeicao = 0;
+        $pb = '36g';      
+      if(($temperatura)>30){
+        $quantidade_total = 0.055*$pv;
         $refeicoes_por_dia = '2 a 3';
-      }elseif($tempsData[count($tempsData)-1] >= 27 && $tempsData[count($tempsData)-1] <= 30){
-        $quantidade_total = '5% a 6% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 27 && $temperatura <= 30){
+        $quantidade_total = 0.055*$pv;
         $refeicoes_por_dia = '2 a 3';
-      }elseif($tempsData[count($tempsData)-1] >= 23 && $tempsData[count($tempsData)-1] <= 26){
-        $quantidade_total = '3% a 4% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 23 && $temperatura <= 26){
+        $quantidade_total = 0.035*$pv;
         $refeicoes_por_dia = '2 a 3';
-      }elseif($tempsData[count($tempsData)-1] >= 19 && $tempsData[count($tempsData)-1] <= 22){
-        $quantidade_total = '2% a 3% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 19 && $temperatura <= 22){
+        $quantidade_total = 0.025*$pv;
         $refeicoes_por_dia = '1 a 2';
-      }elseif($tempsData[count($tempsData)-1] < 19){
-        $quantidade_total = '1% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura < 19){
+        $quantidade_total = 0.010*$pv;
         $refeicoes_por_dia = '1';
       }
     }elseif($biometriasData[count($biometriasData)-1] >= 0.030 && $biometriasData[count($biometriasData)-1] < 0.200){
       $tamanho = '4mm';
-      $pb = '32';     
-      if(($tempsData[count($tempsData)-1])>30){
-        $quantidade_total = '4% a 5% do PV';
-        $quantidade_por_refeicao = 0;
+      $pb = '32g';     
+      if(($temperatura)>30){
+        $quantidade_total = 0.045*$pv;;
         $refeicoes_por_dia = '2 a 3';
-      }elseif($tempsData[count($tempsData)-1] >= 27 && $tempsData[count($tempsData)-1] <= 30){
-        $quantidade_total = '4% a 5% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 27 && $temperatura <= 30){
+        $quantidade_total = 0.045*$pv;
         $refeicoes_por_dia = '2 a 3';
-      }elseif($tempsData[count($tempsData)-1] >= 23 && $tempsData[count($tempsData)-1] <= 26){
-        $quantidade_total = '3% a 4% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 23 && $temperatura <= 26){
+        $quantidade_total = 0.035*$pv;
         $refeicoes_por_dia = '1 a 2';
-      }elseif($tempsData[count($tempsData)-1] >= 19 && $tempsData[count($tempsData)-1] <= 22){
-        $quantidade_total = '2% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 19 && $temperatura <= 22){
+        $quantidade_total = 0.02*$pv;
         $refeicoes_por_dia = '1';
-      }elseif($tempsData[count($tempsData)-1] < 19){
-        $quantidade_total = '1% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura < 19){
+        $quantidade_total = 0.01*$pv;
         $refeicoes_por_dia = '1';
       }
     }elseif($biometriasData[count($biometriasData)-1] >= 0.200 && $biometriasData[count($biometriasData)-1] < 0.500){
       $tamanho = '4mm a 6mm';
       $pb = '28 a 32';       
-      if(($tempsData[count($tempsData)-1])>30){
-        $quantidade_total = '2% a 3% do PV';
-        $quantidade_por_refeicao = 0;
+      if(($temperatura)>30){
+        $quantidade_total = 0.025*$pv;
         $refeicoes_por_dia = '2 a 3';
-      }elseif($tempsData[count($tempsData)-1] >= 27 && $tempsData[count($tempsData)-1] <= 30){
-        $quantidade_total = '3% a 4% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 27 && $temperatura <= 30){
+        $quantidade_total = 0.035*$pv;
         $refeicoes_por_dia = '2 a 3';
-      }elseif($tempsData[count($tempsData)-1] >= 23 && $tempsData[count($tempsData)-1] <= 26){
-        $quantidade_total = '2% a 3% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 23 && $temperatura <= 26){
+        $quantidade_total = 0.025*$pv;
         $refeicoes_por_dia = '1 a 2';
-      }elseif($tempsData[count($tempsData)-1] >= 19 && $tempsData[count($tempsData)-1] <= 22){
-        $quantidade_total = '1% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 19 && $temperatura <= 22){
+        $quantidade_total = 0.01*$pv;
         $refeicoes_por_dia = '1';
-      }elseif($tempsData[count($tempsData)-1] < 19){
-        $quantidade_total = '1% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura < 19){
+        $quantidade_total = 0.01*$pv;
         $refeicoes_por_dia = '1/2';
       }
     }elseif($biometriasData[count($biometriasData)-1] >= 0.500 && $biometriasData[count($biometriasData)-1] <= 1){
       $tamanho = '6mm a 8mm';
       $pb = '28 a 32';
-      if(($tempsData[count($tempsData)-1])>30){
-        $quantidade_total = '2% do PV';
-        $quantidade_por_refeicao = 0;
+      if(($temperatura)>30){
+        $quantidade_total = 0.020*$pv;
         $refeicoes_por_dia = '1 a 2';
-      }elseif($tempsData[count($tempsData)-1] >= 27 && $tempsData[count($tempsData)-1] <= 30){
-        $quantidade_total = '2% a 3% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 27 && $temperatura <= 30){
+        $quantidade_total = 0.025*$pv;
         $refeicoes_por_dia = '1 a 2';
-      }elseif($tempsData[count($tempsData)-1] >= 23 && $tempsData[count($tempsData)-1] <= 26){
-        $quantidade_total = '1% a 2% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 23 && $temperatura <= 26){
+        $quantidade_total = 0.015*$pv;
         $refeicoes_por_dia = '1 a 2';
-      }elseif($tempsData[count($tempsData)-1] >= 19 && $tempsData[count($tempsData)-1] <= 22){
-        $quantidade_total = '1% a 2% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 19 && $temperatura <= 22){
+        $quantidade_total = 0.015*$pv;
         $refeicoes_por_dia = '1';
-      }elseif($tempsData[count($tempsData)-1] < 19){
-        $quantidade_total = '1% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura < 19){
+        $quantidade_total = 0.010*$pv;
         $refeicoes_por_dia = '1/2';
       }
     }elseif($biometriasData[count($biometriasData)-1] > 1){
       $tamanho = '6mm a 12mm';
       $pb = '28 a 32';
-      if(($tempsData[count($tempsData)-1])>30){
-        $quantidade_total = '1% do PV';
-        $quantidade_por_refeicao = 0;
+      if(($temperatura)>30){
+        $quantidade_total = 0.010*$pv;
         $refeicoes_por_dia = '1 a 2';
-      }elseif($tempsData[count($tempsData)-1] >= 27 && $tempsData[count($tempsData)-1] <= 30){
-        $quantidade_total = '1% a 2% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 27 && $temperatura <= 30){
+        $quantidade_total = 0.015*$pv;
         $refeicoes_por_dia = '1 a 2';
-      }elseif($tempsData[count($tempsData)-1] >= 23 && $tempsData[count($tempsData)-1] <= 26){
-        $quantidade_total = '1% a 2% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 23 && $temperatura <= 26){
+        $quantidade_total = 0.015*$pv;
         $refeicoes_por_dia = '1';
-      }elseif($tempsData[count($tempsData)-1] >= 19 && $tempsData[count($tempsData)-1] <= 22){
-        $quantidade_total = '0,5% a 1% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura >= 19 && $temperatura <= 22){
+        $quantidade_total = 0.0075*$pv;
         $refeicoes_por_dia = '1';
-      }elseif($tempsData[count($tempsData)-1] < 19){
-        $quantidade_total = '0,5% do PV';
-        $quantidade_por_refeicao = 0;
+      }elseif($temperatura < 19){
+        $quantidade_total = 0.005*$pv;
         $refeicoes_por_dia = '1/2';
       }
     }
-    return view('racao', ['tamanho'=>$tamanho,'tanque' => $tanque, 'piscicultura' => $piscicultura, 'pb' => $pb, 'quantidade_total'=>$quantidade_total,'refeicoes_por_dia'=>$refeicoes_por_dia,'quantidade_por_refeicao'=>$quantidade_por_refeicao ]);
+    return view('racao', ['tamanho'=>$tamanho,'tanque' => $tanque, 'piscicultura' => $piscicultura, 'pb' => $pb, 'quantidade_total'=>$quantidade_total,'refeicoes_por_dia'=>$refeicoes_por_dia]);
   }
 
 }

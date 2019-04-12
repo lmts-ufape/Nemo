@@ -14,16 +14,16 @@ class EspecieController extends Controller
     public function listar ($id) {
 			$tanque = \nemo\Tanque::find($id);
 			$idPiscultura = $tanque->piscicultura_id;
-    		$piscicultura = \nemo\Piscicultura::find($idPiscultura);
-    		$especiesPeixe= \nemo\EspeciePeixe::where('piscicultura_id','=',$tanque->piscicultura_id)->get();
-    		return view('listarEspecie', ['listaEspecies' => $especiesPeixe, 'piscicultura_id' => $id,'id'=> $id,'piscicultura' => $piscicultura,'tanque' => $tanque]);
+    	$piscicultura = \nemo\Piscicultura::find($idPiscultura);
+    	$especiesPeixe= \nemo\EspeciePeixe::all();
+    	return view('listarEspecie', ['id'=>$id,'listaEspecies' => $especiesPeixe, 'piscicultura' => $piscicultura,'tanque' => $tanque]);
     		   	
     }
    
     public function adicionar($id) {
-    		$tanque = \nemo\Tanque::find($id);
-    		$idPiscultura = $tanque->piscicultura_id;
-    		$piscicultura = \nemo\Piscicultura::find($idPiscultura); 
+    	$tanque = \nemo\Tanque::find($id);
+    	$idPiscultura = $tanque->piscicultura_id;
+    	$piscicultura = \nemo\Piscicultura::find($idPiscultura); 
 			return view("cadastrarEspecie", ['id' => $id,'piscicultura' => $piscicultura, 'tanque' => $tanque]);    
     }
     
