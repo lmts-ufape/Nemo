@@ -14,20 +14,18 @@
                     </div>
                     <div class="card-body">
                         <div>
-                            <table class="table">
+                            <table class="table" >
                                 <tr>
-                                    <th>Proteína bruta</th>
-                                    <th>Tamanho</th>
-                                    <th>Quantidade por dia</th>
-                                    <th>Refeições por dia</th>
-                                    <th>Quantidade por refeição</th>
+                                    <th align ="center">Proteína bruta</th>
+                                    <th align ="center">Tamanho</th>
+                                    <th align ="center">Quantidade por dia</th>
+                                    <th align ="center">Refeições por dia</th>
                                 </tr>
                                 <tr>
-                                <td>{{ $pb }}</td>
-                                <td>{{ $tamanho }}</td>
-                                <td>{{ $quantidade_total }}</td>
-                                <td>{{ $refeicoes_por_dia }}</td>
-                                <td>{{ $quantidade_por_refeicao }}</td>
+                                <td align ="center">{{ $pb }}</td>
+                                <td align ="center">{{ $tamanho }}</td>
+                                <td align ="center">{{ $quantidade_total }}g</td>
+                                <td align ="center">{{ $refeicoes_por_dia }}</td>
                                 </tr>	
                             </table>
                         </div>
