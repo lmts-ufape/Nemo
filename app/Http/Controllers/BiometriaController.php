@@ -11,11 +11,13 @@ class BiometriaController extends Controller
       }
     
         public function cadastrar($tanque_id){
-            $tanque = \nemo\Tanque::find($tanque_id);
-            $idPiscultura = $tanque->piscicultura_id;
-            $piscicultura = \nemo\Piscicultura::find($idPiscultura);
-                  
-            return view("cadastrarBiometria",['tanque_id'=>$tanque_id,'tanque' => $tanque,'piscicultura' => $piscicultura]);
+          $tanque = \nemo\Tanque::find($tanque_id);
+          if(count($tanque->povoamentos) == 0){
+            return back();
+          }
+          $idPiscultura = $tanque->piscicultura_id;
+          $piscicultura = \nemo\Piscicultura::find($idPiscultura);                  
+          return view("cadastrarBiometria",['tanque_id'=>$tanque_id,'tanque' => $tanque,'piscicultura' => $piscicultura]);
       }
     
       public function adicionar(Request $request){

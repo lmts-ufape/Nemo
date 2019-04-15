@@ -25,11 +25,16 @@
 							<tr>
 							<td><a href="/tanque/{{$tanque->id}}/detalhes">{{ $tanque->nome }}</a></td>
 								<td>
-									<a class="btn btn-primary" href="/relatorios/tanque/{{$tanque->id}}">Relatorios</a>
-									<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/cadastrar/qualidadeAgua">Qualidade da água</a>
 									<a class="btn btn-primary" href="/listar/especies/{{$tanque->id}}">Povoar</a>
-									<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/cadastrar/biometria">Biometria</a>
-									<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/racao">Ração</a>
+									<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/cadastrar/qualidadeAgua">Qualidade da água</a>
+									@if(count($tanque->povoamentos) != 0)
+										<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/cadastrar/biometria">Biometria</a>
+										@if(count($tanque->qualidade_aguas->temperaturas)!=0 && count($tanque->biometrias)!=0)
+											<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/racao">Ração</a>
+										@endif
+									@endif
+									<a class="btn btn-primary" href="/relatorios/tanque/{{$tanque->id}}">Relatorios</a>
+
 								</td>
 							</tr>
 							@endforeach		

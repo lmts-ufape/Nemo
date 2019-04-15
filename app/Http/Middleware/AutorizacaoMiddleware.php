@@ -42,7 +42,12 @@ class AutorizacaoMiddleware
                 'tanque/{id}/detalhes',
                 //Rotas de Qualidade Agua
                 'tanque/{id}/cadastrar/qualidadeAgua',
-                'tanque/{id}/listar/qualidadesAgua'
+                'tanque/{id}/listar/qualidadesAgua',
+                //Rota de Biometria
+                'tanque/{id}/cadastrar/biometria',
+                //Rota de Ração
+                'tanque/{id}/racao'
+
             ];
 
             if(in_array($request->route()->uri,$rotas_gerentePiscicultura)){

@@ -1,4 +1,4 @@
-<body>
+<body style="min-height:500px">
     @include('layouts.header')
     <div class="container">
         <!--Menu de Navegação-->
@@ -7,10 +7,14 @@
         @include('layouts.body')
     </div>
     <br>
-    @include('layouts.footer')
     
-    <!--Scripts-->
-    @include('layouts.scripts')
-    <script src="{{asset('js/app.js')}}"></script>
+    
+    
 
 </body>
+@include('layouts.footer')
+
+
+<!--Scripts-->
+@include('layouts.scripts')
+<script src="{{asset('js/app.js')}}"></script>
