@@ -1,4 +1,4 @@
-<body style="min-height:500px">
+<body >
     @include('layouts.header')
     <div class="container">
         <!--Menu de Navegação-->
@@ -6,13 +6,13 @@
         
         @include('layouts.body')
     </div>
-    <br>
+    @include('layouts.footer')
+    
     
     
     
 
 </body>
-@include('layouts.footer')
 
 
 <!--Scripts-->
