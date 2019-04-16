@@ -11,7 +11,7 @@
               <div class="card-header">
                   <div class="menu-direita-logout">
                         Cadastrar Biometria							
-                        <img onclick="return confirm('É indicado que a biometria seja realizada com 3% a 10% do lote de 15 em 15 dias. ')" src="{{asset('images/info.png')}}" style = "margin-left: 30px; margin-right: -10px " height="25" width="25" align = "right">
+                        <img onclick="return confirm('É indicado que a biometria seja realizada com 3% a 10% do lote de 15 em 15 dias. ')" src="{{asset('images/info_white.png')}}" style = "margin-left: 30px; margin-right: -10px " height="25" width="25" align = "right">
                     
                 </div>
               </div>

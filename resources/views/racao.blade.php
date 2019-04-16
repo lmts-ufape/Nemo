@@ -10,7 +10,11 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        Ração          
+                            <div class="menu-direita-logout">
+                                    Cálculo de Ração						
+                                    <img onclick="return confirm('Esse cálculo foi realizado de acordo com a média de temperatura dos últimos 7 dias e com o peso médio da última biometria. ')" src="{{asset('images/info_white.png')}}" style = "margin-left: 30px; margin-right: -10px " height="25" width="25" align = "right">
+                                
+                            </div>         
                     </div>
                     <div class="card-body">
                         <div>

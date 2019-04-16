@@ -269,6 +269,9 @@ class TanqueController extends Controller
 
   public function tabelaRacao($id){
     $tanque = \nemo\Tanque::find($id);
+    if(count($tanque->povoamentos) == 0 && count($tanque->qualidade_aguas->temperaturas)==0 && count($tanque->biometrias)==0){
+      return back();
+    }
     $piscicultura = $tanque->piscicultura;
     $temperaturas = $tanque->qualidade_aguas->temperaturas;
     $datasTemp = $this->gerarDatas($temperaturas);
