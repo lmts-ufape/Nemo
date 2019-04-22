@@ -3,9 +3,9 @@
 namespace nemo\Http\Controllers;
 
 use Illuminate\Http\Request;
+use nemo\Tanque;
 
-class PovoamentoController extends Controller
-{
+class PovoamentoController extends Controller{
 
 	public function __construct(){
 		$this->middleware('auth');
@@ -13,8 +13,11 @@ class PovoamentoController extends Controller
 	
 	 public function povoarTanque($tanque_id, $especie_id)
   {
+		$tanque = \nemo\Tanque::find($tanque_id);
+		if($tanque->status != "livre"){
+			return back();
+		}
   	$especiePeixe= \nemo\EspeciePeixe::find($especie_id); 
-	$tanque = \nemo\Tanque::find($tanque_id);
   	$idPiscultura = $tanque->piscicultura_id;
    $piscicultura = \nemo\Piscicultura::find($idPiscultura); 
     return view("povoarTanque", ['tanque' => $tanque, 'especiePeixe' => $especiePeixe, 'piscicultura' => $piscicultura]);
@@ -33,7 +36,11 @@ class PovoamentoController extends Controller
 				'data' => $data,
 				'quantidade' => $request->quantidade,
 				       
-        	]);
+					]);
+					$tanque->status = "producao";
+					$tanque->update();
+					
+      
         	return redirect()->route("tanque.listar", ['id' => $tanque->piscicultura_id]);
     	
 		}else{

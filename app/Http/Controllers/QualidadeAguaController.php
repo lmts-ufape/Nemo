@@ -52,7 +52,6 @@ class QualidadeAguaController extends Controller
     }if($request->alcalinidade != null){
       AlcalinidadeController::cadastrar($request);
     }
-    dd("foi");
   }
   
   public function verificaTanqueExistente($id){

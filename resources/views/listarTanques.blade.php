@@ -25,15 +25,24 @@
 							<tr>
 							<td><a href="/tanque/{{$tanque->id}}/detalhes">{{ $tanque->nome }}</a></td>
 								<td>
-									<a class="btn btn-primary" href="/listar/especies/{{$tanque->id}}">Povoar</a>
-									<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/cadastrar/qualidadeAgua">Qualidade da água</a>
-									@if(count($tanque->povoamentos) != 0)
-										<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/cadastrar/biometria">Biometria</a>
-										@if(count($tanque->qualidade_aguas->temperaturas)!=0 && count($tanque->biometrias)!=0)
-											<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/racao">Ração</a>
+									@if($tanque->status != "manutencao")
+										@if($tanque->status == "livre")
+											<a class="btn btn-primary" href="/listar/especies/{{$tanque->id}}">Povoar</a>
 										@endif
+										<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/cadastrar/qualidadeAgua">Qualidade da água</a>
+										@if(count($tanque->povoamentos) != 0)
+											<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/cadastrar/biometria">Biometria</a>
+											@if(count($tanque->qualidade_aguas->temperaturas)!=0 && count($tanque->biometrias)!=0)
+												<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/racao">Ração</a>
+											@endif
+											@if($tanque->status == 'producao')
+												<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/pesca">Pescar</a>
+											@endif
+										@endif
+										<a class="btn btn-primary" href="/relatorios/tanque/{{$tanque->id}}">Relatorios</a>
+									@else
+										<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/manutencao">Finalizar manutenção</a>
 									@endif
-									<a class="btn btn-primary" href="/relatorios/tanque/{{$tanque->id}}">Relatorios</a>
 
 								</td>
 							</tr>

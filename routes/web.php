@@ -47,6 +47,7 @@ Route::middleware('autorizacao')->group(function() {
     Route::get('/tanque/{id}/detalhes', "TanqueController@exibirDetalhes")->name('tanque.detalhar');
     Route::get('/relatorios/tanque/{id}', "TanqueController@gerarRelatorios")->name('tanque.gerar.relatorios');
     Route::get('/tanque/{id}/racao', "TanqueController@tabelaRacao")->name('tanque.racao');
+    Route::get('/tanque/{id}/manutencao', "TanqueController@manutencao")->name('tanque.manutencao');
 
     //Rotas de Espécie
     Route::get('/listar/especies/{id}', "EspecieController@listar")->name('listarEspecies');
@@ -95,8 +96,8 @@ Route::middleware('autorizacao')->group(function() {
     Route::get('/info/tanque/{id}', "PovoamentoController@listar")->name('povoamento.listar');
     
     //Rotas de Pesca
-    Route::get('/tanque/{tanque_id}/pesca/especie/{especiePeixe_id}/povoamento/{povoamento_id}', "PescaController@pesca")->name('pesca.pesca');
-    Route::post('/pescarEspecie', "PescaController@pescar")->name('pescar.pescar');
+    Route::get('/tanque/{tanque_id}/pesca', "PescaController@pesca")->name('pesca.pesca');
+    Route::post('/pescar', "PescaController@pescar")->name('pescar.pescar');
     
     //Rotas de Biometria
     Route::get('/tanque/{id}/cadastrar/biometria', "BiometriaController@cadastrar")->name('biometria.cadastrar');
