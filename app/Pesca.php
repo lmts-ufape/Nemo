@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pesca extends Model
 {
-    protected $fillable = ['tanque_id', 'especie_id', 'data', 'quantidade', 'peso'];
+    protected $fillable = ['tanque_id', 'peso', 'data', 'hora'];
     public $timestamps = false;	
 	
     public function tanque(){

@@ -104,6 +104,14 @@ class TanqueController extends Controller
     ]);
   }
 
+  public function manutencao($id) {
+    $tanque = \nemo\Tanque::find($id);
+    $piscicultura = $tanque->piscicultura;
+    $tanque->status = "livre";
+    $tanque->update();
+    return redirect()->route("tanque.listar", ['piscicultura' => $piscicultura->id]);
+  }
+
   public function gerarRelatorios($id) {
     $tanque = \nemo\Tanque::find($id);
     $piscicultura = $tanque->piscicultura;
