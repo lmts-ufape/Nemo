@@ -142,6 +142,9 @@ class TanqueController extends Controller
     $biometrias = $tanque->biometrias;
     $datasBiometria = $this->gerarDatas($biometrias);
     $biometriasData = $this->gerarPesos($datasBiometria,$biometrias);
+    $pescas = $tanque->pescas;
+    $datasPesca = $this->gerarDatas($pescas);
+    $pescasData = $this->getPesos($datasPesca,$pescas);
     
 
 		$line_chartPh = Charts::create('line', 'highcharts')
@@ -217,9 +220,16 @@ class TanqueController extends Controller
 			    ->dimensions(1000,500)
           ->responsive(true);
           
+    $line_chartPesca = Charts::create('line', 'highcharts')
+			    ->title('Pescas')
+			    ->elementLabel('Kg')
+			    ->labels($datasPesca)
+          ->values($pescasData)       
+			    ->dimensions(1000,500)
+          ->responsive(true);
     
 
-    return view('relatoriosTanque', compact('line_chartBiometria','line_chartNitrato','line_chartNitrito','line_chartDureza','line_chartAlcalinidade','line_chartOxigenio','line_chartPh', 'line_chartTemp', 'line_chartAmonia'), ['tanque' => $tanque, 'piscicultura' => $piscicultura]);
+    return view('relatoriosTanque', compact('line_chartPesca','line_chartBiometria','line_chartNitrato','line_chartNitrito','line_chartDureza','line_chartAlcalinidade','line_chartOxigenio','line_chartPh', 'line_chartTemp', 'line_chartAmonia'), ['tanque' => $tanque, 'piscicultura' => $piscicultura]);
   }
 
   public function gerarDatas($qualidades){
@@ -261,6 +271,21 @@ class TanqueController extends Controller
     }
     return $pesosDatas;
   }
+
+  public function getPesos($datas,$pescas){
+    $pesosDatas = array();
+    foreach($datas as &$data){
+      foreach($pescas as &$pesca){
+        $dataHora = $pesca->data . " " . $pesca->hora;
+        $str = str_replace("-", "/", $dataHora);
+        if($data == $str){
+          array_push($pesosDatas,$pesca->peso); 
+        }
+      }
+    }
+    return $pesosDatas;
+  }
+
   public function temperaturaMedia($datasTemp,$tempsData){
     $temps = array();
     $i = 0;
