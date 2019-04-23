@@ -34,6 +34,7 @@ class QualidadeAguaController extends Controller
 
   public function adicionar(Request $request){
     $tanque = \nemo\Tanque::find($request->id_tanque);
+    $piscicultura = $tanque->piscicultura;
     $qualidade_agua = $tanque->qualidade_aguas;
     if($request->ph != null){
       PhController::cadastrar($request);
@@ -52,6 +53,7 @@ class QualidadeAguaController extends Controller
     }if($request->alcalinidade != null){
       AlcalinidadeController::cadastrar($request);
     }
+    return redirect()->route("tanque.listar", ['piscicultura' => $piscicultura->id]);
   }
   
   public function verificaTanqueExistente($id){

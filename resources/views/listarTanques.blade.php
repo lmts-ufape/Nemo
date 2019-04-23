@@ -13,7 +13,7 @@
 						<div class="menu-direita-logout">
 							Tanques							
 							<a href = "/cadastrar/tanque/{{$piscicultura->id}}">
-                    			<img src="{{asset('images/add.png')}}" style = "margin-left: 15px; margin-right: -10px " height="25" width="25" align = "right">
+                    			<img src="{{asset('images/add.png')}}" style = "margin-left: 15px; margin-right: -10px " height="25" width="25" align="right">
 							</a>
 						</div>
 					
