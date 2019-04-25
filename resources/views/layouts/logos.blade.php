@@ -1,4 +1,4 @@
-<div id="barra-logos" class="container" style="background:#FFFFFF; margin-top: 1px; height: 200px; padding: 10px 0 10px 0">
+<div id="barra-logos" class="container" style="background:#FFFFFF; margin-top: 1px; height: 180px; padding: 10px 0 10px 0">
     <ul id="logos" style="list-style:none;">
         <li style="margin-right:140px; margin-left:110px; border-right:1px">
             <a href="{{ route("home") }}"><img src="{{asset('images/nemo.png')}}" style = "margin-left: 8px; margin-top:5px " height="170px" align = "left" ></a>
