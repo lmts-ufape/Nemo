@@ -20,10 +20,10 @@ class CreateBiometriasTable extends Migration
             $table->double('peso_medio');
             $table->date('data');
             $table->time('hora');
-            $table->integer('tanque_id');
+            $table->integer('ciclo_id');
             $table->integer('quantidade');
             
-            $table->foreign('tanque_id')->references('id')->on('tanques')->onDelete('cascade');
+            $table->foreign('ciclo_id')->references('id')->on('ciclos')->onDelete('cascade');
         });
     }
 

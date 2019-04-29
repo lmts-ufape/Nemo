@@ -8,7 +8,8 @@ class NitratoController extends Controller
 {
     public static function cadastrar(Request $request){
         $tanque = \nemo\Tanque::find($request->id_tanque);
-        $qualidade_agua = $tanque->qualidade_aguas;
+        $ciclo = $tanque->ciclos[count($tanque->ciclos)-1];
+        $qualidade_agua = $ciclo->qualidade_agua;
         $nitrato = new \nemo\Nitrato();
         $nitrato->valor = $request->nitrato;
         $nitrato->data = $request->data;

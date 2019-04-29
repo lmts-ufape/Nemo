@@ -20,12 +20,13 @@ class PescaController extends Controller
 	
 	
 	public function pescar(Request $request){	 			
-    $tanque = \nemo\Tanque::find($request->id_tanque);
+		$tanque = \nemo\Tanque::find($request->id_tanque);
+		$ciclo = $tanque->ciclos[count($tanque->ciclos)-1];
     $pesca = new \nemo\Pesca();
     $pesca->peso = $request->valor;
     $pesca->data = $request->data;
     $pesca->hora = $request->hora;
-    $pesca->tanque_id = $tanque->id;
+    $pesca->ciclo_id = $ciclo->id;
 		$pesca->save();
 		$tanque->status = "manutencao";
 		$tanque->update();

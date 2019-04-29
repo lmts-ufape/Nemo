@@ -25,10 +25,9 @@ class QualidadeAgua extends Model
 		'numeric' => 'O campo ":attribute" precisa ser numérico.',
 	];
 
-    public function tanque(){
-    	return $this->belongsTo(Tanque::class, 'tanque_id');
-	}
-	
+    public function ciclo(){
+    	return $this->belongsTo(Ciclo::class, 'ciclo_id');
+	}	
 	public function phs(){
 		return $this->hasMany(Ph::class);
 	}

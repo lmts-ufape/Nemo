@@ -23,15 +23,18 @@ class PovoamentoController extends Controller{
     return view("povoarTanque", ['tanque' => $tanque, 'especiePeixe' => $especiePeixe, 'piscicultura' => $piscicultura]);
   }
     public function inserirPeixe(Request $request){
-		$tanque = \nemo\Tanque::find($request->id_tanque);			
+		$tanque = \nemo\Tanque::find($request->id_tanque);
+		$ciclo = $tanque->ciclos[count($tanque->ciclos)-1];	
 		$especie = \nemo\EspeciePeixe::find($request->id_especie);
 		$quantidadeAtual = $request->quantidade/$tanque->volume;
 		if($request->warning == "1" || $quantidadeAtual <= $especie->quantidade_por_volume){
-    		date_default_timezone_set('America/Sao_Paulo');
-      		$data = date('d-m-Y');
-    		$data .= ' '.date('H:i:s');
+			
+			date_default_timezone_set('America/Sao_Paulo');
+			$data = date('d-m-Y');
+			$data .= ' '.date('H:i:s');
+			//dd($ciclo->id);	
         	$povoamento = \nemo\Povoamento::create([
-				'tanque_id' => $request->id_tanque,       
+				'ciclo_id' => $ciclo->id,       
 				'especie_id' => $request->id_especie,
 				'data' => $data,
 				'quantidade' => $request->quantidade,
@@ -39,8 +42,8 @@ class PovoamentoController extends Controller{
 					]);
 					$tanque->status = "producao";
 					$tanque->update();
+					//dd(count($tanque->ciclos[count($tanque->ciclos)-1]->qualidade_agua->temperaturas));
 					
-      
         	return redirect()->route("tanque.listar", ['id' => $tanque->piscicultura_id]);
     	
 		}else{

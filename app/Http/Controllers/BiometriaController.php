@@ -12,7 +12,8 @@ class BiometriaController extends Controller
     
         public function cadastrar($tanque_id){
           $tanque = \nemo\Tanque::find($tanque_id);
-          if(count($tanque->povoamentos) == 0){
+          $ciclo = $tanque->ciclos[count($tanque->ciclos)-1];
+          if($ciclo->povoamento == null){
             return back();
           }
           $idPiscultura = $tanque->piscicultura_id;
@@ -22,12 +23,13 @@ class BiometriaController extends Controller
     
       public function adicionar(Request $request){
             $tanque = \nemo\Tanque::find($request->tanque_id);
+            $ciclo = $tanque->ciclos[count($tanque->ciclos)-1];
             $biometria = new \nemo\Biometria();
             $biometria->peso_total = $request->peso;
             $biometria->peso_medio = $request->peso/$request->quantidade;
             $biometria->data = $request->data;
             $biometria->hora = $request->hora;
-            $biometria->tanque_id = $tanque->id;
+            $biometria->ciclo_id = $ciclo->id;
             $biometria->quantidade = $request->quantidade;
             $biometria->save();
             

@@ -30,9 +30,9 @@
 											<a class="btn btn-primary" href="/listar/especies/{{$tanque->id}}">Povoar</a>
 										@endif
 										<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/cadastrar/qualidadeAgua">Qualidade da água</a>
-										@if(count($tanque->povoamentos) != 0)
+										@if($tanque->ciclos[count($tanque->ciclos)-1]->povoamento != null)
 											<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/cadastrar/biometria">Biometria</a>
-											@if(count($tanque->qualidade_aguas->temperaturas)!=0 && count($tanque->biometrias)!=0)
+											@if(count($tanque->ciclos[count($tanque->ciclos)-1]->qualidade_agua->temperaturas) !=0 && count($tanque->ciclos[count($tanque->ciclos)-1]->biometrias) != 0 )
 												<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/racao">Ração</a>
 											@endif
 											@if($tanque->status == 'producao')
