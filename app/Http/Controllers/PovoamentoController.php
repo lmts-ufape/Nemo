@@ -4,6 +4,7 @@ namespace nemo\Http\Controllers;
 
 use Illuminate\Http\Request;
 use nemo\Tanque;
+use nemo\Http\Controllers\BiometriaController;
 
 class PovoamentoController extends Controller{
 
@@ -19,8 +20,11 @@ class PovoamentoController extends Controller{
 		}
   	$especiePeixe= \nemo\EspeciePeixe::find($especie_id); 
   	$idPiscultura = $tanque->piscicultura_id;
-   $piscicultura = \nemo\Piscicultura::find($idPiscultura); 
-    return view("povoarTanque", ['tanque' => $tanque, 'especiePeixe' => $especiePeixe, 'piscicultura' => $piscicultura]);
+	 $piscicultura = \nemo\Piscicultura::find($idPiscultura); 
+	 date_default_timezone_set('America/Sao_Paulo');
+      $data = date('Y-m-d');
+      $hora = date('H:i');
+    return view("povoarTanque", ['data_atual'=>$data,'hora_atual'=>$hora,'tanque' => $tanque, 'especiePeixe' => $especiePeixe, 'piscicultura' => $piscicultura]);
   }
     public function inserirPeixe(Request $request){
 		$tanque = \nemo\Tanque::find($request->id_tanque);
@@ -40,9 +44,10 @@ class PovoamentoController extends Controller{
 				'quantidade' => $request->quantidade,
 				       
 					]);
+					BiometriaController::adicionar($request);
 					$tanque->status = "producao";
 					$tanque->update();
-					//dd(count($tanque->ciclos[count($tanque->ciclos)-1]->qualidade_agua->temperaturas));
+					
 					
         	return redirect()->route("tanque.listar", ['id' => $tanque->piscicultura_id]);
     	

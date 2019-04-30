@@ -4,22 +4,6 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Atalhos</div>
-                <div class="card-body">
-
-                    <a class="btn btn-primary" href="#biometria">Biometria</a>
-                    <a class="btn btn-primary" href="#qualidade">Qualidade da água</a>
-                    <a class="btn btn-primary" href="#pesca">Pesca</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div><br>
-
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
                 <div id="qualidade" class="card-header">Relatório da Qualidade da água</div>
                 <div class="card-body">
                     <div id="tabela" class="table-responsive">
@@ -85,22 +69,6 @@
         </div>
     </div>
 </div><br>
-{{-- <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div id="pesca" class="card-header">Pescas</div>
-                <div class="card-body">
-                    <div id="tabela" class="table-responsive">
 
-                        {!! $line_chartPesca->html() !!}
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div> --}}
 {!! Charts::scripts() !!} {!! $line_chartPh->script() !!} {!! $line_chartTemp->script() !!} {!! $line_chartAlcalinidade->script() !!} {!! $line_chartOxigenio->script() !!} {!! $line_chartDureza->script() !!} {!! $line_chartNitrito->script() !!} {!! $line_chartNitrato->script()
 !!} {!! $line_chartAmonia->script() !!} {!! $line_chartBiometria->script() !!}  @stop
