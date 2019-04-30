@@ -28,8 +28,9 @@ Route::middleware('autorizacao')->group(function() {
     Route::get('/editar/pisciculturas/{id}', "PisciculturaController@editar")->name('piscicultura.editar');
     Route::post('/salvarPiscicultura', "PisciculturaController@salvar")->name('piscicultura.salvar');
     Route::get('/remover/piscicultura/{id}', "PisciculturaController@remover")->name('piscicultura.remover');
-
-
+    Route::get('/relatorios/pescas/{id}', "PisciculturaController@relatoriosPesca")->name('piscicultura.pesca.relatorios');
+    Route::get('/ciclo/{id}/graficos', "PisciculturaController@graficosPesca")->name('piscicultura.pesca.graficos');
+    
     //Rotas de Gerenciador
     Route::get('listar/gerenciadores/piscicultura/{id}',"GerenciarController@listarGerenciadores")->name('gerenciador.listar');
     Route::get('adicionar/gerenciador/piscicultura/{id}',"GerenciarController@adicionarGerenciador")->name('gerenciador.adicionar');
