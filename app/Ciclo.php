@@ -22,7 +22,7 @@ class Ciclo extends Model
     	return $this->hasOne(Povoamento::class);
     }
 
-    public function pescas(){
+    public function pesca(){
         return $this->hasOne(Pesca::class);
     }
 }

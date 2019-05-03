@@ -13,22 +13,31 @@
                     </div>
                     <div class="card-body">
                             <table class="table">
-                                <td>
-                                    <a class="btn btn-primary" href="/listar/tanques/{{$piscicultura->id}}">Gerenciar Tanques</a>  
-                                </td>
-                                <td>
+                                <tr>
+                                    <td>
+                                        <a class="btn btn-primary" href="/listar/tanques/{{$piscicultura->id}}">Gerenciar Tanques</a>  
+                                    </td>
                                     @if($dono == True)
                                         @if($quantidade_gerenciadores > 0)
-                                        <a class="btn btn-primary" href="/listar/gerenciadores/piscicultura/{{$piscicultura->id}}">Gerenciar Permissoes</a>
+                                        <td>
+                                            <a class="btn btn-primary" href="/listar/gerenciadores/piscicultura/{{$piscicultura->id}}">Gerenciar Permissoes</a>
+                                        </td>
                                         @else
-                                        <a class="btn btn-primary" href="/listar/gerenciadores/piscicultura/{{$piscicultura->id}}">Gerenciar Permissoes</a>
+                                        <td>
+                                            <a class="btn btn-primary" href="/listar/gerenciadores/piscicultura/{{$piscicultura->id}}">Gerenciar Permissoes</a>
+                                        </td>
                                         @endif                               
                                     @endif
-                                </td>
-                                <td>
-                                    <a class="btn btn-primary" href="/escalonamento/{{$piscicultura->id}}">Escalonamento de Produção</a>
-                
-                                </td>	
+                                    <td>
+                                        <a class="btn btn-primary" href="/escalonamento/{{$piscicultura->id}}">Escalonamento de Produção</a>
+                                    </td>	
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a class="btn btn-primary" href="/relatorios/pescas/{{$piscicultura->id}}">Relatórios de Pesca</a>
+                                    </td>
+                                </tr>
+
                                 </table>
                             </div>            
                         </div>
