@@ -15,11 +15,11 @@ class CreateQualidadeAguasTable extends Migration
     {
         Schema::create('qualidade_aguas', function (Blueprint $table) {
         	$table->increments('id');
-            $table->integer("tanque_id")->unsigned();
+            $table->integer("ciclo_id")->unsigned();
 
             $table->timestamps();
             
-            $table->foreign('tanque_id')->references('id')->on('tanques')->onDelete('cascade');
+            $table->foreign('ciclo_id')->references('id')->on('ciclos')->onDelete('cascade');
          
         });
     }

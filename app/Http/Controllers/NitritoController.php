@@ -8,7 +8,8 @@ class NitritoController extends Controller
 {
     public static function cadastrar(Request $request){
         $tanque = \nemo\Tanque::find($request->id_tanque);
-        $qualidade_agua = $tanque->qualidade_aguas;
+        $ciclo = $tanque->ciclos[count($tanque->ciclos)-1];
+        $qualidade_agua = $ciclo->qualidade_agua;
         $nitrito = new \nemo\Nitrito();
         $nitrito->valor = $request->nitrito;
         $nitrito->data = $request->data;

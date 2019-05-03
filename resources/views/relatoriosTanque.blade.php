@@ -85,7 +85,7 @@
         </div>
     </div>
 </div><br>
-<div class="container">
+{{-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -101,6 +101,6 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 {!! Charts::scripts() !!} {!! $line_chartPh->script() !!} {!! $line_chartTemp->script() !!} {!! $line_chartAlcalinidade->script() !!} {!! $line_chartOxigenio->script() !!} {!! $line_chartDureza->script() !!} {!! $line_chartNitrito->script() !!} {!! $line_chartNitrato->script()
-!!} {!! $line_chartAmonia->script() !!} {!! $line_chartBiometria->script() !!} {!! $line_chartPesca->script() !!} @stop
+!!} {!! $line_chartAmonia->script() !!} {!! $line_chartBiometria->script() !!}  @stop

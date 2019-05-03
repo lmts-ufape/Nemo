@@ -47,7 +47,9 @@ class TanqueController extends Controller
         //'formato' => $request->formato,
         'manutencao_necessaria' => 'Não'
         ]);
-        $tanque->qualidade_aguas()->create([]);
+        $ciclos = $tanque->ciclos()->create([]);
+        $ciclos->qualidade_agua()->create([]);
+        //dd($ciclos->povoamento);
         return redirect()->route("tanque.listar", ['piscicultura' => $request->id_piscicultura]);
     }catch(\nemo\Validator\ValidationException $e){
 
@@ -109,42 +111,54 @@ class TanqueController extends Controller
     $piscicultura = $tanque->piscicultura;
     $tanque->status = "livre";
     $tanque->update();
+    $ciclos = $tanque->ciclos()->create([]);
+    $ciclos->qualidade_agua()->create([]);
     return redirect()->route("tanque.listar", ['piscicultura' => $piscicultura->id]);
   }
 
   public function gerarRelatorios($id) {
     $tanque = \nemo\Tanque::find($id);
+    $ciclo = $tanque->ciclos[count($tanque->ciclos)-1];
     $piscicultura = $tanque->piscicultura;
-    $phs = $tanque->qualidade_aguas->phs;
+    $phs = $ciclo->qualidade_agua->phs;
     $datasPh = $this->gerarDatas($phs);
     $phsData = $this->gerarQualidades($datasPh,$phs);
-    $temperaturas = $tanque->qualidade_aguas->temperaturas;
+    $temperaturas = $ciclo->qualidade_agua->temperaturas;
+    $temperaturas = $ciclo->qualidade_agua->temperaturas;
     $datasTemp = $this->gerarDatas($temperaturas);
     $tempsData = $this->gerarQualidades($datasTemp,$temperaturas);
-    $amonias = $tanque->qualidade_aguas->amonias;
+    $amonias = $ciclo->qualidade_agua->amonias;
+    $amonias = $ciclo->qualidade_agua->amonias;
     $datasAmonia = $this->gerarDatas($amonias);
     $amoniasData = $this->gerarQualidades($datasTemp,$amonias);
-    $nitritos = $tanque->qualidade_aguas->nitritos;
+    $nitritos = $ciclo->qualidade_agua->nitritos;
+    $nitritos = $ciclo->qualidade_agua->nitritos;
     $datasNitrito = $this->gerarDatas($nitritos);
     $nitritosData = $this->gerarQualidades($datasTemp,$nitritos);
-    $nitratos = $tanque->qualidade_aguas->nitratos;
+    $nitratos = $ciclo->qualidade_agua->nitratos;
+    $nitratos = $ciclo->qualidade_agua->nitratos;
     $datasNitrato = $this->gerarDatas($nitratos);
     $nitratosData = $this->gerarQualidades($datasTemp,$nitratos);
-    $durezas = $tanque->qualidade_aguas->durezas;
+    $durezas = $ciclo->qualidade_agua->durezas;
+    $durezas = $ciclo->qualidade_agua->durezas;
     $datasDureza = $this->gerarDatas($durezas);
     $durezasData = $this->gerarQualidades($datasTemp,$durezas);
-    $alcalinidades = $tanque->qualidade_aguas->alcalinidades;
+    $alcalinidades = $ciclo->qualidade_agua->alcalinidades;
+    $alcalinidades = $ciclo->qualidade_agua->alcalinidades;
     $datasAlcalinidade = $this->gerarDatas($alcalinidades);
     $alcalinidadesData = $this->gerarQualidades($datasTemp,$alcalinidades);
-    $oxigenios = $tanque->qualidade_aguas->oxigenios;
+    $oxigenios = $ciclo->qualidade_agua->oxigenios;
+    $oxigenios = $ciclo->qualidade_agua->oxigenios;
     $datasOxigenio = $this->gerarDatas($oxigenios);
     $oxigeniosData = $this->gerarQualidades($datasTemp,$oxigenios);
-    $biometrias = $tanque->biometrias;
+    $biometrias = $ciclo->biometrias;
+    $biometrias = $ciclo->biometrias;
     $datasBiometria = $this->gerarDatas($biometrias);
     $biometriasData = $this->gerarPesos($datasBiometria,$biometrias);
-    $pescas = $tanque->pescas;
-    $datasPesca = $this->gerarDatas($pescas);
-    $pescasData = $this->getPesos($datasPesca,$pescas);
+    // $pescas = $ciclo->pescas;
+    // $pescas = $ciclo->pescas;
+    // $datasPesca = $this->gerarDatas($pescas);
+    // $pescasData = $this->getPesos($datasPesca,$pescas);
     
 
 		$line_chartPh = Charts::create('line', 'highcharts')
@@ -220,16 +234,17 @@ class TanqueController extends Controller
 			    ->dimensions(1000,500)
           ->responsive(true);
           
-    $line_chartPesca = Charts::create('line', 'highcharts')
-			    ->title('Pescas')
-			    ->elementLabel('Kg')
-			    ->labels($datasPesca)
-          ->values($pescasData)       
-			    ->dimensions(1000,500)
-          ->responsive(true);
+    // $line_chartPesca = Charts::create('line', 'highcharts')
+		// 	    ->title('Pescas')
+		// 	    ->elementLabel('Kg')
+		// 	    ->labels($datasPesca)
+    //       ->values($pescasData)       
+		// 	    ->dimensions(1000,500)
+    //       ->responsive(true);
     
 
-    return view('relatoriosTanque', compact('line_chartPesca','line_chartBiometria','line_chartNitrato','line_chartNitrito','line_chartDureza','line_chartAlcalinidade','line_chartOxigenio','line_chartPh', 'line_chartTemp', 'line_chartAmonia'), ['tanque' => $tanque, 'piscicultura' => $piscicultura]);
+    return view('relatoriosTanque', compact('line_chartBiometria','line_chartNitrato','line_chartNitrito','line_chartDureza','line_chartAlcalinidade','line_chartOxigenio','line_chartPh', 'line_chartTemp', 'line_chartAmonia'), ['tanque' => $tanque, 'piscicultura' => $piscicultura]);
+    //return view('relatoriosTanque', compact('line_chartPesca','line_chartBiometria','line_chartNitrato','line_chartNitrito','line_chartDureza','line_chartAlcalinidade','line_chartOxigenio','line_chartPh', 'line_chartTemp', 'line_chartAmonia'), ['tanque' => $tanque, 'piscicultura' => $piscicultura]);
   }
 
   public function gerarDatas($qualidades){
@@ -302,18 +317,20 @@ class TanqueController extends Controller
 
   public function tabelaRacao($id){
     $tanque = \nemo\Tanque::find($id);
-    if(count($tanque->povoamentos) == 0 && count($tanque->qualidade_aguas->temperaturas)==0 && count($tanque->biometrias)==0){
+    $ciclo = $tanque->ciclos[count($tanque->ciclos)-1];
+    if($ciclo->povoamento == null && count($ciclo->qualidade_agua->temperaturas)==0 && count($ciclo->biometrias)==0){
       return back();
     }
     $piscicultura = $tanque->piscicultura;
-    $temperaturas = $tanque->qualidade_aguas->temperaturas;
+    $ciclo = $tanque->ciclos[count($tanque->ciclos)-1];
+    $temperaturas = $ciclo->qualidade_agua->temperaturas;
     $datasTemp = $this->gerarDatas($temperaturas);
     $tempsData = $this->gerarQualidades($datasTemp,$temperaturas);
     $temperatura = $this->temperaturaMedia($datasTemp,$tempsData);
-    $biometrias = $tanque->biometrias;
+    $biometrias = $ciclo->biometrias;
     $datasBiometria = $this->gerarDatas($biometrias);
     $biometriasData = $this->gerarPesos($datasBiometria,$biometrias);
-    $povoamento = $tanque->povoamentos[0];
+    $povoamento = $ciclo->povoamento;
     //dd($povoamento);
     $pb = 0;
     $quantidade_total = 0;

@@ -9,8 +9,8 @@ class Biometria extends Model
     public $timestamps = false;
 	protected $fillable = ['quantidade','peso_total', 'peso_medio', 'data', 'hora'];
 
-    public function tanque(){
-    	return $this->belongsTo(Tanque::class, 'tanque_id');
+    public function ciclo(){
+    	return $this->belongsTo(Ciclo::class, 'ciclo_id');
 	}
 
 }

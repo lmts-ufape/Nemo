@@ -29,20 +29,10 @@ class Tanque extends Model
     public function piscicultura(){
     	return $this->belongsTo(Piscicultura::class);
     }
-
-    public function qualidade_aguas(){
-    	return $this->hasOne(QualidadeAgua::class);
-    }
     
-    public function povoamentos(){
-        return $this->hasMany(Povoamento::class);
+    public function ciclos(){
+        return $this->hasMany(Ciclo::class);
     }
-    
-    public function pescas(){
-        return $this->hasMany(Pesca::class);
-    }
-    public function biometrias(){
-        return $this->hasMany(Biometria::class);
-    }
+   
 }
 
