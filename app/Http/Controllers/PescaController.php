@@ -15,7 +15,10 @@ class PescaController extends Controller
 			$tanque = \nemo\Tanque::find($tanque_id);	
 			//dd($tanque_id);		
 			$piscicultura = $tanque->piscicultura;
-    	return view("pescarEspecie", ['tanque'=>$tanque,'piscicultura' => $piscicultura]);
+			date_default_timezone_set('America/Sao_Paulo');
+      $data = date('Y-m-d');
+      $hora = date('H:i');
+    	return view("pescarEspecie", ['data_atual'=>$data,'hora_atual'=>$hora,'tanque'=>$tanque,'piscicultura' => $piscicultura]);
 	}
 	
 	

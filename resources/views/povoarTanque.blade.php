@@ -27,8 +27,14 @@
 						<input type="hidden" name="id_especie" value="{{$especiePeixe->id}}">
 						<input type="hidden" name="warning" value="1">
 						<div class="form-group">
-							<label>Quantidade</label><br>	
+							<label>Data</label>
+						<input class="form-control" type="date" name="data" value="{{$data_atual}}" placeholder="DD/MM/AA" autofocus /><br/>
+							<label>Hora</label>
+							<input class="form-control" type="time" name="hora" value="{{$hora_atual}}" placeholder="HH:MM" autofocus /><br/>
+							<label>Quantidade (unidade)</label><br>	
 							<input class="form-control" type="number" min="0" name="quantidade" required/>
+							<label>Peso total (Kg)</label>
+							<input class="form-control" type="number" step="0.0001" name="peso" autofocus/><br/>
 						</div>
 						<input class="btn btn-primary" type="submit" value="Adicionar ao tanque" />		
 					</form>
@@ -38,8 +44,14 @@
 						<input type="hidden" name="id_tanque" value="{{$tanque->id}}">
 						<input type="hidden" name="id_especie" value="{{$especiePeixe->id}}">
 						<div class="form-group">
-							<label>Quantidade</label><br>	
+							<label>Data</label>
+							<input class="form-control" type="date" name="data" value="{{$data_atual}}" placeholder="DD/MM/AA" autofocus /><br/>
+							<label>Hora</label>
+							<input class="form-control" type="time" name="hora" value="{{$hora_atual}}" placeholder="HH:MM" autofocus /><br/>
+							<label>Quantidade (unidade)</label><br>	
 							<input class="form-control" type="number" min="0" name="quantidade" required/>
+							<label>Peso total (Kg)</label>
+							<input class="form-control" type="number" step="0.0001" name="peso" autofocus/><br/>
 						</div>
 						<input class="btn btn-primary" type="submit" value="Adicionar" />		
 					</form>

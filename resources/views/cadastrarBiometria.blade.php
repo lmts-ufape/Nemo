@@ -21,14 +21,14 @@
                   <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                   <input type="hidden" name="tanque_id" value="{{$tanque->id}}" />
                   <div class="form-group">
-                    <label>Quantidade</label>
-                    <input class="form-control" type="number" name="quantidade" autofocus/><br/>
-                    <label>Peso</label>
-                    <input class="form-control" type="number" step="0.0001" name="peso" placeholder="Kg" autofocus/><br/>
                     <label>Data</label>
-                    <input class="form-control" type="date" name="data" placeholder="DD/MM/AA" autofocus /><br/>
+                    <input class="form-control" type="date" name="data" value="{{$data_atual}}" placeholder="DD/MM/AA" autofocus /><br/>
                     <label>Hora</label>
-                    <input class="form-control" type="time" name="hora" placeholder="HH:MM" autofocus /><br/>
+                    <input class="form-control" type="time" name="hora" value="{{$hora_atual}}" placeholder="HH:MM" autofocus /><br/>
+                    <label>Quantidade da amostra (unidade)</label>
+                    <input class="form-control" type="number" name="quantidade" autofocus/><br/>
+                    <label>Peso total (Kg)</label>
+                    <input class="form-control" type="number" step="0.0001" name="peso" autofocus/><br/>
                   </div>
                   <input class="btn btn-success" type="submit" value="Cadastrar" />
                 </form>

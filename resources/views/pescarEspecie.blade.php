@@ -17,12 +17,12 @@
                   <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                   <input type="hidden" name="id_tanque" value="{{$tanque->id}}" />
                   <div class="form-group">
-                    <label>Peso</label>
-                    <input class="form-control" type="number" name="valor" min="0" value="{{old('peso')}}" autofocus/><br/>
                     <label>Data da Pesca</label>
-                    <input class="form-control" type="date" name="data" value="{{old('data')}}" placeholder="DD/MM/AA" autofocus /><br/>
+                    <input class="form-control" type="date" name="data" value="{{$data_atual}}" placeholder="DD/MM/AA" autofocus /><br/>
                     <label>Hora da Pesca</label>
-                    <input class="form-control" type="time" name="hora" value="{{old('hora')}}" placeholder="HH:MM" autofocus /><br/>
+                    <input class="form-control" type="time" name="hora" value="{{$hora_atual}}" placeholder="HH:MM" autofocus /><br/>
+                    <label>Peso total da pesca</label>
+                    <input class="form-control" type="number" name="valor" min="0" value="{{old('peso')}}" autofocus/><br/>
                   </div>
                   <input class="btn btn-success" type="submit" value="Cadastrar" />
                 </form>
