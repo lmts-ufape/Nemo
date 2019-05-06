@@ -36,26 +36,29 @@
                       <label>Nível de Oxigênio(mg/L)</label>
                       <img onclick="return confirm('É recomendado que o nível de oxigênio seja maior ou igual a 3mg/l')" src="{{asset('images/info.png')}}"  height="18" width="18">
                       <input id="oxigenio" class="form-control" type="number" name="oxigenio"  value="{{old('oxigenio')}}" disabled/><br/>
-                      <input type="checkbox" name="amoniaBox" id="amoniaBox" onchange="teste(this)" />
-                      <label>Amônia(mg/L)</label>
-                      <img onclick="return confirm('É recomendado que o valor do Amônia esteja entre 0 e 0,5mg/L')" src="{{asset('images/info.png')}}"  height="18" width="18">
-                      <input id="amonia" class="form-control" type="number" name="amonia"  value="{{old('amonia')}}" disabled/><br/>
-                      <input type="checkbox" name="nitrato" id="nitratoBox" onchange="teste(this)" />
-                      <label>Nitrato(mg/L)</label>
-                      <img onclick="return confirm('É recomendado que o valor do Nitrato esteja entre 0 e 0,5mg/L')" src="{{asset('images/info.png')}}"  height="18" width="18">
-                      <input id="nitrato" class="form-control" type="number" name="nitrato"  value="{{old('ph')}}" disabled/><br/>
-                      <input type="checkbox" name="nitritoBox" id="nitritoBox" onchange="teste(this)" />
-                      <label>Nitrito(mg/L)</label>
-                      <img onclick="return confirm('É recomendado que o valor do Nitrito esteja entre 0 e 0,5mg/L')" src="{{asset('images/info.png')}}"  height="18" width="18">
-                      <input id="nitrito" class="form-control" type="number" name="nitrito"  value="{{old('ph')}}" disabled/><br/>
-                      <input type="checkbox" name="durezaBox" id="durezaBox" onchange="teste(this)" />
-                      <label>Dureza(mg CaCO3/L)</label>
-                      <img onclick="return confirm('É recomendado que o nível de Dureza seja maior ou igual a 30mg CaCO3/L')" src="{{asset('images/info.png')}}"  height="18" width="18">
-                      <input id="dureza" class="form-control" type="number" name="dureza"  value="{{old('ph')}}" disabled/><br/>
-                      <input type="checkbox" name="alcalinidadeBox" id="alcalinidadeBox" onchange="teste(this)" />
-                      <label>Alcalinidade(mg CaCO3/L)</label>
-                      <img onclick="return confirm('É recomendado que o nível de Alcalinidade seja maior ou igual a 30mg CaCO3/L')" src="{{asset('images/info.png')}}"  height="18" width="18">
-                      <input id="alcalinidade" class="form-control" type="number" name="alcalinidade"  value="{{old('ph')}}" disabled/><br/>
+                      <input type="checkbox" name="amoniaNitritoNitratoBox" id="amoniaNitritoNitratoBox" onchange="teste(this)" />
+                      <label>Amônia, Nitrito e Nitrato</label><br>
+                      <div class="card-body">
+                        <label>Amônia(mg/L)</label>
+                        <img onclick="return confirm('É recomendado que o valor do Amônia esteja entre 0 e 0,5mg/L')" src="{{asset('images/info.png')}}"  height="18" width="18">
+                        <input id="amonia" class="form-control" type="number" name="amonia"  value="{{old('amonia')}}" disabled/><br/>
+                        <label>Nitrito(mg/L)</label>
+                        <img onclick="return confirm('É recomendado que o valor do Nitrito esteja entre 0 e 0,5mg/L')" src="{{asset('images/info.png')}}"  height="18" width="18">
+                        <input id="nitrito" class="form-control" type="number" name="nitrito"  value="{{old('nitrito')}}" disabled/><br/>
+                        <label>Nitrato(mg/L)</label>
+                        <img onclick="return confirm('É recomendado que o valor do Nitrato esteja entre 0 e 0,5mg/L')" src="{{asset('images/info.png')}}"  height="18" width="18">
+                        <input id="nitrato" class="form-control" type="number" name="nitrato"  value="{{old('nitrato')}}" disabled/><br/>
+                      </div>
+                      <input type="checkbox" name="alcalinidadeDurezaBox" id="alcalinidadeDurezaBox" onchange="teste(this)" />
+                      <label>Alcalinidade e Dureza</label><br>
+                      <div class="card-body">
+                        <label>Alcalinidade(mg CaCO3/L)</label>
+                        <img onclick="return confirm('É recomendado que o nível de Alcalinidade seja maior ou igual a 30mg CaCO3/L')" src="{{asset('images/info.png')}}"  height="18" width="18">
+                        <input id="alcalinidade" class="form-control" type="number" name="alcalinidade"  value="{{old('alcalinidade')}}" disabled/><br/>
+                        <label>Dureza(mg CaCO3/L)</label>
+                        <img onclick="return confirm('É recomendado que o nível de Dureza seja maior ou igual a 30mg CaCO3/L')" src="{{asset('images/info.png')}}"  height="18" width="18">
+                        <input id="dureza" class="form-control" type="number" name="dureza"  value="{{old('dureza')}}" disabled/><br/>
+                      </div>
                     </div>
                     <input class="btn btn-success" type="submit" value="Cadastrar" />
                   </form>
@@ -67,12 +70,42 @@
 <script type="text/javascript">
   teste = function habilitar(checkbox){
     var qualidade = (checkbox.id).replace('Box','');
-    var input = document.getElementById(qualidade);
-    if(checkbox.checked){
-      input.disabled = false  
+    if(qualidade == "amoniaNitritoNitrato"){
+      var input1 = document.getElementById('amonia');
+      var input2 = document.getElementById('nitrito');
+      var input3 = document.getElementById('nitrato');
+      if(checkbox.checked){
+        input1.disabled = false  
+        input2.disabled = false  
+        input3.disabled = false 
+      }else{
+        input1.disabled = true;
+        input1.value = '';
+        input2.disabled = true;
+        input2.value = '';
+        input3.disabled = true;
+        input3.value = '';
+      }
+    }else if(qualidade == "alcalinidadeDureza"){
+      var input1 = document.getElementById('alcalinidade');
+      var input2 = document.getElementById('dureza');
+      if(checkbox.checked){
+        input1.disabled = false  
+        input2.disabled = false  
+      }else{
+        input1.disabled = true;
+        input1.value = '';
+        input2.disabled = true;
+        input2.value = '';
+      }
     }else{
-      input.disabled = true;
-      input.value = '';
+      var input = document.getElementById(qualidade);
+      if(checkbox.checked){
+        input.disabled = false  
+      }else{
+        input.disabled = true;
+        input.value = '';
+      }
     }
   }
   </script>

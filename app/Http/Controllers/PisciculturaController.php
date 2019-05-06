@@ -120,41 +120,32 @@ class PisciculturaController extends Controller
 				$tanque = $ciclo->tanque;
 				$piscicultura = $tanque->piscicultura;
 				$phs = $ciclo->qualidade_agua->phs;
-				$datasPh = $this->gerarDatas($phs);
-				$phsData = $this->gerarQualidades($datasPh,$phs);
-				$temperaturas = $ciclo->qualidade_agua->temperaturas;
-				$temperaturas = $ciclo->qualidade_agua->temperaturas;
-				$datasTemp = $this->gerarDatas($temperaturas);
-				$tempsData = $this->gerarQualidades($datasTemp,$temperaturas);
-				$amonias = $ciclo->qualidade_agua->amonias;
-				$amonias = $ciclo->qualidade_agua->amonias;
-				$datasAmonia = $this->gerarDatas($amonias);
-				$amoniasData = $this->gerarQualidades($datasTemp,$amonias);
-				$nitritos = $ciclo->qualidade_agua->nitritos;
-				$nitritos = $ciclo->qualidade_agua->nitritos;
-				$datasNitrito = $this->gerarDatas($nitritos);
-				$nitritosData = $this->gerarQualidades($datasTemp,$nitritos);
-				$nitratos = $ciclo->qualidade_agua->nitratos;
-				$nitratos = $ciclo->qualidade_agua->nitratos;
-				$datasNitrato = $this->gerarDatas($nitratos);
-				$nitratosData = $this->gerarQualidades($datasTemp,$nitratos);
-				$durezas = $ciclo->qualidade_agua->durezas;
-				$durezas = $ciclo->qualidade_agua->durezas;
-				$datasDureza = $this->gerarDatas($durezas);
-				$durezasData = $this->gerarQualidades($datasTemp,$durezas);
-				$alcalinidades = $ciclo->qualidade_agua->alcalinidades;
-				$alcalinidades = $ciclo->qualidade_agua->alcalinidades;
-				$datasAlcalinidade = $this->gerarDatas($alcalinidades);
-				$alcalinidadesData = $this->gerarQualidades($datasTemp,$alcalinidades);
-				$oxigenios = $ciclo->qualidade_agua->oxigenios;
-				$oxigenios = $ciclo->qualidade_agua->oxigenios;
-				$datasOxigenio = $this->gerarDatas($oxigenios);
-				$oxigeniosData = $this->gerarQualidades($datasTemp,$oxigenios);
-				$biometrias = $ciclo->biometrias;
-				$biometrias = $ciclo->biometrias;
-				$datasBiometria = $this->gerarDatas($biometrias);
-				$biometriasData = $this->gerarPesos($datasBiometria,$biometrias);
-				
+    $datasPh = $this->gerarDatas($phs);
+    $phsData = $this->gerarQualidades($datasPh,$phs);
+    $temperaturas = $ciclo->qualidade_agua->temperaturas;
+    $datasTemp = $this->gerarDatas($temperaturas);
+    $tempsData = $this->gerarQualidades($datasTemp,$temperaturas);
+    $amonias = $ciclo->qualidade_agua->amonias;
+    $datasAmonia = $this->gerarDatas($amonias);
+    $amoniasData = $this->gerarQualidades($datasAmonia,$amonias);
+    $nitritos = $ciclo->qualidade_agua->nitritos;
+    $datasNitrito = $this->gerarDatas($nitritos);
+    $nitritosData = $this->gerarQualidades($datasNitrito,$nitritos);
+    $nitratos = $ciclo->qualidade_agua->nitratos;
+    $datasNitrato = $this->gerarDatas($nitratos);
+    $nitratosData = $this->gerarQualidades($datasNitrato,$nitratos);
+    $durezas = $ciclo->qualidade_agua->durezas;
+    $datasDureza = $this->gerarDatas($durezas);
+    $durezasData = $this->gerarQualidades($datasDureza,$durezas);
+    $alcalinidades = $ciclo->qualidade_agua->alcalinidades;
+    $datasAlcalinidade = $this->gerarDatas($alcalinidades);
+    $alcalinidadesData = $this->gerarQualidades($datasAlcalinidade,$alcalinidades);
+    $oxigenios = $ciclo->qualidade_agua->oxigenios;
+    $datasOxigenio = $this->gerarDatas($oxigenios);
+    $oxigeniosData = $this->gerarQualidades($datasOxigenio,$oxigenios);
+    $biometrias = $ciclo->biometrias;
+    $datasBiometria = $this->gerarDatas($biometrias);
+    $biometriasData = $this->gerarPesos($datasBiometria,$biometrias);
 
 				$line_chartPh = Charts::create('line', 'highcharts')
 							->title('PH')
@@ -173,43 +164,22 @@ class PisciculturaController extends Controller
 							->dimensions(1000,500)
 							->responsive(true); 
 
-				$line_chartAmonia = Charts::create('line', 'highcharts')
-							->title('Amônia')
-							->elementLabel('mg/L')
-							->labels($datasAmonia)
-							->values($amoniasData)       
-							->dimensions(1000,500)
-							->responsive(true);
-
-				$line_chartNitrato = Charts::create('line', 'highcharts')
-							->title('Nitrato')
-							->elementLabel('mg/L')
-							->labels($datasNitrato)
-							->values($nitratosData)       
-							->dimensions(1000,500)
-							->responsive(true);
-
-				$line_chartNitrito = Charts::create('line', 'highcharts')
-							->title('Nitrito')
+							$line_chartsAmoniaNitritoNitrato = Charts::multi('line','highcharts')
+							->title('Amônia, Nitrito e Nitrato')
 							->elementLabel('mg/L')
 							->labels($datasNitrito)
-							->values($nitritosData)       
+							->dataset('Amônia', $amoniasData)
+							->dataset('Nitrito', $nitritosData)
+							->dataset('Nitrato',$nitratosData)
 							->dimensions(1000,500)
 							->responsive(true);
-				
-				$line_chartAlcalinidade = Charts::create('line', 'highcharts')
-							->title('Alcalinidade')
-							->elementLabel('mg CaCO3/L')
-							->labels($datasAlcalinidade)
-							->values($alcalinidadesData)       
-							->dimensions(1000,500)
-							->responsive(true);
-
-				$line_chartDureza = Charts::create('line', 'highcharts')
-							->title('Dureza')
+		
+				$line_chartsDurezaAlcalinidade= Charts::multi('line','highcharts')
+							->title('Dureza e Alcalinidade')
 							->elementLabel('mg CaCO3/L')
 							->labels($datasDureza)
-							->values($durezasData)       
+							->dataset('Dureza', $durezasData)
+							->dataset('Alcalinidade', $alcalinidadesData)
 							->dimensions(1000,500)
 							->responsive(true);
 
@@ -230,7 +200,7 @@ class PisciculturaController extends Controller
 							->responsive(true);
 							
 
-				return view('graficosPescas', compact('line_chartBiometria','line_chartNitrato','line_chartNitrito','line_chartDureza','line_chartAlcalinidade','line_chartOxigenio','line_chartPh', 'line_chartTemp', 'line_chartAmonia'), ['tanque' => $tanque, 'piscicultura' => $piscicultura]);
+				return view('graficosPescas', compact('line_chartBiometria','line_chartsAmoniaNitritoNitrato','line_chartsDurezaAlcalinidade','line_chartOxigenio','line_chartPh', 'line_chartTemp'), ['tanque' => $tanque, 'piscicultura' => $piscicultura]);
 			
 				}
 
