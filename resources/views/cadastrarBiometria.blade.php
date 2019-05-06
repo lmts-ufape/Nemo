@@ -19,7 +19,7 @@
                 <form action="/adicionarBiometria" method="post">
                   {{ csrf_field() }}
                   <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                  <input type="hidden" name="tanque_id" value="{{$tanque->id}}" />
+                  <input type="hidden" name="id_tanque" value="{{$tanque->id}}" />
                   <div class="form-group">
                     <label>Data</label>
                     <input class="form-control" type="date" name="data" value="{{$data_atual}}" placeholder="DD/MM/AA" autofocus /><br/>

@@ -25,6 +25,7 @@ class BiometriaController extends Controller
       }
     
       public static function adicionar(Request $request){
+            //dd($request->id_tanque);
             $tanque = \nemo\Tanque::find($request->id_tanque);
             //dd($tanque);
             $ciclo = $tanque->ciclos[count($tanque->ciclos)-1];

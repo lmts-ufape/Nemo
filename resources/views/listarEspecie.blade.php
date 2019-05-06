@@ -20,7 +20,7 @@
 						</tr>
 						@foreach ($listaEspecies as $EspeciePeixe)
 						<tr>
-							<td><a href="/tanque/{{$id}}/especie/{{$EspeciePeixe->id}}/info">{{ $EspeciePeixe->nome}}</a></td>
+							<td>{{ $EspeciePeixe->nome}}</td>
 							<td>					
 								<a class="btn btn-primary" href="/povoar/tanque/{{$id}}/especie/{{$EspeciePeixe->id}}">Adicionar ao tanque</a>
 							</td>

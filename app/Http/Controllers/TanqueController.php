@@ -493,7 +493,8 @@ class TanqueController extends Controller
         $refeicoes_por_dia = '1/2';
       }
     }
-    return view('racao', ['tamanho'=>$tamanho,'tanque' => $tanque, 'piscicultura' => $piscicultura, 'pb' => $pb, 'quantidade_total'=>$quantidade_total,'refeicoes_por_dia'=>$refeicoes_por_dia]);
+    $pv = number_format($pv, 2, ".", "");
+    return view('racao', ['pv'=>$pv,'temperatura'=>$temperatura,'tamanho'=>$tamanho,'tanque' => $tanque, 'piscicultura' => $piscicultura, 'pb' => $pb, 'quantidade_total'=>$quantidade_total,'refeicoes_por_dia'=>$refeicoes_por_dia]);
   }
 
 }
