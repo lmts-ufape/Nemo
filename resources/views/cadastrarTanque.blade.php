@@ -22,12 +22,12 @@
                     <div class="card-body">
                       <label>Nome</label>
                     <input class="form-control" type="text" name="nome" placeholder="Nome" value="{{old('nome')}}" autofocus  /><br/>
-                      <label>Volume</label>
-                      <input class="form-control" type="text" min="0" step="any" name="volume" placeholder="Em litros" value="{{old('volume')}}" autofocus /><br/>
-                      <label>Área</label>
-                      <input class="form-control" type="text" min="0" step="any" name="area" placeholder="Em metros quadrados" autofocus /><br/>
-                      <label>Altura</label>
-                      <input class="form-control" type="text" min="0" step="any" name="altura" placeholder="Em metros" autofocus /><br/>
+                      <label>Volume (Litros)</label>
+                      <input class="form-control" type="text" min="0" step="any" name="volume"  value="{{old('volume')}}" autofocus /><br/>
+                      <label>Área (m²)</label>
+                      <input class="form-control" type="text" min="0" step="any" name="area"  /><br/>
+                      <label>Altura (m)</label>
+                      <input class="form-control" type="text" min="0" step="any" name="altura" /><br/>
                       <input class="btn btn-success" type="submit" value="Cadastrar" />
                     </div>
                   </form>

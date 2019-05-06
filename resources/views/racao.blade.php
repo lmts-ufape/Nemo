@@ -20,12 +20,16 @@
                         <div>
                             <table class="table" >
                                 <tr>
+                                    <th align ="center">Peso Vivo</th>
+                                    <th align ="center">Temperatura média</th>
                                     <th align ="center">Proteína bruta</th>
                                     <th align ="center">Tamanho</th>
                                     <th align ="center">Quantidade por dia</th>
                                     <th align ="center">Refeições por dia</th>
                                 </tr>
                                 <tr>
+                                <td align ="center">{{ $pv/10000 }}Kg</td>
+                                <td align ="center">{{ $temperatura }}</td>
                                 <td align ="center">{{ $pb }}</td>
                                 <td align ="center">{{ $tamanho }}</td>
                                 <td align ="center">{{ $quantidade_total }}g</td>
