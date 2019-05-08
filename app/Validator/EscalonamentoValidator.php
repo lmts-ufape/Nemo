@@ -6,10 +6,11 @@ use nemo\Validator\ValidationException;
 
 class EscalonamentoValidator{
     public static $rules = [
-        'volume' => 'required|numeric',
-        'quantidade_peixes' => 'required|numeric',
+        'pesoMedio' => 'required',
+        'duracaoCiclo' => 'required',
         'periodicidade' => 'required',
-        'especie' => 'required'
+        'producaoDesejada' => 'required',
+        'inicioProducao' => 'required',
     ];
 
     public static $messages = [
