@@ -23,7 +23,7 @@
                       <label>Data da Medição</label>
                       <input class="form-control" type="date" name="data" value="{{$data_atual}}"  placeholder="DD/MM/AA" /><br/>
                       <label>Hora da Medição</label>
-                      <input class="form-control" type="time" name="hora" value="{{$hora_atual}}" placeholder="HH:MM" /><br/>
+                      <input class="form-control" type="time" step="1" name="hora" value="{{$hora_atual}}" placeholder="HH:MM" /><br/>
                       <input type="checkbox" name="phBox" id="phBox" onchange="teste(this)" />
                       <label>PH</label>
                       <img onclick="return confirm('É recomendado que o valor do PH esteja entre 6,5 e 8,5')" src="{{asset('images/info.png')}}"  height="18" width="18">

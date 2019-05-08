@@ -43,7 +43,6 @@
 									@else
 										<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/manutencao">Finalizar manutenção</a>
 									@endif
-
 								</td>
 							</tr>
 							@endforeach		
