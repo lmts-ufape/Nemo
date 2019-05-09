@@ -2,31 +2,36 @@
 @extends('layouts.principal')
 @section('title','Informações de Tanque')
 @section('path')
-<a href="/listar/pisciculturas">Pisciculturas</a> > <a href="/info/piscicultura/{{$piscicultura->id}}"> {{$piscicultura->nome}} </a> > <a href="/listar/tanques/{{$tanque->id}}">Tanques</a> > Povoar Tanque	
+<a href="/listar/pisciculturas">Pisciculturas</a> > <a href="/info/piscicultura/{{$piscicultura->id}}"> {{$piscicultura->nome}} </a> > <a href="/listar/tanques/{{$piscicultura->id}}">Tanques</a> > Povoar Tanque	
 @stop
-@section('conteudo')
-	<div>
-		<form action="/adicionar/especie/{{$piscicultura_id}}" method="get" >
-			<input class="btn btn-primary" type="submit" value="Nova Especie" />
-		</form>
-	</div>	
-
-	<div>
-		<table class="table">
-			<tr>
-				<th>Nome</th>
-				<th>Ação</th>
-			</tr>
-			@foreach ($listaEspecies as $EspeciePeixe)
-			<tr>
-				<td><a href="/tanque/{{$id}}/especie/{{$EspeciePeixe->id}}/info">{{ $EspeciePeixe->nome}}</a></td>
-				<td>					
-					<a class="btn btn-primary" href="/povoar/tanque/{{$id}}/especie/{{$EspeciePeixe->id}}">Adicionar ao tanque</a>
-				</td>
-			</tr>
-			@endforeach		
-		</table>
+@section('content')
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-md-8">
+			<div class="card">
+				<div class="card-header">
+					Espécies
+				</div>
+				<div class="card-body">
+					<table class="table">
+						<tr>
+							<th>Nome</th>
+							<th>Ação</th>
+						</tr>
+						@foreach ($listaEspecies as $EspeciePeixe)
+						<tr>
+							<td>{{ $EspeciePeixe->nome}}</td>
+							<td>					
+								<a class="btn btn-primary" href="/povoar/tanque/{{$id}}/especie/{{$EspeciePeixe->id}}">Adicionar ao tanque</a>
+							</td>
+						</tr>
+						@endforeach		
+					</table>
+				</div>
+			</div>
+		</div>
 	</div>
+</div>
 @stop
 
 

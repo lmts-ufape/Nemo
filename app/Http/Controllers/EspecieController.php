@@ -14,16 +14,16 @@ class EspecieController extends Controller
     public function listar ($id) {
 			$tanque = \nemo\Tanque::find($id);
 			$idPiscultura = $tanque->piscicultura_id;
-    		$piscicultura = \nemo\Piscicultura::find($idPiscultura);
-    		$especiesPeixe= \nemo\EspeciePeixe::where('piscicultura_id','=',$tanque->piscicultura_id)->get();
-    		return view('listarEspecie', ['listaEspecies' => $especiesPeixe, 'piscicultura_id' => $id,'id'=> $id,'piscicultura' => $piscicultura,'tanque' => $tanque]);
+    	$piscicultura = \nemo\Piscicultura::find($idPiscultura);
+    	$especiesPeixe= \nemo\EspeciePeixe::all();
+    	return view('listarEspecie', ['id'=>$id,'listaEspecies' => $especiesPeixe, 'piscicultura' => $piscicultura,'tanque' => $tanque]);
     		   	
     }
    
     public function adicionar($id) {
-    		$tanque = \nemo\Tanque::find($id);
-    		$idPiscultura = $tanque->piscicultura_id;
-    		$piscicultura = \nemo\Piscicultura::find($idPiscultura); 
+    	$tanque = \nemo\Tanque::find($id);
+    	$idPiscultura = $tanque->piscicultura_id;
+    	$piscicultura = \nemo\Piscicultura::find($idPiscultura); 
 			return view("cadastrarEspecie", ['id' => $id,'piscicultura' => $piscicultura, 'tanque' => $tanque]);    
     }
     
@@ -51,11 +51,11 @@ class EspecieController extends Controller
                 ]);
 
     			
-    		return redirect()->route("listarEspecies", ['id' => $tanque->id]);
+    		return redirect()->route("especie.listar", ['id' => $tanque->id]);
     		}
     		
     	}
-    	return redirect()->route("listarEspecies", ['id' => $tanque->id]);
+    	return redirect()->route("especie.listar", ['id' => $tanque->id]);
    	
     }
     
@@ -116,7 +116,7 @@ class EspecieController extends Controller
 	 	$tanque = \nemo\Tanque::find($request->tanque_id);
   		$especiePeixe = \nemo\EspeciePeixe::find($request->especie_id);
     	$especiePeixe->delete();
-    	return redirect()->route("listarEspecies", ['id' => $request->tanque_id]);
+    	return redirect()->route("especie.listar", ['id' => $request->tanque_id]);
 	}
 	
 	public function verificaNomeExistente($nome) {

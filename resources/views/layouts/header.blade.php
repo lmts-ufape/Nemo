@@ -1,5 +1,21 @@
-<header>
-    <img class="header-image" src="http://www.stickpng.com/assets/images/58f37995a4fa116215a92421.png" />
-    <h1 class="h1">Nemo</h1>
-    <h3 class="h3">A plataforma ideal pra você, Piscicultor!</h3>
-</header>
+<div>
+    <!--Barra Brasil-->
+    <div id="barra-brasil" style="background:#7F7F7F; height: 20px; padding:0 0 0 10px;display:block;">
+    <ul id="menu-barra-temp" style="list-style:none;">
+        <li style="display:inline; float:left;padding-right:10px; margin-right:10px; border-right:1px solid #EDEDED">
+            <a href="http://brasil.gov.br" style="font-family:sans,sans-serif; text-decoration:none; color:white;">Portal do Governo Brasileiro</a>
+        </li>
+        <li>
+        <a style="font-family:sans,sans-serif; text-decoration:none; color:white;" href="http://epwg.governoeletronico.gov.br/barra/atualize.html">Atualize sua Barra de Governo</a>
+        </li>
+    </ul>
+    </div>
+    <br>
+    <!--Barra de Logos-->
+    @include('layouts.logos')
+    <br>
+    <!--Menu-->
+    @include('layouts.menu')
+
+
+</div>

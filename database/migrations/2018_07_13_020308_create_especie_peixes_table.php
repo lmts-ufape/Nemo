@@ -16,13 +16,10 @@ class CreateEspeciePeixesTable extends Migration
         Schema::create('especie_peixes', function (Blueprint $table) {
             $table->increments('id');
             $table->string("nome");
-            $table->integer("tempo_desenvolvimento");
             $table->string("tipo_racao");
             $table->string("temperatura_ideal_agua");
             $table->integer("quantidade_por_volume");
-            $table->integer("piscicultura_id")->unsigned();
-            
-            $table->foreign('piscicultura_id')->references('id')->on('pisciculturas')->onDelete('cascade');
+           
         });
     }
 

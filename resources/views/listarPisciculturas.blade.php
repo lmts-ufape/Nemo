@@ -1,24 +1,53 @@
+
+
 @extends('layouts.principal')
 @section('title','Listar Pisciculturas')
 @section('path')
 	Listar Pisciculturas
 @stop
-@section('conteudo')
-	<div>
-		<form action="/cadastrar/piscicultura" method="get" >
-			<input type="submit" value="Nova Piscicultura" class="btn btn-primary" />
-		</form>
-	</div>	
-	<div>
-		<table class="table">
-			<tr>
-				<th>Nome</th>
-			</tr>
-			@foreach ($pisciculturas as $piscicultura)
-			<tr>
-				<td><a href="/info/piscicultura/{{$piscicultura->id}}">{{ $piscicultura->nome }}</a></td>
-			</tr>
-			@endforeach		
-		</table>
+@section('content')
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-md-8">
+			@if (\Session::has('denied'))
+                <br>
+				<div class="alert alert-warning">
+					<strong>Negado!</strong>
+					{!! \Session::get('denied') !!}
+				</div>
+			@endif
+			<div class="card">
+				<div class="card-header">
+						<div class="menu-direita-logout">
+							Pisciculturas							
+							<a href = "/cadastrar/piscicultura">
+                    			<img src="{{asset('images/add.png')}}" style = "margin-left: 15px; margin-right: -10px " height="25" width="25" align = "right">
+							</a>
+						</div>
+					
+				</div>
+				<div class="card-body">			
+					<div>
+						<table class="table">
+							@foreach ($pisciculturas as $piscicultura)
+							<tr>
+								<td><a href="/info/piscicultura/{{$piscicultura->id}}">{{ $piscicultura->nome }}</a>
+									<a onclick="return confirm('Confirmar remoção de {{ $piscicultura->nome}}?')" href = "/remover/piscicultura/{{$piscicultura->id}}">
+										<img src="{{asset('images/delete.png')}}" style = "margin-left: 30px; margin-right: -10px " height="25" width="25" align = "right">
+									</a>
+									<a href = "/editar/pisciculturas/{{$piscicultura->id}}">
+										<img src="{{asset('images/edit-black.png')}}"  style = "margin-left: 15px; margin-right: -10px " height="25" width="25" align = "right">
+									</a>
+								</td>
+							
+							</tr>
+							
+							@endforeach		
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
+</div>
 @stop

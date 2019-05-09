@@ -1,27 +1,21 @@
-div#site {
-    margin: 10px 10px 0 10px;
-}
-
 header {
     width: 100%;
-    background-color: #0066ff;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     height: 200px;
     box-shadow: red;
 }
 
-body{
+body {
     width: 100%;
     margin-bottom: 50px;
 }
 
 footer {
-    position:fixed;
-    bottom:0;
+    position: fixed;
+    bottom: 0;
     margin-top: 50px;
     width: 100%;
     text-align: center;
-    background-color: #0066ff;
 }
 
 footer a {
@@ -38,19 +32,18 @@ div {
     margin-bottom: 15px;
 }
 
-.header-image{
+.header-image {
     width: 20%;
     position: absolute;
     margin-top: -15px;
     right: 0;
-
 }
 
-.h1{
+.h1 {
     padding: 10px;
 }
 
-.h3{
+.h3 {
     padding: 10px;
     margin-top: -10px;
 }
@@ -62,7 +55,7 @@ nav#menu {
 nav#menu ul {
     text-align: center;
     margin-bottom: 20px;
-    background-color: white;    
+    background-color: white;
 }
 
 nav#menu li {
@@ -83,4 +76,8 @@ nav#menu a {
 
 nav#menu li:hover {
     color: blue;
+}
+
+.card-header {
+    background-color: #1B2E4F;
 }

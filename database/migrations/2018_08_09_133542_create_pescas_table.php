@@ -15,15 +15,14 @@ class CreatePescasTable extends Migration
     {
         Schema::create('pescas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('tanque_id');
-            $table->integer('especie_id');
-            $table->dateTime('data');
-            $table->integer('quantidade');
-            $table->integer('peso');
+            $table->float('peso')->unsigned();
+            $table->date('data');
+            $table->time('hora');
+            $table->timestamps();
+            $table->integer('ciclo_id');
 
 
-            $table->foreign('tanque_id')->references('id')->on('tanques')->onDelete('cascade');
-            $table->foreign('especie_id')->references('id')->on('especie_peixes')->onDelete('cascade');
+            $table->foreign('ciclo_id')->references('id')->on('ciclos')->onDelete('cascade');
         });
     }
 
