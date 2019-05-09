@@ -255,7 +255,7 @@ class TanqueController extends Controller
         $dataHora = $biometria->data . " " . $biometria->hora;
         $str = str_replace("-", "/", $dataHora);
         if($data == $str){
-          array_push($pesosDatas,$biometria->peso_medio); 
+          array_push($pesosDatas,1000*$biometria->peso_medio); 
         }
       }
     }
@@ -312,16 +312,20 @@ class TanqueController extends Controller
     $refeicoes_por_dia = 0;
     $tamanho = 0;
     $pv = $biometriasData[count($biometriasData)-1]*$povoamento->quantidade;
-    $i = 0;
-    for ($i = 0; $i < count($biometriasData); $i++) {
-      if($i < 4) {
-        $pv =  1000*($pv - (0.05 * $pv));      
+  
+    $qv = $povoamento->quantidade;
+    $j = 0;
+    for ($j = 1; $j < count($biometriasData); $j++) { //j = 1 pois o povoamento já tem uma biometria, mas sem mortalidade
+      if($j < 5) {
+        $qv =  ($qv - (0.05 * $qv));     
       }else{
-        $pv =  1000*($pv - (0.025 * $pv));
+        $qv =  ($qv - (0.025 * $qv));
       }
     }
+    $pv = $biometriasData[count($biometriasData)-1]*$qv;
 
-    if($biometriasData[count($biometriasData)-1] < 0.0005){
+    $pvMedio = $pv/$povoamento->quantidade;
+    if($pvMedio < 0.5){
         $tamanho = "Pó fino < 0,5mm";
         $pb = '40g';
       if(($tempsData[count($tempsData)-1])>30){
@@ -340,7 +344,7 @@ class TanqueController extends Controller
         $quantidade_total = 0.05*$pv;;
         $refeicoes_por_dia = '3 a 4';
       }
-    }elseif($biometriasData[count($biometriasData)-1] >= 0.0005 && $biometriasData[count($biometriasData)-1] < 0.003){
+    }elseif($pvMedio >= 0.5 && $pvMedio < 3){
         $tamanho = "Pó fino < 0,5mm";
         $pb = '40g'; 
       if(($temperatura)>30){
@@ -359,7 +363,7 @@ class TanqueController extends Controller
         $quantidade_total = 0.035*$pv;;
         $refeicoes_por_dia = '2 a 3';
       }
-    }elseif($biometriasData[count($biometriasData)-1] >= 0.003 && $biometriasData[count($biometriasData)-1] < 0.005){
+    }elseif($pvMedio >= 3 && $pvMedio < 5){
       $tamanho = "Pó fino < 0,5mm";
       $pb = '40g ou 36g';      
       if(($temperatura)>30){
@@ -378,7 +382,7 @@ class TanqueController extends Controller
         $quantidade_total = 0.025*$pv;
         $refeicoes_por_dia = '2';
       }
-    }elseif($biometriasData[count($biometriasData)-1] >= 0.005 && $biometriasData[count($biometriasData)-1] < 0.010){
+    }elseif($pvMedio >= 5 && $pvMedio < 10){
       $tamanho = "2mm";
       $pb = '36'; 
       if(($temperatura)>30){
@@ -397,7 +401,7 @@ class TanqueController extends Controller
         $quantidade_total = 0.020*$pv;
         $refeicoes_por_dia = '1';
       }
-    }elseif($biometriasData[count($biometriasData)-1] >= 0.010 && $biometriasData[count($biometriasData)-1] < 0.030){
+    }elseif($pvMedio >= 10 && $pvMedio < 30){
         $tamanho = '2mm a 4mm';
         $pb = '36g';      
       if(($temperatura)>30){
@@ -416,7 +420,7 @@ class TanqueController extends Controller
         $quantidade_total = 0.010*$pv;
         $refeicoes_por_dia = '1';
       }
-    }elseif($biometriasData[count($biometriasData)-1] >= 0.030 && $biometriasData[count($biometriasData)-1] < 0.200){
+    }elseif($pvMedio >= 30 && $pvMedio < 200){
       $tamanho = '4mm';
       $pb = '32g';     
       if(($temperatura)>30){
@@ -435,7 +439,7 @@ class TanqueController extends Controller
         $quantidade_total = 0.01*$pv;
         $refeicoes_por_dia = '1';
       }
-    }elseif($biometriasData[count($biometriasData)-1] >= 0.200 && $biometriasData[count($biometriasData)-1] < 0.500){
+    }elseif($pvMedio >= 200 && $pvMedio < 500){
       $tamanho = '4mm a 6mm';
       $pb = '28 a 32';       
       if(($temperatura)>30){
@@ -454,7 +458,7 @@ class TanqueController extends Controller
         $quantidade_total = 0.01*$pv;
         $refeicoes_por_dia = '1/2';
       }
-    }elseif($biometriasData[count($biometriasData)-1] >= 0.500 && $biometriasData[count($biometriasData)-1] <= 1){
+    }elseif($pvMedio >= 500 && $pvMedio <= 1000){
       $tamanho = '6mm a 8mm';
       $pb = '28 a 32';
       if(($temperatura)>30){
@@ -473,7 +477,7 @@ class TanqueController extends Controller
         $quantidade_total = 0.010*$pv;
         $refeicoes_por_dia = '1/2';
       }
-    }elseif($biometriasData[count($biometriasData)-1] > 1){
+    }elseif($pvMedio > 1000){
       $tamanho = '6mm a 12mm';
       $pb = '28 a 32';
       if(($temperatura)>30){
@@ -494,7 +498,7 @@ class TanqueController extends Controller
       }
     }
     $pv = number_format($pv, 2, ".", "");
-    return view('racao', ['pv'=>$pv,'temperatura'=>$temperatura,'tamanho'=>$tamanho,'tanque' => $tanque, 'piscicultura' => $piscicultura, 'pb' => $pb, 'quantidade_total'=>$quantidade_total,'refeicoes_por_dia'=>$refeicoes_por_dia]);
+    return view('racao', ['pv'=>$pv,'pvMedio'=>$pvMedio,'temperatura'=>$temperatura,'tamanho'=>$tamanho,'tanque' => $tanque, 'piscicultura' => $piscicultura, 'pb' => $pb, 'quantidade_total'=>$quantidade_total,'refeicoes_por_dia'=>$refeicoes_por_dia]);
   }
 
 }
