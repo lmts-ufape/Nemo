@@ -325,178 +325,152 @@ class TanqueController extends Controller
     $pv = $biometriasData[count($biometriasData)-1]*$qv;
 
     $pvMedio = $pv/$povoamento->quantidade;
-    if($pvMedio < 0.5){
-        $tamanho = "Pó fino < 0,5mm";
-        $pb = '40g';
-      if(($tempsData[count($tempsData)-1])>30){
-        $quantidade_total = 0.175*$pv;
-        $refeicoes_por_dia = '6 a 8';
-      }elseif($temperatura >= 27 && $temperatura <= 30){
-        $quantidade_total = 0.175*$pv;;
-        $refeicoes_por_dia = '6 a 8';
-      }elseif($temperatura >= 23 && $temperatura <= 26){
-        $quantidade_total = 0.125*$pv;;
-        $refeicoes_por_dia = '5 a 6';
-      }elseif($temperatura >= 19 && $temperatura <= 22){
-        $quantidade_total = 0.085*$pv;;
-        $refeicoes_por_dia = '4 a 5';
-      }elseif($temperatura < 19){
-        $quantidade_total = 0.05*$pv;;
-        $refeicoes_por_dia = '3 a 4';
-      }
-    }elseif($pvMedio >= 0.5 && $pvMedio < 3){
-        $tamanho = "Pó fino < 0,5mm";
-        $pb = '40g'; 
-      if(($temperatura)>30){
-        $quantidade_total = 0.11*$pv;;
-        $refeicoes_por_dia = '5 a 6';
-      }elseif($temperatura >= 27 && $temperatura <= 30){
-        $quantidade_total = 0.11*$pv;;
-        $refeicoes_por_dia = '5 a 6';
-      }elseif($temperatura >= 23 && $temperatura <= 26){
-        $quantidade_total = 0.08*$pv;;
-        $refeicoes_por_dia = '4 a 5';
-      }elseif($temperatura >= 19 && $temperatura <= 22){
-        $quantidade_total = 0.055*$pv;;
-        $refeicoes_por_dia = '3 a 4';
-      }elseif($temperatura < 19){
-        $quantidade_total = 0.035*$pv;;
-        $refeicoes_por_dia = '2 a 3';
-      }
-    }elseif($pvMedio >= 3 && $pvMedio < 5){
-      $tamanho = "Pó fino < 0,5mm";
-      $pb = '40g ou 36g';      
-      if(($temperatura)>30){
-        $quantidade_total = 0.09*$pv;;
-        $refeicoes_por_dia = '4 a 5';
-      }elseif($temperatura >= 27 && $temperatura <= 30){
-        $quantidade_total = 0.09*$pv;
-        $refeicoes_por_dia = '4 a 5';
-      }elseif($temperatura >= 23 && $temperatura <= 26){
-        $quantidade_total = 0.065*$pv;
-        $refeicoes_por_dia = '3 a 4';
-      }elseif($temperatura >= 19 && $temperatura <= 22){
-        $quantidade_total = 0.045*$pv;
-        $refeicoes_por_dia = '2 a 3';
-      }elseif($temperatura < 19){
-        $quantidade_total = 0.025*$pv;
-        $refeicoes_por_dia = '2';
-      }
-    }elseif($pvMedio >= 5 && $pvMedio < 10){
-      $tamanho = "2mm";
-      $pb = '36'; 
-      if(($temperatura)>30){
-        $quantidade_total = 0.070*$pv;
-        $refeicoes_por_dia = '3 a 4';
-      }elseif($temperatura >= 27 && $temperatura <= 30){
-        $quantidade_total = 0.070*$pv;
-        $refeicoes_por_dia = '3 a 4';
-      }elseif($temperatura >= 23 && $temperatura <= 26){
-        $quantidade_total = 0.050*$pv;
-        $refeicoes_por_dia = '2 a 4';
-      }elseif($temperatura >= 19 && $temperatura <= 22){
-        $quantidade_total = 0.035*$pv;
-        $refeicoes_por_dia = '2';
-      }elseif($temperatura < 19){
-        $quantidade_total = 0.020*$pv;
-        $refeicoes_por_dia = '1';
-      }
-    }elseif($pvMedio >= 10 && $pvMedio < 30){
-        $tamanho = '2mm a 4mm';
-        $pb = '36g';      
-      if(($temperatura)>30){
-        $quantidade_total = 0.055*$pv;
-        $refeicoes_por_dia = '2 a 3';
-      }elseif($temperatura >= 27 && $temperatura <= 30){
-        $quantidade_total = 0.055*$pv;
-        $refeicoes_por_dia = '2 a 3';
-      }elseif($temperatura >= 23 && $temperatura <= 26){
-        $quantidade_total = 0.035*$pv;
-        $refeicoes_por_dia = '2 a 3';
-      }elseif($temperatura >= 19 && $temperatura <= 22){
-        $quantidade_total = 0.025*$pv;
-        $refeicoes_por_dia = '1 a 2';
-      }elseif($temperatura < 19){
-        $quantidade_total = 0.010*$pv;
-        $refeicoes_por_dia = '1';
-      }
-    }elseif($pvMedio >= 30 && $pvMedio < 200){
-      $tamanho = '4mm';
-      $pb = '32g';     
-      if(($temperatura)>30){
-        $quantidade_total = 0.045*$pv;;
-        $refeicoes_por_dia = '2 a 3';
-      }elseif($temperatura >= 27 && $temperatura <= 30){
-        $quantidade_total = 0.045*$pv;
-        $refeicoes_por_dia = '2 a 3';
-      }elseif($temperatura >= 23 && $temperatura <= 26){
-        $quantidade_total = 0.035*$pv;
-        $refeicoes_por_dia = '1 a 2';
-      }elseif($temperatura >= 19 && $temperatura <= 22){
-        $quantidade_total = 0.02*$pv;
-        $refeicoes_por_dia = '1';
-      }elseif($temperatura < 19){
-        $quantidade_total = 0.01*$pv;
-        $refeicoes_por_dia = '1';
-      }
-    }elseif($pvMedio >= 200 && $pvMedio < 500){
-      $tamanho = '4mm a 6mm';
-      $pb = '28 a 32';       
-      if(($temperatura)>30){
-        $quantidade_total = 0.025*$pv;
-        $refeicoes_por_dia = '2 a 3';
-      }elseif($temperatura >= 27 && $temperatura <= 30){
-        $quantidade_total = 0.035*$pv;
-        $refeicoes_por_dia = '2 a 3';
-      }elseif($temperatura >= 23 && $temperatura <= 26){
-        $quantidade_total = 0.025*$pv;
-        $refeicoes_por_dia = '1 a 2';
-      }elseif($temperatura >= 19 && $temperatura <= 22){
-        $quantidade_total = 0.01*$pv;
-        $refeicoes_por_dia = '1';
-      }elseif($temperatura < 19){
-        $quantidade_total = 0.01*$pv;
-        $refeicoes_por_dia = '1/2';
-      }
-    }elseif($pvMedio >= 500 && $pvMedio <= 1000){
-      $tamanho = '6mm a 8mm';
-      $pb = '28 a 32';
-      if(($temperatura)>30){
-        $quantidade_total = 0.020*$pv;
-        $refeicoes_por_dia = '1 a 2';
-      }elseif($temperatura >= 27 && $temperatura <= 30){
-        $quantidade_total = 0.025*$pv;
-        $refeicoes_por_dia = '1 a 2';
-      }elseif($temperatura >= 23 && $temperatura <= 26){
-        $quantidade_total = 0.015*$pv;
-        $refeicoes_por_dia = '1 a 2';
-      }elseif($temperatura >= 19 && $temperatura <= 22){
-        $quantidade_total = 0.015*$pv;
-        $refeicoes_por_dia = '1';
-      }elseif($temperatura < 19){
-        $quantidade_total = 0.010*$pv;
-        $refeicoes_por_dia = '1/2';
-      }
-    }elseif($pvMedio > 1000){
-      $tamanho = '6mm a 12mm';
-      $pb = '28 a 32';
-      if(($temperatura)>30){
-        $quantidade_total = 0.010*$pv;
-        $refeicoes_por_dia = '1 a 2';
-      }elseif($temperatura >= 27 && $temperatura <= 30){
-        $quantidade_total = 0.015*$pv;
-        $refeicoes_por_dia = '1 a 2';
-      }elseif($temperatura >= 23 && $temperatura <= 26){
-        $quantidade_total = 0.015*$pv;
-        $refeicoes_por_dia = '1';
-      }elseif($temperatura >= 19 && $temperatura <= 22){
-        $quantidade_total = 0.0075*$pv;
-        $refeicoes_por_dia = '1';
-      }elseif($temperatura < 19){
-        $quantidade_total = 0.005*$pv;
-        $refeicoes_por_dia = '1/2';
+    
+    $tabela = [
+      0.5 => ['temperatura' =>[
+                  999 =>['porcentagem' => 17.5,
+                        'nRefeicoes' => 8],
+                  30 => ['porcentagem' => 17.5,
+                        'nRefeicoes' => 8],
+                  26 => ['porcentagem' => 12.5,
+                        'nRefeicoes' => 6],
+                  22 => ['porcentagem' => 8.5,
+                        'nRefeicoes' => 5],
+                  19=>['porcentagem' => 5,
+                      'nRefeicoes' => 4]],
+              'pb' => '40',
+              'tamanho' => 'Pó fino <0,5mm'
+            ],
+      3 => ['temperatura' =>[
+                  999 =>['porcentagem' => 11,
+                        'nRefeicoes' => 6],
+                  30 => ['porcentagem' => 11,
+                        'nRefeicoes' => 6],
+                  26 => ['porcentagem' => 8,
+                        'nRefeicoes' => 5],
+                  22 => ['porcentagem' => 5.5,
+                        'nRefeicoes' => 4],
+                  19=>['porcentagem' => 3.5,
+                      'nRefeicoes' => 3]],
+              'pb' => '40',
+              'tamanho' => 'Pó fino <0,5mm'
+            ],
+      5 => ['temperatura' =>[
+                  999 =>['porcentagem' => 9,
+                        'nRefeicoes' => 5],
+                  30 => ['porcentagem' => 9,
+                        'nRefeicoes' => 5],
+                  26 => ['porcentagem' => 6.5,
+                        'nRefeicoes' => 4],
+                  22 => ['porcentagem' => 4.5,
+                        'nRefeicoes' => 3],
+                  19=>['porcentagem' => 2.5,
+                      'nRefeicoes' => 2]],
+              'pb' => '40-36',
+              'tamanho' => 'Pó fino de 2mm'
+            ],
+      10 => ['temperatura' =>[
+                  999 =>['porcentagem' => 7,
+                        'nRefeicoes' => 4],
+                  30 => ['porcentagem' => 7,
+                        'nRefeicoes' => 4],
+                  26 => ['porcentagem' => 5,
+                        'nRefeicoes' => 4],
+                  22 => ['porcentagem' => 3.5,
+                        'nRefeicoes' => 2],
+                  19=>['porcentagem' => 2,
+                      'nRefeicoes' => 1]],
+              'pb' => '36',
+              'tamanho' => '2mm'
+            ],
+      30 => ['temperatura' =>[
+                  999 =>['porcentagem' => 5.5,
+                        'nRefeicoes' => 3],
+                  30 => ['porcentagem' => 5.5,
+                        'nRefeicoes' => 3],
+                  26 => ['porcentagem' => 3.5,
+                        'nRefeicoes' => 2],
+                  22 => ['porcentagem' => 2.5,
+                        'nRefeicoes' => 2],
+                  19=>['porcentagem' => 1,
+                      'nRefeicoes' => 1]],
+              'pb' => '36',
+              'tamanho' => '2mm/4mm'
+            ],
+      200 => ['temperatura' =>[
+                  999 =>['porcentagem' => 4.5,
+                        'nRefeicoes' => 3],
+                  30 => ['porcentagem' => 4.5,
+                        'nRefeicoes' => 3],
+                  26 => ['porcentagem' => 3.5,
+                        'nRefeicoes' => 2],
+                  22 => ['porcentagem' => 2,
+                        'nRefeicoes' => 1],
+                  19=>['porcentagem' => 1,
+                      'nRefeicoes' => 1]],
+              'pb' => '32',
+              'tamanho' => '4mm'
+            ],
+      500 => ['temperatura' =>[
+                  999 =>['porcentagem' => 2.5,
+                        'nRefeicoes' => 3],
+                  30 => ['porcentagem' => 3.5,
+                        'nRefeicoes' => 3],
+                  26 => ['porcentagem' => 2.5,
+                        'nRefeicoes' => 2],
+                  22 => ['porcentagem' => 1,
+                        'nRefeicoes' => 1],
+                  19=>['porcentagem' => 1,
+                      'nRefeicoes' => 0.5]],
+              'pb' => '32-28',
+              'tamanho' => '4mm/6mm'
+            ],
+      1000 => ['temperatura' =>[
+                  999 =>['porcentagem' => 2,
+                        'nRefeicoes' => 2],
+                  30 => ['porcentagem' => 2.5,
+                        'nRefeicoes' => 2],
+                  26 => ['porcentagem' =>1.5,
+                        'nRefeicoes' => 2],
+                  22 => ['porcentagem' => 1.5,
+                        'nRefeicoes' => 1],
+                  19=>['porcentagem' => 1,
+                      'nRefeicoes' => 0.5]],
+              'pb' => '32-28',
+              'tamanho' => '6mm/8mm'
+            ],
+      900000 => ['temperatura' =>[
+                  999 =>['porcentagem' => 1,
+                        'nRefeicoes' => 2],
+                  30 => ['porcentagem' => 1.5,
+                        'nRefeicoes' => 2],
+                  26 => ['porcentagem' => 1.5,
+                        'nRefeicoes' => 1],
+                  22 => ['porcentagem' => 0.75,
+                        'nRefeicoes' => 1],
+                  19=>['porcentagem' => 0.5,
+                      'nRefeicoes' => 0.5]],
+              'pb' => '32-28',
+              'tamanho' => '6mm/12mm'
+            ],
+      ];
+      foreach($tabela as $peso=>$valor){
+        if ($pvMedio < $peso) {
+          $tamanho = $valor['tamanho'];
+          //dd($tamanho);
+          $pb = $valor['pb'];
+          foreach($valor['temperatura'] as $testTemp=>$dados){
+            if($temperatura < $testTemp){
+              //dd($dados['porcentagem']/100);
+              $quantidade_total = $pv*($dados['porcentagem']/100);
+              $refeicoes_por_dia = $dados['nRefeicoes'];
+            }
+          }
+          break;
       }
     }
+    
+    
     $pv = number_format($pv, 2, ".", "");
     return view('racao', ['pv'=>$pv,'pvMedio'=>$pvMedio,'temperatura'=>$temperatura,'tamanho'=>$tamanho,'tanque' => $tanque, 'piscicultura' => $piscicultura, 'pb' => $pb, 'quantidade_total'=>$quantidade_total,'refeicoes_por_dia'=>$refeicoes_por_dia]);
   }
