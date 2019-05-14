@@ -281,7 +281,7 @@ class TanqueController extends Controller
     $i = 0;
     foreach($datasTemp as $temp){
       $dataFinal = (strtotime($datasTemp[count($datasTemp)-1]) - strtotime($temp)) /86400;
-      if($dataFinal <= 7){
+      if($dataFinal <= 1){
         array_push($temps,$tempsData[$i]);
       }
       $i++;
