@@ -11,25 +11,26 @@
                         {!! $line_chartPh->html() !!}
                         
                     </div>
-
+                    <hr>
                     <div id="tabela" class="table-responsive">
 
                         {!! $line_chartTemp->html() !!}
 
                     </div>
-
+                    <hr>                    
                     <div id="tabela" class="table-responsive">
     
                         {!! $line_chartOxigenio->html() !!}
     
                     </div>
+                    <hr>
                     
                     <div id="tabela" class="table-responsive">
 
                         {!! $line_chartsAmoniaNitritoNitrato->html() !!}
 
                     </div>
-                    
+                    <hr>
                     <div id="tabela" class="table-responsive">
 
                         {!! $line_chartsDurezaAlcalinidade->html() !!}
