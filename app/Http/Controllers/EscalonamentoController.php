@@ -74,8 +74,12 @@ class EscalonamentoController extends Controller{
         
         foreach($tanques as $tanque){
           if($ciclosIniciados < $ciclosNecessarios){
+            $metrosCubicos = $tanque->volume/1000;
+            $indvAdultos = $metrosCubicos*$tilapia->quantidade_por_volume;
+            $povPossivel = ceil($fatorMultipliador*$indvAdultos);
+            // dd($povAlevino);
             if($povRestante == 0){
-              if($tanque->volume >= $volumeMinimo){
+              if($povPossivel >= $quantIndvAdultos){
                 array_push($data, date('m/d/Y', strtotime($dataAtual)));
                 array_push($acoes, $povoamento);
                 array_push($quant, $quantPovoamento);
@@ -89,8 +93,8 @@ class EscalonamentoController extends Controller{
                 }
                 $ciclosIniciados++;
               }else{
-                $auxIndAdultos = $tanque->volume * $tilapia->quantidade_por_volume;
-                $povPossivel = ceil($fatorMultipliador*$auxIndAdultos);
+                // $auxIndAdultos = $tanque->volume * $tilapia->quantidade_por_volume;
+                // $povPossivel = ceil($fatorMultipliador*$auxIndAdultos);
                 $povRestante = $quantPovoamento - $povPossivel;
                 array_push($data, date('m/d/Y', strtotime($dataAtual)));
                 array_push($acoes, $povoamento);
@@ -98,8 +102,8 @@ class EscalonamentoController extends Controller{
                 array_push($tanquesEscalonamento, $tanque->nome);
               }
             }else{
-              $auxIndAdultos = $tanque->volume * $tilapia->quantidade_por_volume;
-              $povPossivel = ceil($fatorMultipliador*$auxIndAdultos);
+              // $auxIndAdultos = $tanque->volume * $tilapia->quantidade_por_volume;
+              // $povPossivel = ceil($fatorMultipliador*$auxIndAdultos);
               if($povRestante <= $povPossivel){
                 array_push($data, date('m/d/Y', strtotime($dataAtual)));
                 array_push($acoes, $povoamento);
