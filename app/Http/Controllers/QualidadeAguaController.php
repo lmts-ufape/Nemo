@@ -39,11 +39,6 @@ class QualidadeAguaController extends Controller
     $piscicultura = $tanque->piscicultura;
     $qualidade_agua = $tanque->qualidade_aguas;
     $data = $request->data.' '.$request->hora;
-    $ciclo = $tanque->ciclos[count($tanque->ciclos)-1]->$qualidadeAgua;
-    dd($ciclo);
-    if($data){
-
-    }
     if($request->ph != null){
       PhController::cadastrar($request);
     }if($request->temperatura != null){
