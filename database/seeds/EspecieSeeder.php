@@ -14,7 +14,7 @@ class EspecieSeeder extends Seeder
             'nome' => 'Tilápia',
             'tipo_racao' => 'Pó Fino',
             'temperatura_ideal_agua' => 28,
-            'quantidade_por_volume' => 50
+            'quantidade_por_volume' => 105
         ]);
     
     }
