@@ -40,7 +40,7 @@ class PovoamentoController extends Controller{
         	$povoamento = \nemo\Povoamento::create([
 				'ciclo_id' => $ciclo->id,       
 				'especie_id' => $request->id_especie,
-				'data' => $data,
+				'data' => $request->data,
 				'quantidade' => $request->quantidade,
 				       
 					]);

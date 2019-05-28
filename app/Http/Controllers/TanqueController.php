@@ -339,7 +339,7 @@ class TanqueController extends Controller
     //dd($dataPovoamento);
     $dataUltimaBiometria = str_replace("/", "-", $dataUltimaBiometria);
     $dias = (int)((strtotime($dataUltimaBiometria)-strtotime($dataPovoamento))/86400);
-    $quinzena = (int)($dias/15);
+    $quinzena = (int)($dias/14);
     //dd($quinzena);
     $qv = $povoamento->quantidade;
     $j = 0;
