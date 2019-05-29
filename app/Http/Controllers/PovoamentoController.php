@@ -41,6 +41,7 @@ class PovoamentoController extends Controller{
 				'ciclo_id' => $ciclo->id,       
 				'especie_id' => $request->id_especie,
 				'data' => $request->data,
+				'peso' => $request->peso,
 				'quantidade' => $request->quantidade,
 				       
 					]);

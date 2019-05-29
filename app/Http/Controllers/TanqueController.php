@@ -160,6 +160,7 @@ class TanqueController extends Controller
     $biometrias = $ciclo->biometrias;
     $datasBiometria = $this->gerarDatas($biometrias);
     $biometriasData = $this->gerarPesos($datasBiometria,$biometrias);
+    $povoamento =$ciclo->povoamento;
     
 
 		$line_chartPh = Charts::multi('line', 'highcharts')
@@ -237,7 +238,7 @@ class TanqueController extends Controller
     //       ->responsive(true);
     
 
-    return view('relatoriosTanque', compact('line_chartBiometria','line_chartsAmoniaNitritoNitrato','line_chartsDurezaAlcalinidade','line_chartOxigenio','line_chartPh', 'line_chartTemp'), ['tanque' => $tanque, 'piscicultura' => $piscicultura]);
+    return view('relatoriosTanque', compact('line_chartBiometria','line_chartsAmoniaNitritoNitrato','line_chartsDurezaAlcalinidade','line_chartOxigenio','line_chartPh', 'line_chartTemp'), ['tanque' => $tanque, 'piscicultura' => $piscicultura,'povoamento'=>$povoamento]);
   }
 
   public function gerarDatas($qualidades){

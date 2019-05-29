@@ -4,6 +4,36 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
+                <div id="biometria" class="card-header">Informações de Povoamento</div>
+                <div class="card-body">
+                    <div id="tabela" class="table-responsive">
+
+                        <table class="table">
+                            <tr>
+                                <th>Data</th>
+                                <th>Quantidade</th>
+                                <th>Peso total</th>
+                                <th>Peso por individuo</th>
+                            </tr>
+                            <tr>
+                            <td>{{ date("d/m/Y", strtotime($povoamento->data)) }}</td>
+                            <td>{{ $povoamento->quantidade }}</td>
+                            <td>{{ $povoamento->peso }}</td>
+                            <td>{{ number_format($povoamento->peso/$povoamento->quantidade, 2, ".", "") }}</td>
+                            </tr>	
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div><br>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
                 <div id="qualidade" class="card-header">Relatório da Qualidade da água</div>
                 <div class="card-body">
                     <div id="tabela" class="table-responsive">

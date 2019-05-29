@@ -19,6 +19,7 @@ class CreatePovoamentosTable extends Migration
             $table->integer('especie_id');
             $table->dateTime('data');
             $table->integer('quantidade');
+            $table->float('peso');
 
 
             $table->foreign('ciclo_id')->references('id')->on('ciclos')->onDelete('cascade');
