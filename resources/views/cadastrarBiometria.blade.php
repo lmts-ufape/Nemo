@@ -24,7 +24,7 @@
                     <label>Data</label>
                     <input class="form-control" type="date" name="data" value="{{$data_atual}}" placeholder="DD/MM/AA" autofocus /><br/>
                     <label>Hora</label>
-                    <input class="form-control" type="time" name="hora" value="{{$hora_atual}}" placeholder="HH:MM" autofocus /><br/>
+                    <input class="form-control" type="time" step="1" name="hora" value="{{$hora_atual}}" placeholder="HH:MM" autofocus /><br/>
                     <label>Quantidade da amostra (unidade)</label>
                     <input class="form-control" type="number" name="quantidade" autofocus/><br/>
                     <label>Peso total (Kg)</label>

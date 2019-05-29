@@ -239,6 +239,7 @@ class PisciculturaController extends Controller
 					foreach ($qualidades as &$qualidade) {
 						$dataHora = $qualidade->data . " " . $qualidade->hora;
 						$str = str_replace("-", "/", $dataHora);
+						$str = date("d/m/Y h:i:s", strtotime($str));
 						array_push($datas,$str);   
 						
 					}
@@ -251,6 +252,7 @@ class PisciculturaController extends Controller
 						foreach($qualidades as &$qualidade){
 							$dataHora = $qualidade->data . " " . $qualidade->hora;
 							$str = str_replace("-", "/", $dataHora);
+							$str = date("d/m/Y h:i:s", strtotime($str));
 							if($data == $str){
 								array_push($qualidadesData,$qualidade->valor); 
 							}
@@ -264,6 +266,7 @@ class PisciculturaController extends Controller
 						foreach($biometrias as &$biometria){
 							$dataHora = $biometria->data . " " . $biometria->hora;
 							$str = str_replace("-", "/", $dataHora);
+							$str = date("d/m/Y h:i:s", strtotime($str));
 							if($data == $str){
 								array_push($pesosDatas,$biometria->peso_medio); 
 							}
@@ -277,6 +280,7 @@ class PisciculturaController extends Controller
 						foreach($pescas as &$pesca){
 							$dataHora = $pesca->data . " " . $pesca->hora;
 							$str = str_replace("-", "/", $dataHora);
+							$str = date("d/m/Y h:i:s", strtotime($str));
 							if($data == $str){
 								array_push($pesosDatas,$pesca->peso); 
 							}

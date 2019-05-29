@@ -32,7 +32,7 @@
                                         <tr>
                                             <td><a href="/ciclo/{{$ciclo->id}}/graficos">{{ $tanque->nome }}</a></td>
                                             <td>                                                
-                                                {{$ciclo->pesca->data}}
+                                                {{date("d/m/Y", strtotime($ciclo->pesca->data))}}
                                             </td>
                                             <td>
                                                 {{$ciclo->pesca->peso}}Kg

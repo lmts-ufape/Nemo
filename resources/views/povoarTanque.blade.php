@@ -30,7 +30,7 @@
 							<label>Data</label>
 						<input class="form-control" type="date" name="data" value="{{$data_atual}}" placeholder="DD/MM/AA" autofocus /><br/>
 							<label>Hora</label>
-							<input class="form-control" type="time" name="hora" value="{{$hora_atual}}" placeholder="HH:MM" autofocus /><br/>
+							<input class="form-control" type="time" step="1" name="hora" value="{{$hora_atual}}" placeholder="HH:MM:SS" autofocus /><br/>
 							<label>Quantidade (unidade)</label><br>	
 							<input class="form-control" type="number" min="0" name="quantidade" required/>
 							<label>Peso total (Kg)</label>

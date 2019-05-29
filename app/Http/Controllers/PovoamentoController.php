@@ -23,7 +23,7 @@ class PovoamentoController extends Controller{
 	 $piscicultura = \nemo\Piscicultura::find($idPiscultura); 
 	 date_default_timezone_set('America/Sao_Paulo');
       $data = date('Y-m-d');
-      $hora = date('H:i');
+      $hora = date('H:i:s');
     return view("povoarTanque", ['data_atual'=>$data,'hora_atual'=>$hora,'tanque' => $tanque, 'especiePeixe' => $especiePeixe, 'piscicultura' => $piscicultura]);
   }
     public function inserirPeixe(Request $request){

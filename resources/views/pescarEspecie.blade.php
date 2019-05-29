@@ -20,8 +20,8 @@
                     <label>Data da Pesca</label>
                     <input class="form-control" type="date" name="data" value="{{$data_atual}}" placeholder="DD/MM/AA" autofocus /><br/>
                     <label>Hora da Pesca</label>
-                    <input class="form-control" type="time" name="hora" value="{{$hora_atual}}" placeholder="HH:MM" autofocus /><br/>
-                    <label>Peso total da pesca</label>
+                    <input class="form-control" type="time" step="1" name="hora" value="{{$hora_atual}}" placeholder="HH:MM" autofocus /><br/>
+                    <label>Peso total da pesca (kg)</label>
                     <input class="form-control" type="number" name="valor" min="0" value="{{old('peso')}}" autofocus/><br/>
                   </div>
                   <input class="btn btn-success" type="submit" value="Cadastrar" />
