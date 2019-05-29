@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Povoamento extends Model
 {
-	 protected $fillable = ['ciclo_id','especie_id', 'data', 'quantidade'];
+	 protected $fillable = ['ciclo_id','especie_id', 'data', 'quantidade','peso'];
     public $timestamps = false;	
 	
     public function ciclo(){
