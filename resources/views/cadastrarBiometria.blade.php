@@ -22,7 +22,7 @@
                   <input type="hidden" name="id_tanque" value="{{$tanque->id}}" />
                   <div class="form-group">
                     <label>Data</label>
-                    <input class="form-control" type="date" name="data" value="{{$data_atual}}" placeholder="DD/MM/AA" autofocus /><br/>
+                  <input class="form-control" type="date" name="data" max="{{$data_atual}}" value="{{$data_atual}}" placeholder="DD/MM/AA" autofocus /><br/>
                     <label>Hora</label>
                     <input class="form-control" type="time" step="1" name="hora" value="{{$hora_atual}}" placeholder="HH:MM" autofocus /><br/>
                     <label>Quantidade da amostra (unidade)</label>
