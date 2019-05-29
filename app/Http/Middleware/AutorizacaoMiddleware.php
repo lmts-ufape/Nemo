@@ -23,6 +23,8 @@ class AutorizacaoMiddleware
                 //Rotas de Tanque
                 'listar/tanques/{id}',
                 'cadastrar/tanque/{id}',
+                'relatorios/pescas/{id}',
+                'escalonamento/{id}'
                              
             ];
             $rotas_donoPiscicultura = [
@@ -46,10 +48,13 @@ class AutorizacaoMiddleware
                 //Rota de Biometria
                 'tanque/{id}/cadastrar/biometria',
                 //Rota de Ração
-                'tanque/{id}/racao'
+                'tanque/{id}/racao',
+                //Rota de Pesca
+                'tanque/{id}/pesca'
+                
 
             ];
-
+            //dd($request->route()->uri);
             if(in_array($request->route()->uri,$rotas_gerentePiscicultura)){
 
                 $gerenciar = \nemo\Gerenciar::where('piscicultura_id','=',$request->id)->where('user_id','=',\Auth::user()->id)->first();
@@ -64,6 +69,7 @@ class AutorizacaoMiddleware
                 }
             }elseif(in_array($request->route()->uri,$rotas_gerenteTanque)){
                 $tanque = \nemo\Tanque::find($request->id);
+                
                 $piscicultura = $tanque->piscicultura;
                 $gerenciar = \nemo\Gerenciar::where('piscicultura_id','=',$piscicultura->id)->where('user_id','=',\Auth::user()->id)->first();
                 if($gerenciar == NULL){

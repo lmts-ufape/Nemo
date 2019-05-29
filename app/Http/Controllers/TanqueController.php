@@ -273,7 +273,7 @@ class TanqueController extends Controller
         $str = str_replace("-", "/", $dataHora);
         $str = date("d/m/Y h:i:s", strtotime($str));
         if($data == $str){
-          array_push($pesosDatas,number_format($biometria->peso_medio, 2, ".", "")); 
+          array_push($pesosDatas,number_format(1000*$biometria->peso_medio, 2, ".", "")); 
         }
       }
     }
@@ -349,7 +349,7 @@ class TanqueController extends Controller
     }
     $pv = $biometriasData[count($biometriasData)-1]*$qv;
 
-    $pvMedio = $pv/$povoamento->quantidade;
+    $pvMedio = $pv/$qv;//quantidade atual
     
     $tabela = [
       0.5 => ['temperatura' =>[
