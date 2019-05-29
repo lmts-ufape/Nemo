@@ -17,7 +17,7 @@ class PescaController extends Controller
 			$piscicultura = $tanque->piscicultura;
 			date_default_timezone_set('America/Sao_Paulo');
       $data = date('Y-m-d');
-      $hora = date('H:i');
+      $hora = date('H:i:s');
     	return view("pescarEspecie", ['data_atual'=>$data,'hora_atual'=>$hora,'tanque'=>$tanque,'piscicultura' => $piscicultura]);
 	}
 	

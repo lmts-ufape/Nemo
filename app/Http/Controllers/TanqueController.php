@@ -161,7 +161,6 @@ class TanqueController extends Controller
     $datasBiometria = $this->gerarDatas($biometrias);
     $biometriasData = $this->gerarPesos($datasBiometria,$biometrias);
     $povoamento =$ciclo->povoamento;
-    
 
 		$line_chartPh = Charts::multi('line', 'highcharts')
 			    ->title('PH')
@@ -223,20 +222,13 @@ class TanqueController extends Controller
 
     $line_chartBiometria = Charts::create('line', 'highcharts')
 			    ->title('Biometria')
-			    ->elementLabel('Kg')
+			    ->elementLabel('Peso do indivíduo (Kg)')
 			    ->labels($datasBiometria)
           ->values($biometriasData)       
 			    ->dimensions(1000,500)
           ->responsive(true);
           
-    // $line_chartPesca = Charts::create('line', 'highcharts')
-		// 	    ->title('Pescas')
-		// 	    ->elementLabel('Kg')
-		// 	    ->labels($datasPesca)
-    //       ->values($pescasData)       
-		// 	    ->dimensions(1000,500)
-    //       ->responsive(true);
-    
+  
 
     return view('relatoriosTanque', compact('line_chartBiometria','line_chartsAmoniaNitritoNitrato','line_chartsDurezaAlcalinidade','line_chartOxigenio','line_chartPh', 'line_chartTemp'), ['tanque' => $tanque, 'piscicultura' => $piscicultura,'povoamento'=>$povoamento]);
   }
@@ -249,6 +241,7 @@ class TanqueController extends Controller
     foreach ($qualidades as &$qualidade) {
       $dataHora = $qualidade->data . " " . $qualidade->hora;
       $str = str_replace("-", "/", $dataHora);
+      $str = date("d/m/Y h:i:s", strtotime($str));
       array_push($datas,$str);   
       
     }
@@ -262,6 +255,7 @@ class TanqueController extends Controller
       foreach($qualidades as &$qualidade){
         $dataHora = $qualidade->data . " " . $qualidade->hora;
         $str = str_replace("-", "/", $dataHora);
+        $str = date("d/m/Y h:i:s", strtotime($str));
         if($data == $str){
           array_push($qualidadesData,$qualidade->valor); 
         }
@@ -277,8 +271,9 @@ class TanqueController extends Controller
       foreach($biometrias as &$biometria){
         $dataHora = $biometria->data . " " . $biometria->hora;
         $str = str_replace("-", "/", $dataHora);
+        $str = date("d/m/Y h:i:s", strtotime($str));
         if($data == $str){
-          array_push($pesosDatas,1000*$biometria->peso_medio); 
+          array_push($pesosDatas,number_format($biometria->peso_medio, 2, ".", "")); 
         }
       }
     }
