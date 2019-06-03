@@ -35,8 +35,8 @@ Route::middleware('autorizacao')->group(function() {
     Route::get('listar/gerenciadores/piscicultura/{id}',"GerenciarController@listarGerenciadores")->name('gerenciador.listar');
     Route::get('adicionar/gerenciador/piscicultura/{id}',"GerenciarController@adicionarGerenciador")->name('gerenciador.adicionar');
     Route::post('inserirGerenciador',"GerenciarController@inserirGerenciador")->name('gerenciador.inserir');
-    Route::get('/remover/gerenciador/{user_id}/piscicultura/{piscicultura_id}',  "GerenciarController@apagarGerenciador")->name('gerenciador.apagar');
-    //tratar rota de remover
+    Route::get('/remover/gerenciador/{user_id}/piscicultura/{id}',  "GerenciarController@apagarGerenciador")->name('gerenciador.apagar');
+    
 
     //Rotas de Tanque
     Route::get('/listar/tanques/{id}', "TanqueController@listar")->name('tanque.listar');
@@ -93,7 +93,7 @@ Route::middleware('autorizacao')->group(function() {
     //Route::post('/adicionarTemperatura', "TemperaturaController@adicionar")->name('temperatura.adicionar');
     
     //Rotas de Povoamento (falta middleware)
-    Route::get('/povoar/tanque/{tanque_id}/especie/{especie_id}',  "PovoamentoController@povoarTanque")->name('povoamento.povoar');
+    Route::get('/povoar/tanque/{id}/especie/{especie_id}',  "PovoamentoController@povoarTanque")->name('povoamento.povoar');
     Route::post('/inserirPeixe', "PovoamentoController@inserirPeixe")->name('povoamento.inserir.peixe')->name('povoamento.inserir.peixe');
     //Route::get('/info/tanque/{id}', "PovoamentoController@listar")->name('povoamento.listar');
     

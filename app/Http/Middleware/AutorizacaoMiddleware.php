@@ -24,8 +24,8 @@ class AutorizacaoMiddleware
                 'listar/tanques/{id}',
                 'cadastrar/tanque/{id}',
                 'relatorios/pescas/{id}',
-                'escalonamento/{id}'
-                             
+                'escalonamento/{id}',
+                
             ];
             $rotas_donoPiscicultura = [
                 //Rotas de Gerenciadores
@@ -33,7 +33,8 @@ class AutorizacaoMiddleware
                 'adicionar/gerenciador/piscicultura/{id}',
                 //Rotas de Piscicultura
                 'editar/pisciculturas/{id}',
-                'remover/piscicultura/{id}'                
+                'remover/piscicultura/{id}',                
+                'remover/gerenciador/{user_id}/piscicultura/{id}'
             ];
             $rotas_gerenteTanque = [
                 //Rotas de Tanque
@@ -42,6 +43,7 @@ class AutorizacaoMiddleware
                 'tanque/{id}/detalhes',
                 'relatorios/tanque/{id}',
                 'tanque/{id}/detalhes',
+                'povoar/tanque/{id}/especie/{especie_id}',
                 //Rotas de Qualidade Agua
                 'tanque/{id}/cadastrar/qualidadeAgua',
                 'tanque/{id}/listar/qualidadesAgua',
@@ -54,7 +56,7 @@ class AutorizacaoMiddleware
                 
 
             ];
-            //dd($request->route()->uri);
+
             if(in_array($request->route()->uri,$rotas_gerentePiscicultura)){
 
                 $gerenciar = \nemo\Gerenciar::where('piscicultura_id','=',$request->id)->where('user_id','=',\Auth::user()->id)->first();
@@ -63,13 +65,13 @@ class AutorizacaoMiddleware
                 }
             }
             elseif(in_array($request->route()->uri,$rotas_donoPiscicultura)){
+                
                 $gerenciar = \nemo\Gerenciar::where('piscicultura_id','=',$request->id)->where('user_id','=',\Auth::user()->id)->first();
                 if($gerenciar==NULL||$gerenciar->is_administrador != "1"){
                     return redirect('/home')->with('denied','Você não tem permissão');
                 }
             }elseif(in_array($request->route()->uri,$rotas_gerenteTanque)){
                 $tanque = \nemo\Tanque::find($request->id);
-                
                 $piscicultura = $tanque->piscicultura;
                 $gerenciar = \nemo\Gerenciar::where('piscicultura_id','=',$piscicultura->id)->where('user_id','=',\Auth::user()->id)->first();
                 if($gerenciar == NULL){
