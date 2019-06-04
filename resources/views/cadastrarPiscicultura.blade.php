@@ -1,5 +1,5 @@
 @extends('layouts.principal') @section('title','Criar Piscicultura') @section('path')
-<a href="/listar/pisciculturas">Pisciculturas</a> > Criar Piscicultura @endsection @section('content')
+<a href="{{ route("piscicultura.listar") }}">Pisciculturas</a> > Criar Piscicultura @endsection @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">

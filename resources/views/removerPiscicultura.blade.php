@@ -2,7 +2,7 @@
 @extends('layouts.principal')
 @section('title','Remover Piscicultura')
 @section('path')
-<a href="/listar/pisciculturas">Pisciculturas</a> > <a href="/info/piscicultura/{{$piscicultura->id}}"> {{$piscicultura->nome}} </a> > Remover Piscicultura	
+<a href="{{ route("piscicultura.listar") }}">Pisciculturas</a> > <a href="{{ route("piscicultura.informar", ["id" => $piscicultura->id]) }}"> {{$piscicultura->nome}} </a> > Remover Piscicultura	
 @stop
 @section('content')
 	<form action="/apagarPiscicultura" method="post" >

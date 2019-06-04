@@ -19,7 +19,8 @@
 				<div class="card-header">
 						<div class="menu-direita-logout">
 							Pisciculturas							
-							<a href = "/cadastrar/piscicultura">
+							<a href="{{ route("piscicultura.cadastrar") }}">
+							
                     			<img src="{{asset('images/add.png')}}" style = "margin-left: 15px; margin-right: -10px " height="25" width="25" align = "right">
 							</a>
 						</div>
@@ -30,11 +31,11 @@
 						<table class="table">
 							@foreach ($pisciculturas as $piscicultura)
 							<tr>
-								<td><a href="/info/piscicultura/{{$piscicultura->id}}">{{ $piscicultura->nome }}</a>
+								<td><a href="{{ route("piscicultura.informar", ["id" => $piscicultura->id]) }}"> {{$piscicultura->nome}}
 									<a onclick="return confirm('Confirmar remoção de {{ $piscicultura->nome}}?')" href = "/remover/piscicultura/{{$piscicultura->id}}">
 										<img src="{{asset('images/delete.png')}}" style = "margin-left: 30px; margin-right: -10px " height="25" width="25" align = "right">
 									</a>
-									<a href = "/editar/pisciculturas/{{$piscicultura->id}}">
+									<a href="{{ route("piscicultura.editar", ["id" => $piscicultura->id]) }}">
 										<img src="{{asset('images/edit-black.png')}}"  style = "margin-left: 15px; margin-right: -10px " height="25" width="25" align = "right">
 									</a>
 								</td>

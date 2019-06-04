@@ -2,7 +2,7 @@
 @extends('layouts.principal')
 @section('title','Listar Tanques')
 @section('path')
-	<a href="/listar/pisciculturas">Pisciculturas</a> > <a href="/info/piscicultura/{{$piscicultura->id}}"> {{$piscicultura->nome}} </a> > Pescas
+	<a href="{{ route("piscicultura.listar") }}">Pisciculturas</a> > <a href="{{ route("piscicultura.informar", ["id" => $piscicultura->id]) }}"> {{$piscicultura->nome}} </a> > Pescas
 @stop
 @section('content')
 <div class="container">
@@ -30,7 +30,8 @@
                                 @foreach ($tanque->ciclos as $ciclo)
                                     @if($ciclo->pesca != null)    
                                         <tr>
-                                            <td><a href="/ciclo/{{$ciclo->id}}/graficos">{{ $tanque->nome }}</a></td>
+                                                
+                                            <td><a href="{{ route("piscicultura.pesca.graficos", ["id" => $ciclo->id]) }}">{{ $tanque->nome }}</a></td>
                                             <td>                                                
                                                 {{date("d/m/Y", strtotime($ciclo->pesca->data))}}
                                             </td>

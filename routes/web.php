@@ -17,7 +17,7 @@
 
 //Rotas de Autenticação
 Auth::routes();
-Route::get('/logout', 'Auth\LoginController@logout');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::middleware('autorizacao')->group(function() {
     //Rotas de Piscicultura
@@ -52,7 +52,7 @@ Route::middleware('autorizacao')->group(function() {
     Route::get('/tanque/{id}/manutencao', "TanqueController@manutencao")->name('tanque.manutencaogit ');
 
     //Rotas de Espécie
-    Route::get('/listar/especies/{id}', "EspecieController@listar")->name('listarEspecies');
+    Route::get('/listar/especies/{id}', "EspecieController@listar")->name('especies.listar');
     //Route::get('/adicionar/especie/{id}', "EspecieController@adicionar")->name('especie.adicionar');
     //Route::post('/cadastrarEspecie', "EspecieController@cadastrar")->name('especie.cadastrar');
     //Route::post('/salvarEspecie', "EspecieController@salvar")->name('especie.salvar');
