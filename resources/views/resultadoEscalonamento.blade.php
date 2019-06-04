@@ -22,7 +22,7 @@
                             </tr>
 							@for($i = 0; $i < count($datas); $i++)
                             <tr>
-                                <td>{{$datas[$i]}}</td>
+                                <td>{{date("d/m/Y", strtotime($datas[$i]))}}</td>
                                 <td>{{$acoes[$i]}}</td>
                                 <td>{{$tanquesEscalonamento[$i]}}</td>
                                 <td>{{$quantidadePov[$i]}}</td>
@@ -30,7 +30,7 @@
 							@endfor
 							@for($j = 0; $j < count($datasPesca); $j++)
 							<tr>
-                                <td>{{$datasPesca[$j]}}</td>
+                                <td>{{date("d/m/Y", strtotime($datasPesca[$j]))}}</td>
                                 <td>Despesca</td>
                                 <td>{{$tanquesEscalonamento[$j]}}</td>
                                 <td>-</td>
