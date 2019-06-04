@@ -15,6 +15,11 @@
                     
                 </div>
               </div>
+              @if($errors->getMessages() != NULL)
+                <div class="alert alert-danger" role="alert">
+                  @foreach($errors->getMessages() as &$error) {{$error[0]}} <br/> @endforeach
+                </div>
+              @endif
               <div class="card-body">
                 <form action="/adicionarBiometria" method="post">
                   {{ csrf_field() }}
@@ -26,9 +31,9 @@
                     <label>Hora</label>
                     <input class="form-control" type="time" step="1" name="hora" value="{{$hora_atual}}" placeholder="HH:MM" autofocus /><br/>
                     <label>Quantidade da amostra (unidade)</label>
-                    <input class="form-control" type="number" name="quantidade" autofocus/><br/>
+                    <input class="form-control" type="text" name="quantidade" autofocus/><br/>
                     <label>Peso total (Kg)</label>
-                    <input class="form-control" type="number" step="0.0001" name="peso" autofocus/><br/>
+                    <input class="form-control" type="text" step="0.0001" name="peso" autofocus/><br/>
                   </div>
                   <input class="btn btn-success" type="submit" value="Cadastrar" />
                 </form>
