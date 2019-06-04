@@ -1,7 +1,7 @@
 @extends('layouts.principal')
 @section('title','Escalonamento de Produção')
 @section('path')
-	<a href="/listar/pisciculturas">Pisciculturas</a> > <a href="/info/piscicultura/{{$piscicultura->id}}"> {{$piscicultura->nome}} </a> > Escalonamento de Produção    
+	<a href="{{ route("piscicultura.listar") }}">Pisciculturas</a> > <a href="{{ route("piscicultura.informar", ["id" => $piscicultura->id]) }}"> {{$piscicultura->nome}} </a> > Escalonamento de Produção    
 @stop
 @section('content')
 	<div class='container'>

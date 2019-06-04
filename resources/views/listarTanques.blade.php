@@ -2,7 +2,7 @@
 @extends('layouts.principal')
 @section('title','Listar Tanques')
 @section('path')
-	<a href="/listar/pisciculturas">Pisciculturas</a> > <a href="/info/piscicultura/{{$piscicultura->id}}"> {{$piscicultura->nome}} </a> > Listagem de tanques
+	<a href="{{ route("piscicultura.listar") }}">Pisciculturas</a> > <a href="{{ route("piscicultura.informar", ["id" => $piscicultura->id]) }}"> {{$piscicultura->nome}} </a> > Listagem de tanques
 @stop
 @section('content')
 <div class="container">
@@ -11,8 +11,8 @@
 			<div class="card">
 				<div class="card-header">
 						<div class="menu-direita-logout">
-							Tanques							
-							<a href = "/cadastrar/tanque/{{$piscicultura->id}}">
+							Tanques
+							<a href="{{ route("tanque.cadastrar", ["id" => $piscicultura->id]) }}">					
                     			<img src="{{asset('images/add.png')}}" style = "margin-left: 15px; margin-right: -10px " height="25" width="25" align="right">
 							</a>
 						</div>
@@ -23,7 +23,8 @@
 						<table class="table">							
 							@foreach ($tanques as $tanque)
 							<tr>
-							<td><a href="/tanque/{{$tanque->id}}/detalhes">{{ $tanque->nome }}</a></td>
+									
+							<td><a href="{{ route("tanque.detalhar", ["id" => $tanque->id]) }}">{{ $tanque->nome }}</a></td>
 								<td>
 									@if($tanque->status != "manutencao")
 										@if($tanque->status == "livre")

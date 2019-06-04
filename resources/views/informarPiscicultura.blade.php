@@ -1,7 +1,7 @@
 @extends('layouts.principal')
 @section('title','Ações Piscicultura')
 @section('path')
-    <a href="/listar/pisciculturas">Pisciculturas</a> > {{$piscicultura->nome}} > Dados
+    <a href="{{ route("piscicultura.listar") }}">Pisciculturas</a> > {{$piscicultura->nome}} > Dados
 @stop
 @section('content')
 <div class="container" width="50%">
