@@ -14,15 +14,17 @@ class Tanque extends Model
     
     
     public static $rules = [
-        'nome' => 'required',
-        'volume' => 'required|numeric|min:0',
-        'area' => 'numeric|min:0|nullable',
-        'altura' => 'numeric|min:0|nullable',
+        'nome' => 'required|max:20',
+        'volume' => 'required|numeric|min:0|max:2147483647',
+        'area' => 'numeric|min:0|max:2147483647|nullable',
+        'altura' => 'numeric|min:0|max:2147483647|nullable',
     ];
 
     public static $messages = [
         'required' => 'O campo ":attribute" não pode ser vazio.',
         'numeric' => 'O campo ":attribute" precisa ser numérico.',
+    	'nome.max' => 'O nome do tanque deve ter no maximo :max caracteres.',
+    	'max' => 'Valor do campo ":attribute" excede o limite.',
         'min' => 'O campo ":attribute" não pode ser menor que :min',
     ];
     
