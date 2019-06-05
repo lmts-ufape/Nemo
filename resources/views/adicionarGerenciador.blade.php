@@ -14,11 +14,9 @@
                   Nova Piscicultura
               </div>
               <div class="card-body">
-                @if (isset($errors) && count($errors) > 0)
+                @if($errors->getMessages() != NULL)
                 <div class="alert alert-danger" role="alert">
-                  @foreach($errors->getMessages() as &$error)
-                    {{$error[0]}}
-                  @endforeach
+                  @foreach($errors->getMessages() as &$error) {{$error[0]}} <br/> @endforeach
                 </div>
                 @endif
                 <form action="/inserirGerenciador" method="post">
@@ -27,7 +25,7 @@
                   <input type="hidden" name="piscicultura_id" value="{{$piscicultura->id}}">
                   <div class="form-group">
                     <label>Endereço de e-mail</label>
-                    <input type="email" class="form-control" name="email" placeholder="exemplo@exemplo.com" value="{{old('email')}}" required>
+                    <input type="text" class="form-control" name="email" placeholder="exemplo@exemplo.com" value="{{old('email')}}" >
                   </div>
                   <button type="submit" class="btn btn-primary">Adicionar</button>
                 </form>

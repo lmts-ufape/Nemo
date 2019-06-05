@@ -3,6 +3,8 @@
 namespace nemo\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Validator;
+use nemo\Validator\GerenciarValidator;
 
 class GerenciarController extends Controller
 {
@@ -46,24 +48,33 @@ class GerenciarController extends Controller
     }
 
     public function inserirGerenciador(Request $request){
-        $user = \nemo\User::where('email','=',$request->email)->first();
-        $piscicultura = \nemo\Piscicultura::find($request->piscicultura_id);
+        try{
+            GerenciarValidator::validate($request->all());
 
-        if($user == NULL){
-            return view("adicionarGerenciador", ['piscicultura' => $piscicultura]);
+
+            $user = \nemo\User::where('email','=',$request->email)->first();
+            $piscicultura = \nemo\Piscicultura::find($request->piscicultura_id);
+    
+            if($user == NULL){
+                return view("adicionarGerenciador", ['piscicultura' => $piscicultura]);
+            }
+    
+            $gerenciar = \nemo\Gerenciar::where('user_id','=',$user->id)->where('piscicultura_id','=',$piscicultura->id)->first();
+            
+            if($gerenciar != NULL){
+                return view("adicionarGerenciador", ['piscicultura' => $piscicultura]);
+            }
+    
+            $gerenciar = \nemo\Gerenciar::create([
+                'user_id' => $user->id,
+                'piscicultura_id' => $piscicultura->id,
+                'is_administrador' => 0,
+            ]);
+        }catch(\nemo\Validator\ValidationException $e){
+              
+            return back()->withErrors($e->getValidator())->withInput();
+
         }
-
-        $gerenciar = \nemo\Gerenciar::where('user_id','=',$user->id)->where('piscicultura_id','=',$piscicultura->id)->first();
-        
-        if($gerenciar != NULL){
-            return view("adicionarGerenciador", ['piscicultura' => $piscicultura]);
-        }
-
-        $gerenciar = \nemo\Gerenciar::create([
-			'user_id' => $user->id,
-            'piscicultura_id' => $piscicultura->id,
-            'is_administrador' => 0,
-        ]);
 
         return redirect()->route("gerenciador.listar", ['id' => $piscicultura->id]);
 
