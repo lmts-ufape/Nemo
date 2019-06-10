@@ -15,7 +15,7 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <a class="btn btn-primary" href="/listar/tanques/{{$piscicultura->id}}">Gerenciar Tanques</a>  
+                                        <a class="btn btn-primary" href="{{ route("tanque.listar", ["id" => $piscicultura->id]) }}">Gerenciar Tanques</a>  
                                     </td>
                                     @if($dono == True)
                                         @if($quantidade_gerenciadores > 0)

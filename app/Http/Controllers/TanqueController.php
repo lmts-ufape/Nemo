@@ -229,8 +229,21 @@ class TanqueController extends Controller
           ->responsive(true);
           
   
+      if(count($alcalinidadesData)==0){
+            $alcalinidade = null;
+            $calcario = null;
+      }else{
+          $alcalinidade = $alcalinidadesData[count($alcalinidadesData)-1]; 
+          if($alcalinidade < 10){
+            $calcario = '3000Kg/ha - 4000Kg/ha';
+          }elseif($alcalinidade < 20){
+            $calcario = '2000Kg/ha - 3000Kg/ha';
+          }else{
+            $calcario = '1000Kg/ha - 2000Kg/ha';
+          }
+      }
 
-    return view('relatoriosTanque', compact('line_chartBiometria','line_chartsAmoniaNitritoNitrato','line_chartsDurezaAlcalinidade','line_chartOxigenio','line_chartPh', 'line_chartTemp'), ['tanque' => $tanque, 'piscicultura' => $piscicultura,'povoamento'=>$povoamento]);
+    return view('relatoriosTanque', compact('line_chartBiometria','line_chartsAmoniaNitritoNitrato','line_chartsDurezaAlcalinidade','line_chartOxigenio','line_chartPh', 'line_chartTemp'), ['tanque' => $tanque, 'piscicultura' => $piscicultura,'povoamento'=>$povoamento,'alcalinidade'=>$alcalinidade,'calcario'=>$calcario]);
   }
 
   public function gerarDatas($qualidades){
