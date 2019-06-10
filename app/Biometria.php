@@ -10,15 +10,16 @@ class Biometria extends Model
 	protected $fillable = ['quantidade','peso', 'peso_medio', 'data', 'hora'];
 
 	public static $rules = [
-		'quantidade' => 'required|numeric',
-		'peso' => 'required|numeric',
+		'quantidade' => 'required|numeric|max:2147483647',
+		'peso' => 'required|numeric|max:2147483647',
 		'data' => 'required',
 		'hora' => 'required',
 	];
 
 	public static $messages = [
 		'required' => 'O campo ":attribute" não pode ser vazio.',
-		'numeric' => 'O campo ":attribute" precisa ser numérico.',
+        'numeric' => 'O campo ":attribute" precisa ser numérico.',
+        'max' => 'Valor do campo ":attribute" excede o limite.',
 	];
 
     public function ciclo(){

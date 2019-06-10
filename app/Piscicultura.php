@@ -14,13 +14,14 @@ class Piscicultura extends Model
 	protected $fillable = ['nome'];
  
     public static $rules = [
-        'nome' => 'required|min:3|unique:pisciculturas,nome',
+        'nome' => 'required|min:3|max:20|unique:pisciculturas,nome',
     ];
 
     public static $messages = [
         'required' => 'O campo ":attribute" não pode ser vazio.',
         'nome.unique' => 'Já existe outra piscicultura com o nome ":input".',
         'nome.min' => 'O nome da piscicultura precisa ter ao menos :min characters.',
+        'nome.max' => 'O nome da piscicultura deve ter no maximo :max characters.',
     ];
 
     public function tanques(){

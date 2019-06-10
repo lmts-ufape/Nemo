@@ -56,13 +56,13 @@ class GerenciarController extends Controller
             $piscicultura = \nemo\Piscicultura::find($request->piscicultura_id);
     
             if($user == NULL){
-                return view("adicionarGerenciador", ['piscicultura' => $piscicultura]);
+                return back()->withErrors("Usuário não existe.");
             }
     
             $gerenciar = \nemo\Gerenciar::where('user_id','=',$user->id)->where('piscicultura_id','=',$piscicultura->id)->first();
             
             if($gerenciar != NULL){
-                return view("adicionarGerenciador", ['piscicultura' => $piscicultura]);
+                return back()->withErrors("Usuário já gerencia a piscicultura.");
             }
     
             $gerenciar = \nemo\Gerenciar::create([

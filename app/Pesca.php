@@ -10,7 +10,7 @@ class Pesca extends Model
     public $timestamps = false;	
 
     public static $rules = [
-		'peso' => 'required|numeric',
+		'peso' => 'required|numeric|max:2147483647',
 		'data' => 'required',
 		'hora' => 'required',
 	];
@@ -18,6 +18,7 @@ class Pesca extends Model
 	public static $messages = [
 		'required' => 'O campo ":attribute" não pode ser vazio.',
 		'numeric' => 'O campo ":attribute" precisa ser numérico.',
+    'max' => 'Valor do campo ":attribute" excede o limite.',
 	];
 	
     public function ciclo(){

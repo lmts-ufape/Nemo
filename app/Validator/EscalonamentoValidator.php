@@ -6,16 +6,17 @@ use nemo\Validator\ValidationException;
 
 class EscalonamentoValidator{
     public static $rules = [
-        'pesoMedio' => 'required|numeric',
-        'duracaoCiclo' => 'required|numeric',
+        'pesoMedio' => 'required|numeric|max:2147483647',
+        'duracaoCiclo' => 'required|numeric|max:2147483647',
         'periodicidade' => 'required',
-        'producaoDesejada' => 'required|numeric',
+        'producaoDesejada' => 'required|numeric|max:2147483647',
         'inicioProducao' => 'required|date',
     ];
 
     public static $messages = [
         'required' => 'O campo ":attribute" não pode ser vazio.',
-        'numeric' => 'O campo ":attribute" deve ser numérico.'
+        'numeric' => 'O campo ":attribute" deve ser numérico.',
+        'max' => 'Valor do campo ":attribute" excede o limite.',
     ];
 
     public static function validate($dados){

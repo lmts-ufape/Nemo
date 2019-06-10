@@ -11,18 +11,20 @@ class QualidadeAgua extends Model
 
 	public static $rules = [
 			'ph' => 'required|numeric|min:0|max:14',
-			'nivelOxigenio' => 'required|numeric',
-			'temperatura' => 'required|numeric',
-			'nivelAmonia' => 'required|numeric',
-			'nitrito' => 'required|numeric',
-			'nitrato' => 'required|numeric',
-			'alcalinidade' => 'required|numeric',
-			'dureza' => 'required|numeric',
+			'nivelOxigenio' => 'required|numeric|max:2147483647',
+			'temperatura' => 'required|numeric|max:2147483647',
+			'nivelAmonia' => 'required|numeric|max:2147483647',
+			'nitrito' => 'required|numeric|max:2147483647',
+			'nitrato' => 'required|numeric|max:2147483647',
+			'alcalinidade' => 'required|numeric|max:2147483647',
+			'dureza' => 'required|numeric|max:2147483647',
 	];
 
 	public static $messages = [
 		'required' => 'O campo ":attribute" não pode ser vazio.',
 		'numeric' => 'O campo ":attribute" precisa ser numérico.',
+    	'max' => 'Valor do campo ":attribute" excede o limite.',
+
 	];
 
     public function ciclo(){
