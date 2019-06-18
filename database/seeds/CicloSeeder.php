@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class QualidadeAguaSeeder extends Seeder
+class CicloSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,8 +13,8 @@ class QualidadeAguaSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
         for($i = 0; $i < 60; $i++){
-            DB::table('qualidade_aguas')->insert([
-                'ciclo_id'=> $i+1,
+            DB::table('ciclos')->insert([
+                'tanque_id'=> $i+1,
             ]);        
         }
     }

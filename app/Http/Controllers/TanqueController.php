@@ -162,6 +162,8 @@ class TanqueController extends Controller
     $biometriasData = $this->gerarPesos($datasBiometria,$biometrias);
     $povoamento =$ciclo->povoamento;
 
+    
+
 		$line_chartPh = Charts::multi('line', 'highcharts')
 			    ->title('PH')
 			    ->elementLabel('Ph')
@@ -252,13 +254,19 @@ class TanqueController extends Controller
     $datas = array();
     
     foreach ($qualidades as &$qualidade) {
+      //dd('top');
       $dataHora = $qualidade->data . " " . $qualidade->hora;
       $str = str_replace("-", "/", $dataHora);
-      $str = date("d/m/Y h:i:s", strtotime($str));
+      $str = date("Y/m/d h:i:s", strtotime($str));
       array_push($datas,$str);   
       
     }
     sort($datas);
+    for($i=0;$i<count($datas);$i++){
+      $datas[$i] = date("d/m/Y h:i:s", strtotime($datas[$i]));
+    }
+    //dd($datas);
+    //return [$datas[1],$datas[2],$datas[3]];
     return $datas;    
   }
 
