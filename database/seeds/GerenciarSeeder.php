@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class PisciculturaSeeder extends Seeder
+class GerenciarSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,11 +11,12 @@ class PisciculturaSeeder extends Seeder
      */
     public function run()
     {
-
-        $faker = Faker\Factory::create();
         for($i = 0; $i < 5; $i++) {
-        	DB::table('pisciculturas')->insert([
-                'nome' => 'Piscicultura-'.$faker->word]
+        	DB::table('gerenciars')->insert([
+                'user_id' => 1,
+                'piscicultura_id'=>$i+1
+                
+                ]
             );
         }
     }

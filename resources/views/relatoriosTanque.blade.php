@@ -35,9 +35,6 @@
         <div class="col-md-8">
             <div class="card">
                 <div id="qualidade" class="card-header">Relatório da Qualidade da água
-                    @if($alcalinidade != null && $alcalinidade < 30)
-					    <a class="btn btn-primary" style = "margin-left: 15px; margin-right: -10px align:right" onclick="return alert('Deve ser aplicado {{$calcario}} de calcário.')">Suguestão de correção</a>
-                    @endif
                 </div>
                 <div class="card-body">
                     <div id="tabela" class="table-responsive">

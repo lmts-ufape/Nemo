@@ -11,12 +11,14 @@ class TanqueSeeder extends Seeder
      */
      public function run()
      {
-         for($i = 0; $i < 10; $i++){
-           DB::table('tanques')->insert([
-             'volume' => rand(1,1000)/10,
-             'manutencao_necessaria' => "Não",
-             'piscicultura_id' => rand(1,5)
-           ]);
-         }
-     }
+      $faker = Faker\Factory::create();
+      for($i = 0; $i < 60; $i++){
+        $tanque = DB::table('tanques')->insert([
+          'nome'=> 'tanque-'.$i,
+          'volume' => 20000,
+          'piscicultura_id' => rand(1,5)
+        ]);
+        
+      }
+  }
 }
