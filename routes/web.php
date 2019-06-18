@@ -109,4 +109,6 @@ Route::middleware('autorizacao')->group(function() {
     //Rotas de Escalonamento
     Route::get('/escalonamento/{id}', "EscalonamentoController@chamaEscalonamento")->name('escalonamento.chamar');
     Route::post('/resultadoEscalonamento', "EscalonamentoController@calcularEscalonamento")->name('escalonamento.resultado');
+    Route::get('/projecao/{id}', "EscalonamentoController@chamaProjecao")->name('projecao.chamar');
+    Route::post('/resultadoProjecao', "EscalonamentoController@calcularProjecao")->name('projecao.calcular');
 });

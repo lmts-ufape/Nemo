@@ -34,6 +34,9 @@
                                 </tr>
                                 <tr>
                                     <td>
+                                        <a class="btn btn-primary" href="{{route("projecao.chamar", ["id"=>$piscicultura->id])}}">Projeção de Produção</a>                                        
+                                    </td>
+                                    <td>
                                         <a class="btn btn-primary" href="/relatorios/pescas/{{$piscicultura->id}}">Relatórios de Pesca</a>
                                     </td>
                                 </tr>
