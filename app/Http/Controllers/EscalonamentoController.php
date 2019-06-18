@@ -135,28 +135,6 @@ class EscalonamentoController extends Controller{
           $novaData = "+".$diasParaPesca." days";
           array_push($datasPesca, date('m/d/Y', strtotime($novaData, strtotime($data[$i]))));
         }
-        // dd($datasPesca);
-        // for($i = 0; $i < count($data); $i++){
-        //   if($periodicidade == 7){
-        //     array_push($datasPesca, date('m/d/Y', strtotime('+7 days',strtotime($data[$i]))));
-        //   }elseif($periodicidade == 14){
-        //     array_push($datasPesca, date('m/d/Y', strtotime('+14 days',strtotime($data[$i]))));
-        //   }elseif($periodicidade == 28){
-        //     array_push($datasPesca, date('m/d/Y', strtotime('+28 days',strtotime($data[$i]))));
-        //   }
-        // }
-
-
-        // $tamanhoArray = count($data);
-
-        // for($i = 0; $i < $tamanhoArray; i++){
-        //   if($periodicidade == 7){
-        //     array_push($data, date('m/d/Y', strtotime('+7 days',strtotime($dataAtual)));)
-        // }elseif($periodicidade == 14){
-        //   $ciclosNecessarios = $duracaoCiclo * 2;
-        // }elseif($periodicidade == 28){
-        //   $ciclosNecessarios = $duracaoCiclo;
-        // }
         
         if($ciclosIniciados == $ciclosNecessarios){
           return view('resultadoEscalonamento', [
@@ -173,68 +151,45 @@ class EscalonamentoController extends Controller{
       }catch(\nemo\Validator\ValidationException $e){
         return back()->withErrors($e->getValidator())->withInput();
       }
-        // $volumeTanque = $request->volume;
-        // $quantidadePeixes = $request->quantidade_peixes;
-        // $periodicidade = $request->periodicidade;
-        // try{
-        //   $especiePeixe = \nemo\EspeciePeixe::find($request->especie);
-        // }catch(\Illuminate\Database\QueryException $e){
-        //   return back()->withInput();
-        // }
-
-        // $numeroPeixesPorTanque = $volumeTanque * $especiePeixe->quantidade_por_volume;
-        // $ciclo = $especiePeixe->tempo_desenvolvimento + 1;
-        // $tanquesNecessarios = 0;
-        // if($periodicidade == 7){
-        //   $tanquesNecessarios = $ciclo * 4;
-        // }elseif($periodicidade == 15){
-        //   $tanquesNecessarios = $ciclo * 2;
-        // }elseif($periodicidade == 30){
-        //   $tanquesNecessarios = $ciclo;
-        // }else{
-        //   return back()->withInput();
-        // }
-
-        // $aux = $numeroPeixesPorTanque / $quantidadePeixes;
-        // $tanquesNecessarios = ceil($tanquesNecessarios / $aux);
-
-        // $piscicultura = \nemo\Piscicultura::find($request->piscicultura_id);
-
-      
-      
 
     }
 
-    // public function escolheTanque(){
-      
-    // }
+    public function chamaProjecao($id){
+      $piscicultura = \nemo\Piscicultura::find($id);
+      return view('calcularProjecao', [
+        'piscicultura' => $piscicultura,
+      ]);
+    }
 
-    // public function escalonamentoEhPossivel($tanques, $volumeMinimo, $tanquesNecessarios){
-    //   $volumeMinimo = $indivAdultos / $peixe->quantidade_por_volume;
-    //   $auxTanques = 0;
-    //   $tanquesUtilizados = [];
-    //   if($tanquesNecessarios <= count($tanques)){
-    //     for($i = 0; $i<count($tanques); $i++){
-    //       if($tanques[$i]->volume >= $volumeMinimo){
-    //         $auxTanques++;
-    //         array_push($tanquesUtilizados, $tanques[$i]);
-    //       }else{
-    //         for($j = $i; j < count($tanques)-$auxTanques; $j++){
-    //           $volume = $tanques[$i]->volume + $tanques[$i+$j]->volume;
-    //           if($volume >= $volumeMinimo){
-    //             $auxTanques++;
-    //             $i = $i+$j;
-    //             break;
-    //           } 
-    //         }
-    //       }
-    //     }
-    //     if($auxTanques == $tanquesNecessarios){
-    //       return True;
-    //     }
-    //   }else{
-    //     return False;
-    //   }
-    // }
+    public function calcularProjecao(Request $request){
+      $pesoMedio = $request->pesoMedio;
+      $duracaoCiclo = $request->duracaoCiclo;
+      $periodicidade = $request->periodicidade;
+      $producaoDesejada = $request->producaoDesejada;
+      $inicioProducao = $request->inicioProducao;
+
+      $tilapia = \nemo\EspeciePeixe::find(1);
+      $piscicultura = \nemo\Piscicultura::find($request->piscicultura_id);
+
+      $quantIndvAdultos = ($producaoDesejada*1000) / $pesoMedio;
+      $volumeMinimo = $quantIndvAdultos / $tilapia->quantidade_por_volume;
+      $volumeMinimo = ceil($volumeMinimo*1000);
+
+      if($periodicidade == 7){
+        $tanquesNecessarios = $duracaoCiclo * 4;
+      }elseif($periodicidade == 14){
+        $tanquesNecessarios = $duracaoCiclo * 2;
+      }elseif($periodicidade == 28){
+        $tanquesNecessarios = $duracaoCiclo;
+      }else{
+        return back()->withInput();
+      }
+
+      return view('resultadoProjecao', [
+        'piscicultura' => $piscicultura,
+        'tanquesNecessarios' => $tanquesNecessarios,
+        'volumeMinimo' => $volumeMinimo,
+      ]);
+    }
 
 }
