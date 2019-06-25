@@ -28,21 +28,21 @@
 								<td>
 									@if($tanque->status != "manutencao")
 										@if($tanque->status == "livre")
-											<a class="btn btn-primary" href="/listar/especies/{{$tanque->id}}">Povoar</a>
+											<a class="btn btn-primary" href="{{ route("especies.listar", ["id" => $tanque->id]) }}">Povoar</a>
 										@endif
-										<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/cadastrar/qualidadeAgua">Qualidade da água</a>
+										<a class="btn btn-primary" href="{{ route("qualidade.agua.cadastrar", ["id" => $tanque->id]) }}">Qualidade da água</a>
 										@if($tanque->ciclos[count($tanque->ciclos)-1]->povoamento != null)
-											<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/cadastrar/biometria">Biometria</a>
-											<a class="btn btn-primary" href="/relatorios/tanque/{{$tanque->id}}">Relatorios</a>
+											<a class="btn btn-primary" href="{{ route("biometria.cadastrar", ["id" => $tanque->id]) }}">Biometria</a>
+											<a class="btn btn-primary" href="{{ route("tanque.gerar.relatorios", ["id" => $tanque->id]) }}">Relatorios</a>
 											@if(count($tanque->ciclos[count($tanque->ciclos)-1]->qualidade_agua->temperaturas) !=0 && count($tanque->ciclos[count($tanque->ciclos)-1]->biometrias) != 0 )
-												<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/racao">Ração</a>
+												<a class="btn btn-primary" href="{{ route("tanque.racao", ["id" => $tanque->id]) }}">Ração</a>
 											@endif
 											@if($tanque->status == 'producao')
-												<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/pesca">Pescar</a>
+												<a class="btn btn-primary" href="{{ route("pesca.pesca", ["id" => $tanque->id]) }}">Pescar</a>
 											@endif
 										@endif
 									@else
-										<a class="btn btn-primary" href="/tanque/{{$tanque->id}}/manutencao">Finalizar manutenção</a>
+										<a class="btn btn-primary" href="{{ route("tanque.manutencao", ["id" => $tanque->id]) }}">Finalizar manutenção</a>
 									@endif
 								</td>
 							</tr>
