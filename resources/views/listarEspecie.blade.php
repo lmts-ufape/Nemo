@@ -22,7 +22,7 @@
 						<tr>
 							<td>{{ $EspeciePeixe->nome}}</td>
 							<td>					
-								<a class="btn btn-primary" href="/povoar/tanque/{{$id}}/especie/{{$EspeciePeixe->id}}">Adicionar ao tanque</a>
+								<a class="btn btn-primary" href="{{ route("povoamento.povoar", ["id" => $id,"especie_id"=>$EspeciePeixe->id]) }}">Adicionar ao tanque</a>
 							</td>
 						</tr>
 						@endforeach		

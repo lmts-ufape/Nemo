@@ -32,7 +32,7 @@
 							@foreach ($pisciculturas as $piscicultura)
 							<tr>
 								<td><a href="{{ route("piscicultura.informar", ["id" => $piscicultura->id]) }}"> {{$piscicultura->nome}}
-									<a onclick="return confirm('Confirmar remoção de {{ $piscicultura->nome}}?')" href = "/remover/piscicultura/{{$piscicultura->id}}">
+									<a onclick="return confirm('Confirmar remoção de {{ $piscicultura->nome}}?')" href="{{ route("piscicultura.remover", ["id" => $piscicultura->id]) }}">
 										<img src="{{asset('images/delete.png')}}" style = "margin-left: 30px; margin-right: -10px " height="25" width="25" align = "right">
 									</a>
 									<a href="{{ route("piscicultura.editar", ["id" => $piscicultura->id]) }}">
