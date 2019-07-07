@@ -13,19 +13,19 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UsersSeeder::class);
 
-        $this->call(PisciculturaSeeder::class);
+        //$this->call(PisciculturaSeeder::class);
 
-        $this->call(GerenciarSeeder::class);
+        //$this->call(GerenciarSeeder::class);
 
-        $this->call(TanqueSeeder::class);
+        //$this->call(TanqueSeeder::class);
 
-        $this->call(CicloSeeder::class);
+        //$this->call(CicloSeeder::class);
 
-        $this->call(QualidadeAguaSeeder::class);
+        //$this->call(QualidadeAguaSeeder::class);
 
         $this->call(EspecieSeeder::class);
 
-        $this->call(TemperaturaSeeder::class);
+        //$this->call(TemperaturaSeeder::class);
 
         
         //$this->call(QualidadeAguaSeeder::class);
