@@ -1,10 +1,10 @@
 <div id="menu">
     @if(Auth::check())
         <div id="menu-esquerda">
-                <a href="/home">Início</a>
+            <a href="{{ route("home") }}">Início</a>
         </div>
         <div id ="menu-direita">
-                <a href="/logout">Sair</a>
+                <a href="{{ route("logout") }}">Sair</a>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
             {{ csrf_field() }}
         </form>

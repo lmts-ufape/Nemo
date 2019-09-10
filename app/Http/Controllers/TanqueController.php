@@ -123,58 +123,77 @@ class TanqueController extends Controller
     $phs = $ciclo->qualidade_agua->phs;
     $datasPh = $this->gerarDatas($phs);
     $phsData = $this->gerarQualidades($datasPh,$phs);
+    $idealPhM = array_fill(0,count($datasPh),8.5);
+    $idealPhm = array_fill(0,count($datasPh),6.5);    
     $temperaturas = $ciclo->qualidade_agua->temperaturas;
     $datasTemp = $this->gerarDatas($temperaturas);
     $tempsData = $this->gerarQualidades($datasTemp,$temperaturas);
+    $idealTempM = array_fill(0,count($datasTemp),30);
+    $idealTempm = array_fill(0,count($datasTemp),26);
     $amonias = $ciclo->qualidade_agua->amonias;
     $datasAmonia = $this->gerarDatas($amonias);
     $amoniasData = $this->gerarQualidades($datasAmonia,$amonias);
+    $idealAmoniaM = array_fill(0,count($datasAmonia),0.5);
+    $idealAmoniam = array_fill(0,count($datasAmonia),0);
     $nitritos = $ciclo->qualidade_agua->nitritos;
     $datasNitrito = $this->gerarDatas($nitritos);
     $nitritosData = $this->gerarQualidades($datasNitrito,$nitritos);
+    $idealNitritoM = array_fill(0,count($datasNitrito),0.5);
+    $idealNitritom = array_fill(0,count($datasNitrito),0);
     $nitratos = $ciclo->qualidade_agua->nitratos;
     $datasNitrato = $this->gerarDatas($nitratos);
     $nitratosData = $this->gerarQualidades($datasNitrato,$nitratos);
+    $idealNitratoM = array_fill(0,count($datasNitrato),0.5);
+    $idealNitratom = array_fill(0,count($datasNitrato),0);
     $durezas = $ciclo->qualidade_agua->durezas;
     $datasDureza = $this->gerarDatas($durezas);
     $durezasData = $this->gerarQualidades($datasDureza,$durezas);
+    $idealDurezam = array_fill(0,count($datasDureza),30);
     $alcalinidades = $ciclo->qualidade_agua->alcalinidades;
     $datasAlcalinidade = $this->gerarDatas($alcalinidades);
     $alcalinidadesData = $this->gerarQualidades($datasAlcalinidade,$alcalinidades);
+    $idealAlcalinidadem = array_fill(0,count($datasAlcalinidade),30);    
     $oxigenios = $ciclo->qualidade_agua->oxigenios;
     $datasOxigenio = $this->gerarDatas($oxigenios);
     $oxigeniosData = $this->gerarQualidades($datasOxigenio,$oxigenios);
+    $idealOxigeniom = array_fill(0,count($datasOxigenio),3);    
     $biometrias = $ciclo->biometrias;
     $datasBiometria = $this->gerarDatas($biometrias);
     $biometriasData = $this->gerarPesos($datasBiometria,$biometrias);
-    // $pescas = $ciclo->pescas;
-    // $pescas = $ciclo->pescas;
-    // $datasPesca = $this->gerarDatas($pescas);
-    // $pescasData = $this->getPesos($datasPesca,$pescas);
+    $povoamento =$ciclo->povoamento;
+
     
 
-		$line_chartPh = Charts::create('line', 'highcharts')
+		$line_chartPh = Charts::multi('line', 'highcharts')
 			    ->title('PH')
 			    ->elementLabel('Ph')
-			    ->labels($datasPh)
-          ->values($phsData)       
+          ->labels($datasPh)
+          ->colors(['#98FB98','#00CED1','#B22222'])
+          ->dataset('Máximo ideal', $idealPhM)          
+          ->dataset('Ph',$phsData)       
+          ->dataset('Minimo ideal', $idealPhm)
 			    ->dimensions(1000,500)
           ->responsive(true);
     
           
-    $line_chartTemp = Charts::create('line', 'highcharts')
+    $line_chartTemp = Charts::multi('line', 'highcharts')
 			    ->title('Temperatura')
 			    ->elementLabel('°C')
 			    ->labels($datasTemp)
-          ->values($tempsData)       
+          ->colors(['#98FB98','#00CED1','#B22222'])
+          ->dataset('Máximo ideal', $idealTempM)          
+          ->dataset('temperatura',$tempsData)       
+          ->dataset('Minimo ideal', $idealTempm)       
 			    ->dimensions(1000,500)
           ->responsive(true); 
 
-    $line_chartOxigenio = Charts::create('line', 'highcharts')
+    $line_chartOxigenio = Charts::multi('line', 'highcharts')
           ->title('Oxigênio')
           ->elementLabel('mg/L')
           ->labels($datasOxigenio)
-          ->values($oxigeniosData)       
+          ->colors(['#00CED1','#B22222'])
+          ->dataset('Oxigênio',$oxigeniosData)       
+          ->dataset('Minimo ideal', $idealOxigeniom)        
           ->dimensions(1000,500)
           ->responsive(true);
 
@@ -182,9 +201,12 @@ class TanqueController extends Controller
           ->title('Amônia, Nitrito e Nitrato')
           ->elementLabel('mg/L')
           ->labels($datasNitrito)
+          ->colors(['#98FB98','#00CED1','#FFD700','#D8BFD8','#B22222'])
+          ->dataset('Máximo ideal', $idealAmoniaM)        
           ->dataset('Amônia', $amoniasData)
           ->dataset('Nitrito', $nitritosData)
           ->dataset('Nitrato',$nitratosData)
+          ->dataset('Minimo ideal', $idealAmoniam) 
           ->dimensions(1000,500)
           ->responsive(true);
 
@@ -192,30 +214,38 @@ class TanqueController extends Controller
           ->title('Dureza e Alcalinidade')
           ->elementLabel('mg CaCO3/L')
           ->labels($datasDureza)
+          ->colors(['#00CED1','#FFD700','#B22222'])
           ->dataset('Dureza', $durezasData)
           ->dataset('Alcalinidade', $alcalinidadesData)
+          ->dataset('Minimo ideal', $idealDurezam)
           ->dimensions(1000,500)
           ->responsive(true);
 
 
     $line_chartBiometria = Charts::create('line', 'highcharts')
 			    ->title('Biometria')
-			    ->elementLabel('Kg')
+			    ->elementLabel('Peso do indivíduo (Kg)')
 			    ->labels($datasBiometria)
           ->values($biometriasData)       
 			    ->dimensions(1000,500)
           ->responsive(true);
           
-    // $line_chartPesca = Charts::create('line', 'highcharts')
-		// 	    ->title('Pescas')
-		// 	    ->elementLabel('Kg')
-		// 	    ->labels($datasPesca)
-    //       ->values($pescasData)       
-		// 	    ->dimensions(1000,500)
-    //       ->responsive(true);
-    
+  
+      if(count($alcalinidadesData)==0){
+            $alcalinidade = null;
+            $calcario = null;
+      }else{
+          $alcalinidade = $alcalinidadesData[count($alcalinidadesData)-1]; 
+          if($alcalinidade < 10){
+            $calcario = '3000Kg/ha - 4000Kg/ha';
+          }elseif($alcalinidade < 20){
+            $calcario = '2000Kg/ha - 3000Kg/ha';
+          }else{
+            $calcario = '1000Kg/ha - 2000Kg/ha';
+          }
+      }
 
-    return view('relatoriosTanque', compact('line_chartBiometria','line_chartsAmoniaNitritoNitrato','line_chartsDurezaAlcalinidade','line_chartOxigenio','line_chartPh', 'line_chartTemp'), ['tanque' => $tanque, 'piscicultura' => $piscicultura]);
+    return view('relatoriosTanque', compact('line_chartBiometria','line_chartsAmoniaNitritoNitrato','line_chartsDurezaAlcalinidade','line_chartOxigenio','line_chartPh', 'line_chartTemp'), ['tanque' => $tanque, 'piscicultura' => $piscicultura,'povoamento'=>$povoamento,'alcalinidade'=>$alcalinidade,'calcario'=>$calcario]);
   }
 
   public function gerarDatas($qualidades){
@@ -224,12 +254,19 @@ class TanqueController extends Controller
     $datas = array();
     
     foreach ($qualidades as &$qualidade) {
+      //dd('top');
       $dataHora = $qualidade->data . " " . $qualidade->hora;
       $str = str_replace("-", "/", $dataHora);
+      $str = date("Y/m/d h:i:s", strtotime($str));
       array_push($datas,$str);   
       
     }
     sort($datas);
+    for($i=0;$i<count($datas);$i++){
+      $datas[$i] = date("d/m/Y h:i:s", strtotime($datas[$i]));
+    }
+    //dd($datas);
+    //return [$datas[1],$datas[2],$datas[3]];
     return $datas;    
   }
 
@@ -239,6 +276,7 @@ class TanqueController extends Controller
       foreach($qualidades as &$qualidade){
         $dataHora = $qualidade->data . " " . $qualidade->hora;
         $str = str_replace("-", "/", $dataHora);
+        $str = date("d/m/Y h:i:s", strtotime($str));
         if($data == $str){
           array_push($qualidadesData,$qualidade->valor); 
         }
@@ -254,8 +292,9 @@ class TanqueController extends Controller
       foreach($biometrias as &$biometria){
         $dataHora = $biometria->data . " " . $biometria->hora;
         $str = str_replace("-", "/", $dataHora);
+        $str = date("d/m/Y h:i:s", strtotime($str));
         if($data == $str){
-          array_push($pesosDatas,1000*$biometria->peso_medio); 
+          array_push($pesosDatas,number_format(1000*$biometria->peso_medio, 2, ".", "")); 
         }
       }
     }
@@ -281,7 +320,7 @@ class TanqueController extends Controller
     $i = 0;
     foreach($datasTemp as $temp){
       $dataFinal = (strtotime($datasTemp[count($datasTemp)-1]) - strtotime($temp)) /86400;
-      if($dataFinal <= 7){
+      if($dataFinal <= 1){
         array_push($temps,$tempsData[$i]);
       }
       $i++;
@@ -312,10 +351,17 @@ class TanqueController extends Controller
     $refeicoes_por_dia = 0;
     $tamanho = 0;
     $pv = $biometriasData[count($biometriasData)-1]*$povoamento->quantidade;
-  
+    $dataPovoamento = $povoamento->data;
+    $dataUltimaBiometria = $datasBiometria[count($datasBiometria)-1];
+    //dd($dataPovoamento);
+    $dataUltimaBiometria = str_replace("/", "-", $dataUltimaBiometria);
+    $dias = (int)((strtotime($dataUltimaBiometria)-strtotime($dataPovoamento))/86400);
+    $quinzena = (int)($dias/14);
+    //dd($quinzena);
     $qv = $povoamento->quantidade;
     $j = 0;
-    for ($j = 1; $j < count($biometriasData); $j++) { //j = 1 pois o povoamento já tem uma biometria, mas sem mortalidade
+
+    for ($j = 0; $j < $quinzena; $j++) { 
       if($j < 5) {
         $qv =  ($qv - (0.05 * $qv));     
       }else{
@@ -324,7 +370,7 @@ class TanqueController extends Controller
     }
     $pv = $biometriasData[count($biometriasData)-1]*$qv;
 
-    $pvMedio = $pv/$povoamento->quantidade;
+    $pvMedio = $pv/$qv;//quantidade atual
     
     $tabela = [
       0.5 => ['temperatura' =>[

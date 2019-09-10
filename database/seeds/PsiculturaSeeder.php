@@ -11,9 +11,11 @@ class PisciculturaSeeder extends Seeder
      */
     public function run()
     {
+
+        $faker = Faker\Factory::create();
         for($i = 0; $i < 5; $i++) {
         	DB::table('pisciculturas')->insert([
-                'nome' => str_random(10)]
+                'nome' => 'Piscicultura-'.$faker->word]
             );
         }
     }

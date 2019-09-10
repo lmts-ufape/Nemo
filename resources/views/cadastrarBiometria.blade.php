@@ -1,7 +1,7 @@
 @extends('layouts.principal')
 @section('title','Cadastrar Biometria')
 @section('path')
-<a href="/listar/pisciculturas">Pisciculturas</a> > <a href="/info/piscicultura/{{$piscicultura->id}}"> {{$piscicultura->nome}} </a> > <a href="/listar/tanques/{{$piscicultura->id}}">Tanques</a> > Biometria	
+<a href="{{ route("piscicultura.listar") }}">Pisciculturas</a> > <a href="{{ route("piscicultura.informar", ["id" => $piscicultura->id]) }}"> {{$piscicultura->nome}} </a> > <a href="{{ route("tanque.listar", ["id" => $piscicultura->id]) }}"> Tanques </a> > Biometria	
 @stop
 @section('content')
 <div class="container">
@@ -15,6 +15,11 @@
                     
                 </div>
               </div>
+              @if($errors->getMessages() != NULL)
+                <div class="alert alert-danger" role="alert">
+                  @foreach($errors->getMessages() as &$error) {{$error[0]}} <br/> @endforeach
+                </div>
+              @endif
               <div class="card-body">
                 <form action="/adicionarBiometria" method="post">
                   {{ csrf_field() }}
@@ -22,13 +27,13 @@
                   <input type="hidden" name="id_tanque" value="{{$tanque->id}}" />
                   <div class="form-group">
                     <label>Data</label>
-                    <input class="form-control" type="date" name="data" value="{{$data_atual}}" placeholder="DD/MM/AA" autofocus /><br/>
+                  <input class="form-control" type="date" name="data" max="{{$data_atual}}" value="{{$data_atual}}" placeholder="DD/MM/AA" autofocus /><br/>
                     <label>Hora</label>
-                    <input class="form-control" type="time" name="hora" value="{{$hora_atual}}" placeholder="HH:MM" autofocus /><br/>
+                    <input class="form-control" type="time" step="1" name="hora" value="{{$hora_atual}}" placeholder="HH:MM" autofocus /><br/>
                     <label>Quantidade da amostra (unidade)</label>
-                    <input class="form-control" type="number" name="quantidade" autofocus/><br/>
+                    <input class="form-control" type="text" name="quantidade" autofocus/><br/>
                     <label>Peso total (Kg)</label>
-                    <input class="form-control" type="number" step="0.0001" name="peso" autofocus/><br/>
+                    <input class="form-control" type="text" step="0.0001" name="peso" autofocus/><br/>
                   </div>
                   <input class="btn btn-success" type="submit" value="Cadastrar" />
                 </form>

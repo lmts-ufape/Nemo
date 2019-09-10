@@ -4,8 +4,8 @@
         <!--Menu de Navegação-->
         @include('layouts.navigation')
         
-        @include('layouts.body')
     </div>
+    @include('layouts.body')
     @include('layouts.footer')
     
     

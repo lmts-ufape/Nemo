@@ -3,6 +3,8 @@
 namespace nemo\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Validator;
+use nemo\Validator\BiometriaValidator;
 
 class BiometriaController extends Controller
 {
@@ -20,23 +22,30 @@ class BiometriaController extends Controller
           $piscicultura = \nemo\Piscicultura::find($idPiscultura); 
           date_default_timezone_set('America/Sao_Paulo');
           $data = date('Y-m-d');
-          $hora = date('H:i');                 
+          $hora = date('H:i:s');                 
           return view("cadastrarBiometria",['data_atual'=>$data,'hora_atual'=>$hora,'tanque_id'=>$tanque_id,'tanque' => $tanque,'piscicultura' => $piscicultura]);
       }
     
       public static function adicionar(Request $request){
-            //dd($request->id_tanque);
-            $tanque = \nemo\Tanque::find($request->id_tanque);
-            //dd($tanque);
-            $ciclo = $tanque->ciclos[count($tanque->ciclos)-1];
-            $biometria = new \nemo\Biometria();
-            $biometria->peso_total = $request->peso;
-            $biometria->peso_medio = $request->peso/$request->quantidade;
-            $biometria->data = $request->data;
-            $biometria->hora = $request->hora;
-            $biometria->ciclo_id = $ciclo->id;
-            $biometria->quantidade = $request->quantidade;
-            $biometria->save();
+            try{
+              BiometriaValidator::validate($request->all());
+              //dd($request->id_tanque);
+              $tanque = \nemo\Tanque::find($request->id_tanque);
+              //dd($tanque);
+              $ciclo = $tanque->ciclos[count($tanque->ciclos)-1];
+              $biometria = new \nemo\Biometria();
+              $biometria->peso_total = $request->peso;
+              $biometria->peso_medio = $request->peso/$request->quantidade;
+              $biometria->data = $request->data;
+              $biometria->hora = $request->hora;
+              $biometria->ciclo_id = $ciclo->id;
+              $biometria->quantidade = $request->quantidade;
+              $biometria->save();
+            }catch(\nemo\Validator\ValidationException $e){
+              
+              return back()->withErrors($e->getValidator())->withInput();
+
+            }
             
              return redirect()->route("tanque.listar", ['id' => $tanque->piscicultura_id]);
 

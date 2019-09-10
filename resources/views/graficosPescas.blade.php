@@ -1,5 +1,61 @@
 <!doctype html> @extends('layouts.principal') @section('title','Relatórios do Tanque') @section('path')
-<a href="/listar/pisciculturas">Pisciculturas</a> > <a href="/info/piscicultura/{{$piscicultura->id}}"> {{$piscicultura->nome}} </a> > <a href="/relatorios/pescas/{{$piscicultura->id}}">Pescas</a> > {{$tanque->nome}}@stop @section('content')
+<a href="{{ route("piscicultura.listar") }}">Pisciculturas</a> > <a href="{{ route("piscicultura.informar", ["id" => $piscicultura->id]) }}"> {{$piscicultura->nome}} </a> @stop @section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div id="biometria" class="card-header">Informações de Povoamento</div>
+                <div class="card-body">
+                    <div id="tabela" class="table-responsive">
+
+                        <table class="table">
+                            <tr>
+                                <th>Data</th>
+                                <th>Quantidade</th>
+                                <th>Peso total</th>
+                                <th>Peso por individuo</th>
+                            </tr>
+                            <tr>
+                            <td>{{ date("d/m/Y", strtotime($povoamento->data)) }}</td>
+                            <td>{{ $povoamento->quantidade }}</td>
+                            <td>{{ $povoamento->peso }}</td>
+                            <td>{{ number_format($povoamento->peso/$povoamento->quantidade, 2, ".", "") }}</td>
+                            </tr>	
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div><br>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div id="biometria" class="card-header">Informações de Pesca</div>
+                <div class="card-body">
+                    <div id="tabela" class="table-responsive">
+
+                        <table class="table">
+                            <tr>
+                                <th>Data</th>
+                                <th>Peso total</th>
+                            </tr>
+                            <tr>
+                            <td>{{ date("d/m/Y", strtotime($pesca->data)) }}</td>
+                            <td>{{ $pesca->peso }}</td>
+                            </tr>	
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div><br>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -11,24 +67,28 @@
                                 {!! $line_chartPh->html() !!}
                                 
                             </div>
+                            <hr>
         
                             <div id="tabela" class="table-responsive">
         
                                 {!! $line_chartTemp->html() !!}
         
                             </div>
+                            <hr>
         
                             <div id="tabela" class="table-responsive">
             
                                 {!! $line_chartOxigenio->html() !!}
             
                             </div>
+                    <hr>
                             
                             <div id="tabela" class="table-responsive">
         
                                 {!! $line_chartsAmoniaNitritoNitrato->html() !!}
         
                             </div>
+                    <hr>
                             
                             <div id="tabela" class="table-responsive">
         

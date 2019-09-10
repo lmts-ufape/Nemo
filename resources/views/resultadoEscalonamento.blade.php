@@ -1,7 +1,8 @@
 @extends('layouts.principal')
 @section('title','Escalonamento de Produção')
 @section('path')
-<a href="/listar/pisciculturas">Pisciculturas</a> > <a href="/info/piscicultura/{{$piscicultura->id}}"> {{$piscicultura->nome}} </a> > <a href="/escalonamento/{{$piscicultura->id}}">Calcular Escalonamento</a> > Resultado do Escalonamento da Produção    
+<a href="{{ route("piscicultura.listar") }}">Pisciculturas</a> > <a href="{{ route("piscicultura.informar", ["id" => $piscicultura->id]) }}"> {{$piscicultura->nome}} </a> > 
+<a href="{{ route("escalonamento.chamar", ["id" => $piscicultura->id]) }}"> Calcular Escalonamento</a> > Resultado do Escalonamento da Produção    
 @stop
 @section('content')
     <div class="container">
@@ -22,7 +23,7 @@
                             </tr>
 							@for($i = 0; $i < count($datas); $i++)
                             <tr>
-                                <td>{{$datas[$i]}}</td>
+                                <td>{{date("d/m/Y", strtotime($datas[$i]))}}</td>
                                 <td>{{$acoes[$i]}}</td>
                                 <td>{{$tanquesEscalonamento[$i]}}</td>
                                 <td>{{$quantidadePov[$i]}}</td>
@@ -30,7 +31,7 @@
 							@endfor
 							@for($j = 0; $j < count($datasPesca); $j++)
 							<tr>
-                                <td>{{$datasPesca[$j]}}</td>
+                                <td>{{date("d/m/Y", strtotime($datasPesca[$j]))}}</td>
                                 <td>Despesca</td>
                                 <td>{{$tanquesEscalonamento[$j]}}</td>
                                 <td>-</td>
