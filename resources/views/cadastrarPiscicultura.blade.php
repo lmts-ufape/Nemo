@@ -13,7 +13,7 @@
                         @foreach($errors->getMessages() as &$error) {{$error[0]}} @endforeach
                     </div>
                     @endif
-                    <form form action="/adicionarPiscicultura" method="POST">
+                    <form form action="{{ route('piscicultura.adicionar') }}" method="POST">
                         @csrf
                         <div class="form-group">
                             <label> Nome</label>
