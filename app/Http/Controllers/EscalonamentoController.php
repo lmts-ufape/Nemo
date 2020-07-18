@@ -11,12 +11,12 @@ class EscalonamentoController extends Controller{
     public function __construct(){
 		  $this->middleware('auth');
     }
-    
+
     public function chamaEscalonamento($id){
       $piscicultura = \nemo\Piscicultura::find($id);
       //$especiePeixe = \nemo\EspeciePeixe::where('piscicultura_id','=',$id)->get();
       //$quantidade_tanques = count($tanques);
-      
+
       return view('escalonamentoProducao', [
         'piscicultura' => $piscicultura,
         //'especiePeixe' => $especiePeixe,
@@ -27,9 +27,9 @@ class EscalonamentoController extends Controller{
 
     public function calcularEscalonamento(Request $request){
       try{
-        
+
         EscalonamentoValidator::validate($request->all());
-        
+
         $pesoMedio = $request->pesoMedio;
         $duracaoCiclo = $request->duracaoCiclo;
         $periodicidade = $request->periodicidade;
@@ -44,7 +44,7 @@ class EscalonamentoController extends Controller{
         $quantIndvAdultos = ($producaoDesejada*1000) / $pesoMedio;
         $mortalidade = 0;
         $volumeMinimo = $quantIndvAdultos / $tilapia->quantidade_por_volume;
-        
+
         if($periodicidade == 7){
           $ciclosNecessarios = $duracaoCiclo * 4;
         }elseif($periodicidade == 14){
@@ -54,9 +54,9 @@ class EscalonamentoController extends Controller{
         }else{
           return back()->withInput();
         }
-        
+
         $nBiometrias = $duracaoCiclo * 2;
-        $fatorMultipliador = ((100/95)**4)*((100/97.5)**($nBiometrias-4));
+        $fatorMultipliador = ((100/98.5)**4)*((100/99.7)**($nBiometrias-4));
         $quantPovoamento = ceil($fatorMultipliador*$quantIndvAdultos);
 
         // if(!escalonamentoEhPossivel){
@@ -71,7 +71,7 @@ class EscalonamentoController extends Controller{
         $povRestante = 0;
         $dataAtual = $inicioProducao;
         $ciclosIniciados = 0;
-        
+
         foreach($tanques as $tanque){
           if($ciclosIniciados < $ciclosNecessarios){
             $metrosCubicos = $tanque->volume/1000;
@@ -135,7 +135,7 @@ class EscalonamentoController extends Controller{
           $novaData = "+".$diasParaPesca." days";
           array_push($datasPesca, date('m/d/Y', strtotime($novaData, strtotime($data[$i]))));
         }
-        
+
         if($ciclosIniciados == $ciclosNecessarios){
           return view('resultadoEscalonamento', [
             'piscicultura' => $piscicultura,
