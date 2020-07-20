@@ -1,8 +1,8 @@
 @extends('layouts.principal')
 @section('title','Adicionar Gerenciador')
 @section('path')
-  <a href="{{ route("piscicultura.listar") }}">Pisciculturas</a> > 
-  <a href="{{ route("piscicultura.informar", ["id" => $piscicultura->id]) }}"> {{$piscicultura->nome}} </a> > 
+  <a href="{{ route("piscicultura.listar") }}">Pisciculturas</a> >
+  <a href="{{ route("piscicultura.informar", ["id" => $piscicultura->id]) }}"> {{$piscicultura->nome}} </a> >
   Adicionar Gerenciador
 @stop
 @section('content')
@@ -19,7 +19,7 @@
                   @foreach($errors->getMessages() as &$error) {{$error[0]}} <br/> @endforeach
                 </div>
                 @endif
-                <form action="/inserirGerenciador" method="post">
+                <form action="{{route('gerenciador.inserir')}}" method="post">
                   {{ csrf_field() }}
                   <input type="hidden" name="is_adiministrador" value=0>
                   <input type="hidden" name="piscicultura_id" value="{{$piscicultura->id}}">

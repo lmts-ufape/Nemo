@@ -1,18 +1,18 @@
 @extends('layouts.principal')
 @section('title','Escalonamento de Produção')
 @section('path')
-	<a href="{{ route("piscicultura.listar") }}">Pisciculturas</a> > <a href="{{ route("piscicultura.informar", ["id" => $piscicultura->id]) }}"> {{$piscicultura->nome}} </a> > Escalonamento de Produção    
+	<a href="{{ route("piscicultura.listar") }}">Pisciculturas</a> > <a href="{{ route("piscicultura.informar", ["id" => $piscicultura->id]) }}"> {{$piscicultura->nome}} </a> > Escalonamento de Produção
 @stop
 @section('content')
 	<div class='container'>
 		<div class="row justify-content-center">
         	<div class="col-md-8">
-				
+
             	<div class="card">
                 	<div class="card-header">
                     	Projeção de Produção
 					</div>
-					<form action="/resultadoProjecao" method="post">
+					<form action="{{ route('projecao.calcular') }}" method="post">
 						@csrf
 						<input type="hidden" value="{{$piscicultura->id}}" name="piscicultura_id">
 						<div class="card-body">
@@ -44,18 +44,18 @@
 								</div> --}}
 							<div class="form-group">
 								<label>Produção Desejada (Em Kg)</label>
-								<input class="form-control" type="text" name="producaoDesejada" placeholder="Em Kg" value="{{old('producaoDesejada')}}"> 
+								<input class="form-control" type="text" name="producaoDesejada" placeholder="Em Kg" value="{{old('producaoDesejada')}}">
 							</div>
 							<div class="form-group">
 								<label>Data do inicio da Produção</label>
-								<input class="form-control" type="date" name="inicioProducao" placeholder="DD/MM/AA" value="{{old('inicioProducao')}}"> 
+								<input class="form-control" type="date" name="inicioProducao" placeholder="DD/MM/AA" value="{{old('inicioProducao')}}">
 							</div>
 							<input class="btn btn-primary" type="submit" value="Calcular"/>
-						</div>							
+						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-			
+
 @stop

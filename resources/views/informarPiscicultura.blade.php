@@ -9,13 +9,13 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        {{$piscicultura->nome}}                  
+                        {{$piscicultura->nome}}
                     </div>
                     <div class="card-body">
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <a class="btn btn-primary" href="{{ route("tanque.listar", ["id" => $piscicultura->id]) }}">Gerenciar Tanques</a>  
+                                        <a class="btn btn-primary" href="{{ route("tanque.listar", ["id" => $piscicultura->id]) }}">Gerenciar Tanques</a>
                                     </td>
                                     @if($dono == True)
                                         @if($quantidade_gerenciadores > 0)
@@ -26,28 +26,27 @@
                                         <td>
                                             <a class="btn btn-primary" href="{{ route("gerenciador.listar", ["id" => $piscicultura->id]) }}">Gerenciar Permissoes</a>
                                         </td>
-                                        @endif                               
+                                        @endif
                                     @endif
                                     <td>
                                         <a class="btn btn-primary"  href="{{ route("escalonamento.chamar", ["id" => $piscicultura->id]) }}">Escalonamento de Produção</a>
-                                    </td>	
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <a class="btn btn-primary" href="{{route("projecao.chamar", ["id"=>$piscicultura->id])}}">Projeção de Produção</a>                                        
+                                        <a class="btn btn-primary" href="{{route("projecao.chamar", ["id"=>$piscicultura->id])}}">Projeção de Produção</a>
                                     </td>
                                     <td>
-                                        <a class="btn btn-primary" href="{{ route("piscicultura.pesca.relatorios", ["id" => $piscicultura->id]) }}">Relatórios de Pesca</a>
+                                        <a class="btn btn-primary" href="{{ route("piscicultura.pesca.relatorios", ["id" => $piscicultura->id]) }}">Relatórios de Despesca</a>
                                     </td>
                                 </tr>
 
                                 </table>
-                            </div>            
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-    
-@stop
 
+@stop

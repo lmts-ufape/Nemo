@@ -3,7 +3,7 @@
 @extends('layouts.principal')
 @section('title','Cadastrar Qualidade da água')
 @section('path')
-<a href="{{ route("piscicultura.listar") }}">Pisciculturas</a> > <a href="{{ route("piscicultura.informar", ["id" => $piscicultura->id]) }}"> {{$piscicultura->nome}} </a> > <a href="{{ route("tanque.listar", ["id" => $piscicultura->id]) }}"> Tanques </a> > Parâmetros da água	
+<a href="{{ route("piscicultura.listar") }}">Pisciculturas</a> > <a href="{{ route("piscicultura.informar", ["id" => $piscicultura->id]) }}"> {{$piscicultura->nome}} </a> > <a href="{{ route("tanque.listar", ["id" => $piscicultura->id]) }}"> Tanques </a> > Parâmetros da água
 @stop
 @section('content')
 <div class="container">
@@ -14,11 +14,11 @@
                   Cadastrar qualidade da água
               </div>
               <div class="card-body">
-                  <form action="/adicionarQualidadeAgua" method="post">
+                  <form action="{{ route('qualidade.agua.adicionar') }}" method="post">
                     {{ csrf_field() }}
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                     <input type="hidden" name="id_tanque" value="{{$tanque->id}}" />
-                    
+
                     <div class="form-group">
                       <label>Data da Medição</label>
                       <input class="form-control" type="date" name="data" value="{{$data_atual}}" max="{{$data_atual}}"  placeholder="DD/MM/AA" /><br/>
@@ -75,9 +75,9 @@
       var input2 = document.getElementById('nitrito');
       var input3 = document.getElementById('nitrato');
       if(checkbox.checked){
-        input1.disabled = false  
-        input2.disabled = false  
-        input3.disabled = false 
+        input1.disabled = false
+        input2.disabled = false
+        input3.disabled = false
       }else{
         input1.disabled = true;
         input1.value = '';
@@ -90,8 +90,8 @@
       var input1 = document.getElementById('alcalinidade');
       var input2 = document.getElementById('dureza');
       if(checkbox.checked){
-        input1.disabled = false  
-        input2.disabled = false  
+        input1.disabled = false
+        input2.disabled = false
       }else{
         input1.disabled = true;
         input1.value = '';
@@ -101,7 +101,7 @@
     }else{
       var input = document.getElementById(qualidade);
       if(checkbox.checked){
-        input.disabled = false  
+        input.disabled = false
       }else{
         input.disabled = true;
         input.value = '';
@@ -109,5 +109,5 @@
     }
   }
   </script>
-  	
+
 @stop

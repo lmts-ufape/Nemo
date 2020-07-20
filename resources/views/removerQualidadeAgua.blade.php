@@ -6,8 +6,8 @@
     </head>
     <body>
     	<h1>Remover Qualidade da água</h1>
-    	
-    	<form action="/apagarQualidadeAgua" method="post"> 
+
+    	<form action="{{route('qualidade.agua.apagar')}}" method="post"> 
     		<input type="hidden" name="_token" value="{{ csrf_token() }}" />
     			<input type="hidden" name="id" value="{{ $qualidadeAgua->id}}" />
     			Cod: <input type="text" disabled="disabled" name="id" value="{{$qualidadeAgua->id}}"><br/>
@@ -15,6 +15,6 @@
     			PH: <input type="number" disabled="disabled" name="ph" value="{{$qualidadeAgua->ph}}"><br/>
     			<input  type="submit" value="remover!" />
     	</form>
- 
+
     </body>
 </html>

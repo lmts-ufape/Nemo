@@ -1,7 +1,7 @@
 @extends('layouts.principal')
 @section('title','Escalonamento de Produção')
 @section('path')
-	<a href="{{ route("piscicultura.listar") }}">Pisciculturas</a> > <a href="{{ route("piscicultura.informar", ["id" => $piscicultura->id]) }}"> {{$piscicultura->nome}} </a> > Escalonamento de Produção    
+	<a href="{{ route("piscicultura.listar") }}">Pisciculturas</a> > <a href="{{ route("piscicultura.informar", ["id" => $piscicultura->id]) }}"> {{$piscicultura->nome}} </a> > Escalonamento de Produção
 @stop
 @section('content')
 	<div class='container'>
@@ -26,12 +26,12 @@
 						@endforeach
 					</div>
 					@endif
-					<form action="/resultadoEscalonamento" method="post">
+					<form action="{{route('escalonamento.resultado')}}" method="post">
 						@csrf
 						<input type="hidden" value="{{$piscicultura->id}}" name="piscicultura_id">
 						<div class="card-body">
 							<div class="form-group">
-								<label>Peso médio esperado do indivíduo (Em gramas)</label>
+								<label>peso médio para despesca (Em gramas)</label>
 								<input class="form-control" type="text" name="pesoMedio" placeholder="Em gramas" value="{{old('pesoMedio')}}" autofocus/>
 							</div>
 							<div class="form-group">
@@ -39,7 +39,7 @@
 								<input class="form-control" type="text" name="duracaoCiclo" placeholder="Em meses" value="{{old('duracaoCiclo')}}">
 							</div>
 							<div class="form-group">
-								<label>Periodicidade da Pesca</label>
+								<label>Periodicidade da despesca</label>
 								<select class="custom-select" name="periodicidade">
 									<option selected>Selecione a periodicidade</option>
 									<option value="7">Semanal</option>
@@ -58,19 +58,18 @@
 								</div> --}}
 							<div class="form-group">
 								<label>Produção Desejada (Em Kg)</label>
-								<input class="form-control" type="text" name="producaoDesejada" placeholder="Em Kg" value="{{old('producaoDesejada')}}"> 
+								<input class="form-control" type="text" name="producaoDesejada" placeholder="Em Kg" value="{{old('producaoDesejada')}}">
 							</div>
 							<div class="form-group">
 								<label>Data do inicio da Produção</label>
-								<input class="form-control" type="date" name="inicioProducao" placeholder="DD/MM/AA" value="{{old('inicioProducao')}}"> 
+								<input class="form-control" type="date" name="inicioProducao" placeholder="DD/MM/AA" value="{{old('inicioProducao')}}">
 							</div>
 							<input class="btn btn-primary" type="submit" value="Calcular"/>
-						</div>							
+						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-			
-@stop
 
+@stop

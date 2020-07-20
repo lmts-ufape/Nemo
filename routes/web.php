@@ -30,13 +30,13 @@ Route::middleware('autorizacao')->group(function() {
     Route::get('/remover/piscicultura/{id}', "PisciculturaController@remover")->name('piscicultura.remover');
     Route::get('/relatorios/pescas/{id}', "PisciculturaController@relatoriosPesca")->name('piscicultura.pesca.relatorios');
     Route::get('/ciclo/{id}/graficos', "PisciculturaController@graficosPesca")->name('piscicultura.pesca.graficos');
-    
+
     //Rotas de Gerenciador
     Route::get('listar/gerenciadores/piscicultura/{id}',"GerenciarController@listarGerenciadores")->name('gerenciador.listar');
     Route::get('adicionar/gerenciador/piscicultura/{id}',"GerenciarController@adicionarGerenciador")->name('gerenciador.adicionar');
     Route::post('inserirGerenciador',"GerenciarController@inserirGerenciador")->name('gerenciador.inserir');
     Route::get('/remover/gerenciador/{user_id}/piscicultura/{id}',  "GerenciarController@apagarGerenciador")->name('gerenciador.apagar');
-    
+
 
     //Rotas de Tanque
     Route::get('/listar/tanques/{id}', "TanqueController@listar")->name('tanque.listar');
@@ -62,11 +62,11 @@ Route::middleware('autorizacao')->group(function() {
     //Route::get('/tanque/{id}/especie/{especiePeixe_id}/info', "EspecieController@informar")->name('especie.informar');;
 
 
-    
+
     //Rotas de Sistema
     Route::get('/', 'PisciculturaController@listar')->name('home');
     Route::get('/home', 'PisciculturaController@listar')->name('home');
-    
+
     //Rotas de Qualidade Água
     Route::get('/tanque/{id}/cadastrar/qualidadeAgua', "QualidadeAguaController@cadastrar")->name('qualidade.agua.cadastrar');
     Route::post('/adicionarQualidadeAgua', "QualidadeAguaController@adicionar")->name('qualidade.agua.adicionar');
@@ -91,20 +91,20 @@ Route::middleware('autorizacao')->group(function() {
     //Route::post('/adicionarAlcalinidade', "AlcalinidadeController@adicionar")->name('alcalinidade.adicionar');
     //Route::get('/tanque/{id}/cadastrar/temperatura', "TemperaturaController@cadastrar")->name('temperatura.cadastrar');
     //Route::post('/adicionarTemperatura', "TemperaturaController@adicionar")->name('temperatura.adicionar');
-    
+
     //Rotas de Povoamento (falta middleware)
     Route::get('/povoar/tanque/{id}/especie/{especie_id}',  "PovoamentoController@povoarTanque")->name('povoamento.povoar');
-    Route::post('/inserirPeixe', "PovoamentoController@inserirPeixe")->name('povoamento.inserir.peixe')->name('povoamento.inserir.peixe');
+    Route::post('/inserirPeixe', "PovoamentoController@inserirPeixe")->name('povoamento.inserir.peixe');
     //Route::get('/info/tanque/{id}', "PovoamentoController@listar")->name('povoamento.listar');
-    
+
     //Rotas de Pesca
     Route::get('/tanque/{id}/pesca', "PescaController@pesca")->name('pesca.pesca');
     Route::post('/pescar', "PescaController@pescar")->name('pescar.pescar');
-    
+
     //Rotas de Biometria
     Route::get('/tanque/{id}/cadastrar/biometria', "BiometriaController@cadastrar")->name('biometria.cadastrar');
     Route::post('/adicionarBiometria', "BiometriaController@adicionar")->name('biometria.adicionar');
-    
+
 
     //Rotas de Escalonamento
     Route::get('/escalonamento/{id}', "EscalonamentoController@chamaEscalonamento")->name('escalonamento.chamar');

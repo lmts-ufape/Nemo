@@ -2,37 +2,37 @@
 @extends('layouts.principal')
 @section('title','Listar Tanques')
 @section('path')
-	<a href="{{ route("piscicultura.listar") }}">Pisciculturas</a> > <a href="{{ route("piscicultura.informar", ["id" => $piscicultura->id]) }}"> {{$piscicultura->nome}} </a> > Pescas
+	<a href="{{ route("piscicultura.listar") }}">Pisciculturas</a> > <a href="{{ route("piscicultura.informar", ["id" => $piscicultura->id]) }}"> {{$piscicultura->nome}} </a> > Despescas
 @stop
 @section('content')
 <div class="container">
 	<div class="row justify-content-center">
 		<div class="col-md-8">
 			<div class="card">
-				<div class="card-header">				
-					Pescas				
+				<div class="card-header">
+					Despescas
 				</div>
 				<div class="card-body">
 					<div>
-						<table class="table">	
+						<table class="table">
                             <tr>
                                 <td>
                                     <label> Tanque</label>
                                 </td>
                                 <td>
-                                    <label> Data da Pesca</label>	
+                                    <label> Data da despesca</label>
                                 </td>
-                                <td> 
-                                    <label> Peso da Pesca</label>
+                                <td>
+                                    <label> Peso da despesca</label>
                                 </td>
-                            </tr>					
+                            </tr>
                             @foreach ($tanques as $tanque)
                                 @foreach ($tanque->ciclos as $ciclo)
-                                    @if($ciclo->pesca != null)    
+                                    @if($ciclo->pesca != null)
                                         <tr>
-                                                
+
                                             <td><a href="{{ route("piscicultura.pesca.graficos", ["id" => $ciclo->id]) }}">{{ $tanque->nome }}</a></td>
-                                            <td>                                                
+                                            <td>
                                                 {{date("d/m/Y", strtotime($ciclo->pesca->data))}}
                                             </td>
                                             <td>
@@ -41,7 +41,7 @@
                                         </tr>
                                     @endif
                                 @endforeach
-							@endforeach		
+							@endforeach
 						</table>
 					</div>
 				</div>
@@ -51,4 +51,3 @@
 </div>
 
 @stop
-
