@@ -1,7 +1,7 @@
 @extends('layouts.principal')
 @section('title','Pesca')
 @section('path')
-<a href="{{ route("piscicultura.listar") }}">Pisciculturas</a> > <a href="{{ route("piscicultura.informar", ["id" => $piscicultura->id]) }}"> {{$piscicultura->nome}} </a> > <a href="{{ route("tanque.listar", ["id" => $piscicultura->id]) }}"> Tanques </a> > Pescar	
+<a href="{{ route("piscicultura.listar") }}">Pisciculturas</a> > <a href="{{ route("piscicultura.informar", ["id" => $piscicultura->id]) }}"> {{$piscicultura->nome}} </a> > <a href="{{ route("tanque.listar", ["id" => $piscicultura->id]) }}"> Tanques </a> > Pescar
 @stop
 @section('content')
 <div class="container">
@@ -17,7 +17,7 @@
                 </div>
               @endif
               <div class="card-body">
-                <form action="/pescar" method="post">
+                <form action="{{route('pescar.pescar')}}" method="post">
                   {{ csrf_field() }}
                   <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                   <input type="hidden" name="id_tanque" value="{{$tanque->id}}" />

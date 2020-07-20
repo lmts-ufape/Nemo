@@ -1,10 +1,10 @@
 @extends('layouts.principal')
 @section('title','Remover Tanque')
 @section('path')
-<a href="{{ route("piscicultura.listar") }}">Pisciculturas</a> > <a href="{{ route("piscicultura.informar", ["id" => $piscicultura->id]) }}"> {{$piscicultura->nome}} </a> > <a href="{{ route("tanque.listar", ["id" => $piscicultura->id]) }}"> Tanques </a> > Remover Tanque	
+<a href="{{ route("piscicultura.listar") }}">Pisciculturas</a> > <a href="{{ route("piscicultura.informar", ["id" => $piscicultura->id]) }}"> {{$piscicultura->nome}} </a> > <a href="{{ route("tanque.listar", ["id" => $piscicultura->id]) }}"> Tanques </a> > Remover Tanque
 @stop
 @section('content')
-  <form action="/apagarTanque" method="post">
+  <form action="{{route('tanque.apagar')}}" method="post">
     {{ csrf_field() }}
     <input type="hidden" name="tanque_id" value="{{$tanque->id}}"/>
     <input type="hidden" name="piscicultura_id" value="{{ $piscicultura->id}}" />

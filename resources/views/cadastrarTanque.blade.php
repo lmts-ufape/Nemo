@@ -16,7 +16,7 @@
                       @foreach($errors->getMessages() as &$error) {{$error[0]}} <br/> @endforeach
                   </div>
                       @endif
-                  <form action="/adicionarTanque" method="post">
+                  <form action="{{ route('tanque.adicionar') }}" method="post">
                     {{ csrf_field() }}
                     <input type="hidden" name="id_piscicultura" value="{{$piscicultura->id}}">
                     <div class="card-body">

@@ -1,7 +1,7 @@
 @extends('layouts.principal')
 @section('title','Cadastrar Biometria')
 @section('path')
-<a href="{{ route("piscicultura.listar") }}">Pisciculturas</a> > <a href="{{ route("piscicultura.informar", ["id" => $piscicultura->id]) }}"> {{$piscicultura->nome}} </a> > <a href="{{ route("tanque.listar", ["id" => $piscicultura->id]) }}"> Tanques </a> > Biometria	
+<a href="{{ route("piscicultura.listar") }}">Pisciculturas</a> > <a href="{{ route("piscicultura.informar", ["id" => $piscicultura->id]) }}"> {{$piscicultura->nome}} </a> > <a href="{{ route("tanque.listar", ["id" => $piscicultura->id]) }}"> Tanques </a> > Biometria
 @stop
 @section('content')
 <div class="container">
@@ -10,9 +10,9 @@
           <div class="card">
               <div class="card-header">
                   <div class="menu-direita-logout">
-                        Cadastrar Biometria							
+                        Cadastrar Biometria
                         <img onclick="return confirm('É indicado que a biometria seja realizada com 3% a 10% do lote de 15 em 15 dias. ')" src="{{asset('images/info_white.png')}}" style = "margin-left: 30px; margin-right: -10px " height="25" width="25" align = "right">
-                    
+
                 </div>
               </div>
               @if($errors->getMessages() != NULL)
@@ -21,7 +21,7 @@
                 </div>
               @endif
               <div class="card-body">
-                <form action="/adicionarBiometria" method="post">
+                <form action="{{ route('biometria.adicionar') }}" method="post">
                   {{ csrf_field() }}
                   <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                   <input type="hidden" name="id_tanque" value="{{$tanque->id}}" />

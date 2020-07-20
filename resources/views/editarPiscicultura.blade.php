@@ -2,7 +2,7 @@
 @extends('layouts.principal')
 @section('title','Editar Piscucultura')
 @section('path')
-<a href="{{ route("piscicultura.listar") }}">Pisciculturas</a>  > Editar {{$piscicultura->nome}}	
+<a href="{{ route("piscicultura.listar") }}">Pisciculturas</a>  > Editar {{$piscicultura->nome}}
 @stop
 @section('content')
 <div class="container">
@@ -21,14 +21,14 @@
 					</div>
 					@endif
 
-					<form action="/salvarPiscicultura" method="POST">
+					<form action="{{ route('piscicultura.salvar') }}" method="POST">
 						{{ csrf_field() }}
 						<input type="hidden" name="id" value="{{$piscicultura->id}}"/>
 						<div class="form-group">
-							<label>Nome da Piscultura</label><br>	
+							<label>Nome da Piscultura</label><br>
 							<input type="form-control" name="nome" value="{{$piscicultura->nome}}" />
 						</div>
-						<input class="btn btn-primary" type="submit" value="Alterar" />		
+						<input class="btn btn-primary" type="submit" value="Alterar" />
 					</form>
 				</div>
 			</div>
@@ -36,5 +36,3 @@
 	</div>
 </div>
 @stop
-
-

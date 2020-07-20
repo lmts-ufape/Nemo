@@ -6,12 +6,13 @@
     <body>
     @foreach ($listaQualidadesAgua as $qualidadeAgua)
     	<b>Cod: {{ $qualidadeAgua->id }}</b> - PH: {{ $qualidadeAgua->ph}}, - Data e hora: {{ $qualidadeAgua->data}}, - Tanque relacionado: {{ $qualidadeAgua->id_tanque}}
-		<a href="/editar/qualidadeAgua/{{$qualidadeAgua->id}}">Editar</a>
-		<a href="/remover/qualidadeAgua/{{$qualidadeAgua->id}}">Remover</a>    	
-    	
+      {{-- "/editar/qualidadeAgua/{{$qualidadeAgua->id}}" --}}
+		<a href="{{route('qualidade.agua.editar', ['id'=>$qualidadeAgua->id])}}" >Editar</a>
+		<a href="{{route('qualidade.agua.remover', ['id'=>$qualidadeAgua->id])}}" >Remover</a>
+
     	<br/>
     @endforeach
- 
- 		<a href="/tanque/{{$id}}/cadastrar/qualidadeAgua">Novo</a>
+    {{-- "/tanque/{{$id}}/cadastrar/qualidadeAgua" --}}
+ 		<a href="{{route('qualidade.agua.cadastrar', ['id'=>$id])}}">Novo</a>
     </body>
 </html>
