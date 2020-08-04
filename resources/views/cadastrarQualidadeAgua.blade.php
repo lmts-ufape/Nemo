@@ -1,4 +1,4 @@
-
+z
 
 @extends('layouts.principal')
 @section('title','Cadastrar Qualidade da água')
@@ -27,7 +27,7 @@
                       <input type="checkbox" name="phBox" id="phBox" onchange="teste(this)" />
                       <label>Ph</label>
                       <img onclick="return confirm('É recomendado que o valor do PH esteja entre 6,5 e 8,5')" src="{{asset('images/info.png')}}"  height="18" width="18">
-                      <input id="ph" class="form-control" type="number" name="ph" min="0" max="14" disabled/><br/>
+                      <input id="ph" class="form-control" type="number" name="ph" step="0.1"min="0" max="14" disabled/><br/>
                       <input type="checkbox" name="temperaturaBox" id="temperaturaBox" onchange="teste(this)" />
                       <label>Temperatura (°C)</label>
                       <img onclick="return confirm('A temperatura ideal é entre 26°C a 30°C')" src="{{asset('images/info.png')}}"  height="18" width="18">
