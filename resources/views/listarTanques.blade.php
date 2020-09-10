@@ -38,7 +38,7 @@
 												<a class="btn btn-primary" href="{{ route("tanque.racao", ["id" => $tanque->id]) }}">Ração</a>
 											@endif
 											@if($tanque->status == 'producao')
-												<a class="btn btn-primary" href="{{ route("pesca.pesca", ["id" => $tanque->id]) }}">Pescar</a>
+												<a class="btn btn-primary" href="{{ route("pesca.pesca", ["id" => $tanque->id]) }}">Despesca</a>
 											@endif
 										@endif
 									@else

@@ -39,7 +39,7 @@ z
                       <input type="checkbox" name="amoniaNitritoNitratoBox" id="amoniaNitritoNitratoBox" onchange="teste(this)" />
                       <label>Amônia, Nitrito e Nitrato</label><br>
                       <div class="card-body">
-                        <label>Amônia (mg/L)</label>
+                        <label>Amônia Total(mg/L)</label>
                         <img onclick="return confirm('É recomendado que o valor do Amônia esteja entre 0 e 0,5mg/L')" src="{{asset('images/info.png')}}"  height="18" width="18">
                         <input id="amonia" class="form-control" step="0.01" type="number" name="amonia"  value="{{old('amonia')}}" disabled/><br/>
                         <label>Nitrito (mg/L)</label>
