@@ -25,7 +25,7 @@
 								<input class="form-control" type="text" name="duracaoCiclo" placeholder="Em meses" value="{{old('duracaoCiclo')}}">
 							</div>
 							<div class="form-group">
-								<label>Periodicidade da Pesca</label>
+								<label>Periodicidade da Despesca</label>
 								<select class="custom-select" name="periodicidade">
 									<option selected>Selecione a periodicidade</option>
 									<option value="7">Semanal</option>

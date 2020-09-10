@@ -26,7 +26,7 @@
                       <input class="form-control" type="text" min="0" step="any" name="volume"  value="{{old('volume')}}" autofocus /><br/>
                       <label>Área (m²)</label>
                       <input class="form-control" type="text" min="0" step="any" name="area"  /><br/>
-                      <label>Altura (m)</label>
+                      <label>Profundidade (m)</label>
                       <input class="form-control" type="text" min="0" step="any" name="altura" /><br/>
                       <input class="btn btn-success" type="submit" value="Cadastrar" />
                     </div>

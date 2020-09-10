@@ -34,7 +34,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div id="biometria" class="card-header">Informações de Pesca</div>
+                <div id="biometria" class="card-header">Informações de Despesca</div>
                 <div class="card-body">
                     <div id="tabela" class="table-responsive">
 
